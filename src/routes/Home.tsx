@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import provincialSeatsGeoJson from '../geojson/provincial.json'
+import candidatesJson from '../geojson/candidates.json'
 import { ProvincialGeoJson } from '../models'
 import { useNavigate, useParams } from 'react-router-dom'
 import { polygonStyle } from '../mapping/styles'
@@ -14,6 +15,13 @@ function App() {
 
   const current = provincialSeats.features.find((f) => f.properties.PA === seat)
   const currentStyle = current && polygonStyle(current)
+  const currentCandidate =
+    current &&
+    ((candidatesJson as any)[current.properties.PA] as {
+      candidate: string
+      symbol_text: string
+      symbol_image: string
+    })
 
   // Attach event handlers to each feature
   const onEachFeature = (feature: any, layer: any) => {
@@ -65,8 +73,8 @@ function App() {
             </div>
           </div> */}
         </div>
-        <div className="flex-1 w-full bg-red-50">
-          {!(currentStyle && current) && (
+        <div className="flex flex-1 w-full">
+          {!(currentStyle && current) ? (
             <div className="flex items-center justify-center w-full h-full">
               <img
                 className="rounded-md mb-5"
@@ -78,6 +86,68 @@ function App() {
                 }}
                 src={PTIElectionSymbol}
               />
+            </div>
+          ) : (
+            <div className="flex w-full relative">
+              <div className="flex absolute font-mono bg-red-50 text-red-600 font-bold items-center px-3 py-2 rounded right-4 top-4 tracking-tighter">
+                <FaLocationCrosshairs className="mr-3 text-lg" />
+                Your Constituency
+              </div>
+              <div
+                style={{
+                  height: '100%',
+                  width: '25px',
+                  backgroundColor: currentStyle.fillColor
+                }}
+              ></div>
+              <div className="flex flex-col px-5 py-4">
+                <div className="flex flex-col mb-8">
+                  <div
+                    className="font-bold font-mono text-7xl"
+                    style={{ color: currentStyle.fillColor }}
+                  >
+                    {current.properties.DISTRICT}
+                  </div>
+                  <div
+                    className="font-mono font-bold text-3xl"
+                    style={{ color: currentStyle.fillColor }}
+                  >
+                    {current.properties.PA}
+                  </div>
+                </div>
+                {currentCandidate && (
+                  <div className="flex flex-col">
+                    <div className="flex flex-col mb-6">
+                      <div
+                        className="font-mono font-bold text-3xl mb-3"
+                        style={{ color: currentStyle.fillColor }}
+                      >
+                        Candidate
+                      </div>
+                      <div className="flex ml-5 text-gray-600 font-mono text-3xl">
+                        {currentCandidate.candidate}
+                      </div>
+                    </div>
+                    <div className="flex flex-col">
+                      <div
+                        className="font-mono font-bold text-3xl mb-3"
+                        style={{ color: currentStyle.fillColor }}
+                      >
+                        Symbol
+                      </div>
+                      <div className="flex ml-5 text-gray-600 font-mono mb-2 text-3xl justify-center">
+                        {currentCandidate.symbol_text}
+                        <div className="ml-4 text-gray-600 font-mono">
+                          <img
+                            style={{ height: '35px', width: '35px' }}
+                            src={currentCandidate.symbol_image}
+                          ></img>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>

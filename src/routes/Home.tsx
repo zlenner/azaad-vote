@@ -89,7 +89,7 @@ function App() {
             </div>
           ) : (
             <div className="flex w-full relative">
-              <div className="flex absolute font-mono bg-red-50 text-red-600 font-bold items-center px-3 py-2 rounded right-4 top-4 tracking-tighter">
+              <div className="flex absolute font-mono bg-blue-50 text-blue-600 font-bold items-center px-3 py-2 rounded right-4 top-4 tracking-tighter">
                 <FaLocationCrosshairs className="mr-3 text-lg" />
                 Your Constituency
               </div>
@@ -100,20 +100,23 @@ function App() {
                   backgroundColor: currentStyle.fillColor
                 }}
               ></div>
-              <div className="flex flex-col px-5 py-4">
-                <div className="flex flex-col mb-8">
+              <div className="flex flex-col w-full px-5 py-4 relative">
+                <div className="flex flex-col w-full mb-8">
                   <div
                     className="font-bold font-mono text-7xl"
                     style={{ color: currentStyle.fillColor }}
                   >
-                    {current.properties.DISTRICT}
+                    {current.properties.PA}
                   </div>
                   <div
                     className="font-mono font-bold text-3xl"
                     style={{ color: currentStyle.fillColor }}
                   >
-                    {current.properties.PA}
+                    {current.properties.DISTRICT}
                   </div>
+                </div>
+                <div className="flex flex-col absolute right-3 bottom-3 text-gray-700 font-semibold font-mono">
+                  <div>{current.properties.PROVINCE}</div>
                 </div>
                 {currentCandidate && (
                   <div className="flex flex-col">

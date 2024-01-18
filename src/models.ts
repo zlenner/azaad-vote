@@ -15,3 +15,9 @@ export interface ProvincialFeature {
 export interface ProvincialGeoJson {
   features: ProvincialFeature[]
 }
+
+export interface Candidate {
+  candidate: string
+  symbol_text: string
+  symbol_image: string
+}

@@ -53,9 +53,9 @@ function App() {
   }
 
   return (
-    <div className="flex flex w-full h-full">
+    <div className="flex flex w-full h-full frame">
       <div
-        className="flex flex-col w-full h-full"
+        className="flex flex-col w-full h-full details"
         style={{ width: '50%', maxWidth: 850 }}
       >
         <Header goToMyConstituency={goToMyConstituency} />

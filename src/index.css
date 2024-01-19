@@ -13,3 +13,14 @@ body {
         Helvetica Neue,
         sans-serif;
 }
+
+@media (max-width: 768px) {
+    .frame {
+        @apply flex-col;
+    }
+    .details {
+        width: 100% !important;
+        max-width: none !important;
+        height: 70% !important;
+    }
+}

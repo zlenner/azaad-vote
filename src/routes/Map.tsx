@@ -75,7 +75,7 @@ const Map = ({
   }, [selectedConstituency?.properties.PA])
 
   return (
-    <div className="flex flex-1 h-full">
+    <div className="flex flex-1 h-full map">
       <MapContainer
         className="w-full h-full"
         center={[30.656574684183685, 68.25139799853381]}

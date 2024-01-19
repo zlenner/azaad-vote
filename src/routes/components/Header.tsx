@@ -5,7 +5,7 @@ import { useState } from 'react'
 const Header = ({
   goToMyConstituency
 }: {
-  goToMyConstituency: (coords: { latitude: string; longitude: string }) => void
+  goToMyConstituency: (coords: { latitude: number; longitude: number }) => void
 }) => {
   const [loading, setLoading] = useState(false)
 
@@ -18,8 +18,8 @@ const Header = ({
         (position) => {
           setLoading(false)
           goToMyConstituency({
-            latitude: position.coords.latitude.toString(),
-            longitude: position.coords.longitude.toString()
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
           })
         },
         () => {

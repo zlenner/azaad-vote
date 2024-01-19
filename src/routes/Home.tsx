@@ -21,10 +21,10 @@ function App() {
   >(undefined)
 
   const goToMyConstituency: (coords: {
-    latitude: string
-    longitude: string
+    latitude: number
+    longitude: number
   }) => void = (coords) => {
-    const locationPoint = turf.point([67.07630154256441, 24.90182725824524])
+    const locationPoint = turf.point([coords.longitude, coords.latitude])
 
     const foundPolygon = provincialSeats.features.find((feature) =>
       turf.booleanPointInPolygon(locationPoint, feature)

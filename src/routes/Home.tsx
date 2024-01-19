@@ -2,7 +2,7 @@ import provincialSeatsGeoJson from '../geojson/provincial.json'
 import candidatesJson from '../geojson/candidates.json'
 import { Candidate, ProvincialGeoJson } from '../models'
 import { useParams } from 'react-router-dom'
-import { polygonStyle } from '../mapping/styles'
+import { stringToColor } from '../mapping/styles'
 import Header from './components/Header'
 import Map from './Map'
 import BackgroundImage from './components/BackgroundImage'
@@ -13,16 +13,16 @@ const provincialSeats = provincialSeatsGeoJson as ProvincialGeoJson
 function App() {
   const { seat = null } = useParams()
 
-  const currentFeature = provincialSeats.features.find(
+  const selectedFeature = provincialSeats.features.find(
     (f) => f.properties.PA === seat
   )
 
-  const CURRENT = {
-    feature: currentFeature,
-    style: currentFeature && polygonStyle(currentFeature),
+  const SELECTED = {
+    feature: selectedFeature,
+    color: selectedFeature && stringToColor(selectedFeature.properties.PA),
     candidate:
-      currentFeature &&
-      ((candidatesJson as any)[currentFeature.properties.PA] as Candidate)
+      selectedFeature &&
+      ((candidatesJson as any)[selectedFeature.properties.PA] as Candidate)
   }
 
   return (
@@ -33,18 +33,18 @@ function App() {
       >
         <Header goToMyConstituency={() => {}} />
         <div className="flex flex-1 w-full">
-          {!CURRENT.feature ? (
+          {!SELECTED.feature ? (
             <BackgroundImage />
           ) : (
             <ConstituencyView
-              feature={CURRENT.feature}
-              color={CURRENT.style!.fillColor}
-              candidate={CURRENT.candidate}
+              feature={SELECTED.feature}
+              color={SELECTED.color ?? ''}
+              candidate={SELECTED.candidate}
             />
           )}
         </div>
       </div>
-      <Map />
+      <Map selectedConstituency={SELECTED.feature} />
     </div>
   )
 }

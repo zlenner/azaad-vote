@@ -1,0 +1,71 @@
+{
+  "PB-1": {
+    "candidate": "Gul Khan Qureshi",
+    "constituency": "Sherani Cum Zhob"
+  },
+  "PB-2": { "candidate": "PENDING", "constituency": "Zhob" },
+  "PB-3": {
+    "candidate": "Haji Hayat Meerzai",
+    "constituency": "Killa Saif Ullah"
+  },
+  "PB-4": {
+    "candidate": "Muhammad Tariq",
+    "constituency": "Musakhail Cum Barkhan"
+  },
+  "PB-5": { "candidate": "Abdul Hassan Nasar", "constituency": "Loralai" },
+  "PB-6": { "candidate": "Haji Ashraf Nasar", "constituency": "Duki" },
+  "PB-7": {
+    "candidate": "Nawab Khan Dumar",
+    "constituency": "Ziarat Cum Harnai"
+  },
+  "PB-8": { "candidate": "Zubaida Khatoon", "constituency": "Sibi" },
+  "PB-9": { "candidate": "PENDING", "constituency": "Kohlu" },
+  "PB-10": { "candidate": "Pending", "constituency": "Dera Bugti" },
+  "PB-11": { "candidate": "Imdad Hussain", "constituency": "Jhall Magsi" },
+  "PB-12": { "candidate": "Pir Bux Jamot", "constituency": "Kachhi" },
+  "PB-13": { "candidate": "Abdul Razak", "constituency": "Nasirabad-I" },
+  "PB-14": { "candidate": "Qurban Ali", "constituency": "Nasirabad-II" },
+  "PB-15": { "candidate": "Dr. Pervez Ahmed", "constituency": "Sohbat Pur" },
+  "PB-16": { "candidate": "Naseeb Ullah", "constituency": "Jaffarabad" },
+  "PB-17": { "candidate": "Godha Khan", "constituency": "Usta Muhammad" },
+  "PB-18": { "candidate": "Pending", "constituency": "Khuzdar-I" },
+  "PB-19": { "candidate": "Pending", "constituency": "Khuzdar-II" },
+  "PB-20": { "candidate": "Pending", "constituency": "Khuzdar-III" },
+  "PB-21": { "candidate": "Pending", "constituency": "Hub" },
+  "PB-22": { "candidate": "Pending", "constituency": "Lasbela" },
+  "PB-23": { "candidate": "Pending", "constituency": "Awaran" },
+  "PB-24": { "candidate": "Pending", "constituency": "Gawadar" },
+  "PB-25": { "candidate": "Pending", "constituency": "Kech-I" },
+  "PB-26": { "candidate": "Pending", "constituency": "Kech-II" },
+  "PB-27": { "candidate": "Pending", "constituency": "Kech-III" },
+  "PB-28": { "candidate": "Pending", "constituency": "Kech-IV" },
+  "PB-29": { "candidate": "Pending", "constituency": "Panjgur-I" },
+  "PB-30": { "candidate": "Sardar Ali Akbar", "constituency": "Panjgur-II" },
+  "PB-31": { "candidate": "Hussain Ahmed", "constituency": "Washuk" },
+  "PB-32": { "candidate": "Ali Ahmed", "constituency": "Chagai" },
+  "PB-33": { "candidate": "Pending", "constituency": "Kharan" },
+  "PB-34": { "candidate": "Pending", "constituency": "Nushki" },
+  "PB-35": { "candidate": "Pending", "constituency": "Surab" },
+  "PB-36": { "candidate": "Pending", "constituency": "Kalat" },
+  "PB-37": { "candidate": "Zulekha Aziz", "constituency": "Mastung" },
+  "PB-38": { "candidate": "Haji Saif Ullah", "constituency": "Quetta-I" },
+  "PB-39": { "candidate": "Noor Muhammad", "constituency": "Quetta-II" },
+  "PB-40": { "candidate": "Dawood Shah", "constituency": "Quetta-III" },
+  "PB-41": { "candidate": "Adv. Abdul Ghaffar", "constituency": "Quetta-IV" },
+  "PB-42": { "candidate": "Imran Hussain Hazara", "constituency": "Quetta-V" },
+  "PB-43": {
+    "candidate": "Sardar Doda Khan Shahwani",
+    "constituency": "Quetta-VI"
+  },
+  "PB-44": { "candidate": "Malik Faisal Dehwar", "constituency": "Quetta-VII" },
+  "PB-45": { "candidate": "Liaqat Lehri", "constituency": "Quetta-VIII" },
+  "PB-46": { "candidate": "PENDING", "constituency": "Quetta-IX" },
+  "PB-47": { "candidate": "Zain ul Abideen Khan", "constituency": "Pishin-I" },
+  "PB-48": { "candidate": "Shahnawaz Khiral", "constituency": "Pishin-II" },
+  "PB-49": { "candidate": "Abdul Hayyi Agha", "constituency": "Pishin-III" },
+  "PB-50": {
+    "candidate": "Zakir Khan Tareen",
+    "constituency": "Killa Abdullah"
+  },
+  "PB-51": { "candidate": "Jalal Saadi Achakzai", "constituency": "Chaman" }
+}

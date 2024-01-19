@@ -9,6 +9,7 @@ import BackgroundImage from './components/BackgroundImage'
 import ConstituencyView from './components/ConstituencyView'
 import * as turf from '@turf/turf'
 import { useState } from 'react'
+import { FaLocationCrosshairs } from 'react-icons/fa6'
 
 const provincialSeats = provincialSeatsGeoJson as ProvincialGeoJson
 
@@ -17,7 +18,7 @@ function App() {
   const navigate = useNavigate()
 
   const [myConstituency, setMyConstituency] = useState<
-    ProvincialFeature | undefined
+    ProvincialFeature | false | undefined
   >(undefined)
 
   const goToMyConstituency: (coords: {
@@ -31,7 +32,7 @@ function App() {
     )
 
     if (!foundPolygon) {
-      setMyConstituency(undefined)
+      setMyConstituency(false)
       navigate('/')
     } else {
       setMyConstituency(foundPolygon)
@@ -60,7 +61,14 @@ function App() {
         <Header goToMyConstituency={goToMyConstituency} />
         <div className="flex flex-1 w-full">
           {!SELECTED.feature ? (
-            <BackgroundImage />
+            myConstituency === false ? (
+              <div className="flex text-gray-400 font-mono w-full h-full items-center justify-center p-3 tracking-tighter">
+                <FaLocationCrosshairs className="mr-3 text-lg" />
+                Your current location is not in any of the constituencies.
+              </div>
+            ) : (
+              <BackgroundImage />
+            )
           ) : (
             <ConstituencyView
               isMyConstituency={myConstituency === SELECTED.feature}

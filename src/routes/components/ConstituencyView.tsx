@@ -19,7 +19,7 @@ const ConstituencyView = ({
         <div className="flex absolute right-4 top-4">
           <div className="flex font-mono tracking-tighter text-blue-600 px-3 py-2 bg-blue-50 font-bold rounded items-center">
             <FaLocationCrosshairs className="mr-3 text-lg" />
-            Your District
+            Your Constituency
           </div>
         </div>
       )}

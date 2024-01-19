@@ -33,7 +33,7 @@ const Header = ({
     <div className="flex flex-col px-4 py-8 bg-green-50 items-center justify-center relative">
       <img className="w-20 h-20 rounded-md mb-5" src={PTIElectionSymbol} />
       <div className="font-mono font-bold text-emerald-600 mb-4">
-        One-step tool to find the PTI Candidate in your district.
+        One-step tool to find the PTI Candidate in your constituency.
       </div>
       <button
         onClick={updateLocation}
@@ -47,7 +47,7 @@ const Header = ({
         ) : (
           <FaLocationCrosshairs className="mr-2 text-lg" />
         )}
-        Find District by Location
+        Find Constituency by Location
       </button>
     </div>
   )

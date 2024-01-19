@@ -5,18 +5,24 @@ import CandidateView from './CandidateView'
 const ConstituencyView = ({
   feature,
   color,
-  candidate
+  candidate,
+  isMyConstituency
 }: {
   feature: ProvincialFeature
   color: string
   candidate?: Candidate
+  isMyConstituency: boolean
 }) => {
   return (
     <div className="flex w-full relative">
-      <div className="flex absolute font-mono bg-blue-50 text-blue-600 font-bold items-center px-3 py-2 rounded right-4 top-4 tracking-tighter">
-        <FaLocationCrosshairs className="mr-3 text-lg" />
-        Your Constituency
-      </div>
+      {isMyConstituency && (
+        <div className="flex absolute right-4 top-4">
+          <div className="flex font-mono tracking-tighter text-blue-600 px-3 py-2 bg-blue-50 font-bold rounded items-center">
+            <FaLocationCrosshairs className="mr-3 text-lg" />
+            Your Constituency
+          </div>
+        </div>
+      )}
       <div
         style={{
           height: '100%',

@@ -1,17 +1,43 @@
 import provincialSeatsGeoJson from '../geojson/provincial.json'
 import candidatesJson from '../geojson/candidates.json'
-import { Candidate, ProvincialGeoJson } from '../models'
-import { useParams } from 'react-router-dom'
+import { Candidate, ProvincialFeature, ProvincialGeoJson } from '../models'
+import { useNavigate, useParams } from 'react-router-dom'
 import { stringToColor } from '../mapping/styles'
 import Header from './components/Header'
 import Map from './Map'
 import BackgroundImage from './components/BackgroundImage'
 import ConstituencyView from './components/ConstituencyView'
+import * as turf from '@turf/turf'
+import { useState } from 'react'
 
 const provincialSeats = provincialSeatsGeoJson as ProvincialGeoJson
 
 function App() {
   const { seat = null } = useParams()
+  const navigate = useNavigate()
+
+  const [myConstituency, setMyConstituency] = useState<
+    ProvincialFeature | undefined
+  >(undefined)
+
+  const goToMyConstituency: (coords: {
+    latitude: string
+    longitude: string
+  }) => void = (coords) => {
+    const locationPoint = turf.point([67.07630154256441, 24.90182725824524])
+
+    const foundPolygon = provincialSeats.features.find((feature) =>
+      turf.booleanPointInPolygon(locationPoint, feature)
+    )
+
+    if (!foundPolygon) {
+      setMyConstituency(undefined)
+      navigate('/')
+    } else {
+      setMyConstituency(foundPolygon)
+      navigate('/' + foundPolygon?.properties.PA)
+    }
+  }
 
   const selectedFeature = provincialSeats.features.find(
     (f) => f.properties.PA === seat
@@ -31,12 +57,13 @@ function App() {
         className="flex flex-col w-full h-full"
         style={{ width: '50%', maxWidth: 850 }}
       >
-        <Header goToMyConstituency={() => {}} />
+        <Header goToMyConstituency={goToMyConstituency} />
         <div className="flex flex-1 w-full">
           {!SELECTED.feature ? (
             <BackgroundImage />
           ) : (
             <ConstituencyView
+              isMyConstituency={myConstituency === SELECTED.feature}
               feature={SELECTED.feature}
               color={SELECTED.color ?? ''}
               candidate={SELECTED.candidate}

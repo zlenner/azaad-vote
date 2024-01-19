@@ -42,7 +42,6 @@ const Map = ({
       click: (event: any) => {
         const layer = event.target
         navigate('/' + layer.feature.properties.PA)
-        mapRef.current.fitBounds(layer.getBounds())
       }
     })
   }
@@ -73,7 +72,7 @@ const Map = ({
         }
       }
     }, 0)
-  }, [])
+  }, [selectedConstituency?.properties.PA])
 
   return (
     <div className="flex flex-1 h-full">
@@ -94,8 +93,7 @@ const Map = ({
               fillColor: stringToColor(feature.properties.PA),
               weight: 1,
               opacity: 1,
-              color: '#9ca3af', // Border color
-
+              color: '#666666', // Border color
               fillOpacity: 0.5
             }
 
@@ -103,9 +101,7 @@ const Map = ({
               return {
                 ...defaultStyle,
                 fillColor: 'transparent',
-                weight: 5,
-                opacity: 1,
-                color: '#666666' // Border color
+                weight: 5
               }
             } else if (
               (
@@ -116,7 +112,6 @@ const Map = ({
               return {
                 ...defaultStyle,
                 fillColor: '#e5e7eb',
-                weight: 1,
                 opacity: 0.2
               }
             } else {

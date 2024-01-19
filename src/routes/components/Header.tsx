@@ -1,7 +1,34 @@
 import { FaLocationCrosshairs } from 'react-icons/fa6'
 import PTIElectionSymbol from '../../assets/nobg.png'
+import { useState } from 'react'
 
-const Header = ({ goToMyConstituency }: { goToMyConstituency: () => void }) => {
+const Header = ({
+  goToMyConstituency
+}: {
+  goToMyConstituency: (coords: { latitude: string; longitude: string }) => void
+}) => {
+  const [loading, setLoading] = useState(false)
+
+  const updateLocation = () => {
+    if (!navigator.geolocation) {
+      console.error('Geolocation is not supported by your browser')
+    } else {
+      setLoading(true)
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLoading(false)
+          goToMyConstituency({
+            latitude: position.coords.latitude.toString(),
+            longitude: position.coords.longitude.toString()
+          })
+        },
+        () => {
+          setLoading(false)
+          console.error('Unable to retrieve your location')
+        }
+      )
+    }
+  }
   return (
     <div className="flex flex-col px-4 py-8 bg-green-50 items-center justify-center relative">
       <img className="w-20 h-20 rounded-md mb-5" src={PTIElectionSymbol} />
@@ -9,10 +36,17 @@ const Header = ({ goToMyConstituency }: { goToMyConstituency: () => void }) => {
         One-step tool to find the PTI Candidate in your constituency.
       </div>
       <button
-        onClick={goToMyConstituency}
+        onClick={updateLocation}
         className="flex items-center bg-white shadow rounded-md px-3 py-1 select-none cursor-pointer font-bold text-red-600 font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition"
       >
-        <FaLocationCrosshairs className="mr-2 text-lg" />
+        {loading ? (
+          <div
+            className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] mr-2.5"
+            role="status"
+          ></div>
+        ) : (
+          <FaLocationCrosshairs className="mr-2 text-lg" />
+        )}
         Find My Constituency
       </button>
     </div>

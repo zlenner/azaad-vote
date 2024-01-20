@@ -98,7 +98,7 @@ const Map = ({ selectedSeat }: { selectedSeat?: Seat }) => {
               }
             } else if (
               !seat.candidate ||
-              seat.candidate.constituency_name.toUpperCase() === 'PENDING'
+              seat.candidate.candidate_name.toUpperCase() === 'PENDING'
             ) {
               // In case the candidate is pending, we want to make the color lighter
               return {

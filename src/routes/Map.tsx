@@ -1,27 +1,19 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import { useNavigate } from 'react-router-dom'
-import provincialSeatsGeoJson from '../geojson/provincial.json'
-import candidatesJson from '../geojson/candidates.json'
-import { Candidate, ProvincialFeature, ProvincialGeoJson } from '../models'
 import { stringToColor } from '../mapping/styles'
 import { useEffect } from 'react'
 import React from 'react'
+import { ProvincialFeature, Seat, provincialGeoJson, seats } from './data'
 
-const provincialSeats = provincialSeatsGeoJson as ProvincialGeoJson
-
-const Map = ({
-  selectedConstituency
-}: {
-  selectedConstituency?: ProvincialFeature
-}) => {
+const Map = ({ selectedSeat }: { selectedSeat?: Seat }) => {
   const navigate = useNavigate()
 
   const isFeatureSelected = (feature: ProvincialFeature) => {
-    return feature.properties.PA === selectedConstituency?.properties.PA
+    return feature.properties.PA === selectedSeat?.seat
   }
 
   // Attach event handlers to each feature
-  const onEachFeature = (feature: any, layer: any) => {
+  const onEachFeature = (feature: ProvincialFeature, layer: any) => {
     layer.on({
       mouseover: (event: any) => {
         if (isFeatureSelected(feature)) return
@@ -56,7 +48,7 @@ const Map = ({
         )
       }
       // Zoom to the initial selected polygon, if provided
-      if (selectedConstituency && mapRef.current) {
+      if (selectedSeat && mapRef.current) {
         const selectedLayer = Object.values(mapRef.current._layers).find(
           (layer: any) => {
             if (layer.feature === undefined) {
@@ -72,7 +64,7 @@ const Map = ({
         }
       }
     }, 0)
-  }, [selectedConstituency?.properties.PA])
+  }, [selectedSeat?.seat])
 
   return (
     <div className="flex flex-1 h-full map">
@@ -86,27 +78,27 @@ const Map = ({
       >
         <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
         <GeoJSON
-          data={provincialSeats.features as any}
-          style={(featureUntyped) => {
-            const feature = featureUntyped as ProvincialFeature
+          data={provincialGeoJson}
+          style={(feature) => {
+            const seat = seats[feature!.properties.PA]
+
             const defaultStyle = {
-              fillColor: stringToColor(feature.properties.PA),
+              fillColor: stringToColor(seat.seat),
               weight: 1,
               opacity: 1,
               color: '#666666', // Border color
               fillOpacity: 0.5
             }
 
-            if (isFeatureSelected(feature)) {
+            if (isFeatureSelected(feature as ProvincialFeature)) {
               return {
                 ...defaultStyle,
                 fillColor: 'transparent',
                 weight: 5
               }
             } else if (
-              (
-                (candidatesJson as any)[feature.properties.PA] as Candidate
-              ).candidate.toLowerCase() === 'pending'
+              !seat.candidate ||
+              seat.candidate.constituency_name.toUpperCase() === 'PENDING'
             ) {
               // In case the candidate is pending, we want to make the color lighter
               return {

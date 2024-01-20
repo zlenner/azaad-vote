@@ -1,4 +1,4 @@
-import { Candidate } from '../../models'
+import { Candidate } from '../data'
 
 const CandidateView = ({
   color,
@@ -17,7 +17,7 @@ const CandidateView = ({
           Candidate
         </div>
         <div className="flex ml-5 text-gray-600 font-mono text-3xl">
-          {candidate.candidate}
+          {candidate.candidate_name}
         </div>
       </div>
       {candidate.symbol_text && (

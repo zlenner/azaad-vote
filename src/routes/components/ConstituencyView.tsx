@@ -1,16 +1,15 @@
 import { FaLocationCrosshairs } from 'react-icons/fa6'
-import { Candidate, ProvincialFeature } from '../../models'
 import CandidateView from './CandidateView'
+import { Seat } from '../data'
 
 const ConstituencyView = ({
-  feature,
-  color,
-  candidate,
+  selected,
   isMyConstituency
 }: {
-  feature: ProvincialFeature
-  color: string
-  candidate?: Candidate
+  selected: {
+    seat: Seat
+    color: string
+  }
   isMyConstituency: boolean
 }) => {
   return (
@@ -27,28 +26,33 @@ const ConstituencyView = ({
         style={{
           height: '100%',
           width: '25px',
-          backgroundColor: color
+          backgroundColor: selected.color
         }}
       ></div>
       <div className="flex flex-col w-full px-5 py-4 relative">
         <div className="flex flex-col w-full mb-8">
           <div
             className="font-bold font-mono text-7xl"
-            style={{ color: color }}
+            style={{ color: selected.color }}
           >
-            {feature.properties.PA}
+            {selected.seat.seat}
           </div>
           <div
             className="font-mono font-bold text-3xl"
-            style={{ color: color }}
+            style={{ color: selected.color }}
           >
-            {feature.properties.DISTRICT}
+            {selected.seat.candidate?.constituency_name}
           </div>
         </div>
         <div className="flex flex-col absolute right-3 bottom-3 text-gray-700 font-semibold font-mono">
-          <div>{feature.properties.PROVINCE}</div>
+          <div>{selected.seat.province}</div>
         </div>
-        {candidate && <CandidateView candidate={candidate} color={color} />}
+        {selected.seat.candidate && (
+          <CandidateView
+            candidate={selected.seat.candidate}
+            color={selected.color}
+          />
+        )}
       </div>
     </div>
   )

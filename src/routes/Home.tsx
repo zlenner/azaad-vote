@@ -1,6 +1,3 @@
-import provincialSeatsGeoJson from '../geojson/provincial.json'
-import candidatesJson from '../geojson/candidates.json'
-import { Candidate, ProvincialFeature, ProvincialGeoJson } from '../models'
 import { useNavigate, useParams } from 'react-router-dom'
 import { stringToColor } from '../mapping/styles'
 import Header from './components/Header'
@@ -10,15 +7,49 @@ import ConstituencyView from './components/ConstituencyView'
 import * as turf from '@turf/turf'
 import { useState } from 'react'
 import { FaLocationCrosshairs } from 'react-icons/fa6'
+import { Seat, provincialGeoJson, seats } from './data'
 
-const provincialSeats = provincialSeatsGeoJson as ProvincialGeoJson
+const DetailConditionals = ({
+  selected,
+  locationConstituency
+}: {
+  selected?: {
+    seat: Seat
+    color: string
+  }
+  locationConstituency?: Seat | false
+}) => {
+  if (selected) {
+    return (
+      <ConstituencyView
+        isMyConstituency={
+          locationConstituency
+            ? locationConstituency.seat === selected.seat.seat
+            : false
+        }
+        selected={selected}
+      />
+    )
+  } else {
+    if (locationConstituency === false) {
+      return (
+        <div className="flex text-gray-400 font-mono w-full h-full items-center justify-center p-3 tracking-tighter">
+          <FaLocationCrosshairs className="mr-3 text-lg" />
+          Your current location is not in any of the constituencies.
+        </div>
+      )
+    } else {
+      return <BackgroundImage />
+    }
+  }
+}
 
 function App() {
-  const { seat = null } = useParams()
+  const { seat: seatCode = null } = useParams()
   const navigate = useNavigate()
 
-  const [myConstituency, setMyConstituency] = useState<
-    ProvincialFeature | false | undefined
+  const [locationConstituency, setLocationConstituency] = useState<
+    Seat | false | undefined
   >(undefined)
 
   const goToMyConstituency: (coords: {
@@ -27,30 +58,28 @@ function App() {
   }) => void = (coords) => {
     const locationPoint = turf.point([coords.longitude, coords.latitude])
 
-    const foundPolygon = provincialSeats.features.find((feature) =>
+    const foundPolygon = provincialGeoJson.features.find((feature) =>
       turf.booleanPointInPolygon(locationPoint, feature)
     )
 
     if (!foundPolygon) {
-      setMyConstituency(false)
+      setLocationConstituency(false)
       navigate('/')
     } else {
-      setMyConstituency(foundPolygon)
-      navigate('/' + foundPolygon?.properties.PA)
+      const seat = seats[foundPolygon.properties.PA]
+      setLocationConstituency(seat)
+      navigate('/' + seat.seat)
     }
   }
 
-  const selectedFeature = provincialSeats.features.find(
-    (f) => f.properties.PA === seat
-  )
+  const selectedSeat = seatCode ? seats[seatCode] : undefined
 
-  const SELECTED = {
-    feature: selectedFeature,
-    color: selectedFeature && stringToColor(selectedFeature.properties.PA),
-    candidate:
-      selectedFeature &&
-      ((candidatesJson as any)[selectedFeature.properties.PA] as Candidate)
-  }
+  const SELECTED = !selectedSeat
+    ? undefined
+    : ({
+        color: stringToColor(selectedSeat.seat),
+        seat: selectedSeat
+      } as const)
 
   return (
     <div className="flex flex w-full h-full frame">
@@ -60,26 +89,13 @@ function App() {
       >
         <Header goToMyConstituency={goToMyConstituency} />
         <div className="flex flex-1 w-full">
-          {!SELECTED.feature ? (
-            myConstituency === false ? (
-              <div className="flex text-gray-400 font-mono w-full h-full items-center justify-center p-3 tracking-tighter">
-                <FaLocationCrosshairs className="mr-3 text-lg" />
-                Your current location is not in any of the constituencies.
-              </div>
-            ) : (
-              <BackgroundImage />
-            )
-          ) : (
-            <ConstituencyView
-              isMyConstituency={myConstituency === SELECTED.feature}
-              feature={SELECTED.feature}
-              color={SELECTED.color ?? ''}
-              candidate={SELECTED.candidate}
-            />
-          )}
+          <DetailConditionals
+            selected={SELECTED}
+            locationConstituency={locationConstituency}
+          />
         </div>
       </div>
-      <Map selectedConstituency={SELECTED.feature} />
+      <Map selectedSeat={SELECTED?.seat} />
     </div>
   )
 }

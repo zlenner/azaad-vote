@@ -45,7 +45,11 @@ const ConstituencyView = ({
           </div>
         </div>
         <div className="flex flex-col absolute right-3 bottom-3 text-gray-700 font-semibold font-mono">
-          <div>{selected.seat.province}</div>
+          <div>
+            {selected.seat.type === 'national'
+              ? 'NATIONAL'
+              : selected.seat.province}
+          </div>
         </div>
         {selected.seat.candidate && (
           <CandidateView

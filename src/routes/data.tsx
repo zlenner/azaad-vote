@@ -1,4 +1,6 @@
 import provincialSeatsGeoJson from '../geojson/provincial.json'
+import nationalSeatsGeoJson from '../geojson/national.json'
+
 import candidatesJson from '../geojson/candidates.json'
 
 export interface Candidate {
@@ -22,6 +24,17 @@ export interface ProvincialFeature {
   }
 }
 
+export interface NationalAssemblyObject {
+  Constituency: string
+  District: string
+  Candidate: string
+  Symbol: string
+  symbolfile: string
+  Status: string
+  duespaid: string
+  'WhatsApp Link': string
+}
+
 export interface Seat {
   type: 'provincial' | 'national'
   province: string
@@ -35,6 +48,7 @@ const produceData = () => {
     provincialSeats: provincialSeatsGeoJson as {
       features: ProvincialFeature[]
     },
+    nationalSeats: nationalSeatsGeoJson as NationalAssemblyObject[],
     candidates: candidatesJson as {
       [seat: string]: {
         constituency: string
@@ -73,6 +87,19 @@ const produceData = () => {
       return [key, value]
     })
   )
+
+  for (const seat of RAW.nationalSeats) {
+    seats[seat.Constituency] = {
+      seat: seat.Constituency,
+      type: 'national',
+      province: '',
+      district: '',
+      candidate: {
+        constituency_name: seat.District,
+        candidate_name: seat.Candidate
+      }
+    }
+  }
 
   const provincialGeoJson = RAW.provincialSeats as {
     type: 'FeatureCollection'

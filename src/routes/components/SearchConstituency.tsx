@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Popover } from 'react-tiny-popover'
 import fuse from './fuseSearch'
 import { stringToColor } from '../../mapping/styles'

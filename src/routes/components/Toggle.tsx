@@ -12,7 +12,7 @@ export default function AssemblyToggle({
   onChange
 }: Props) {
   const defaultClass = clsx(
-    isDisabled && 'opacity-50 cursor-not-allowed',
+    isDisabled && 'opacity-50 !cursor-not-allowed',
     'transition px-2 py-1 rounded text-gray-600'
   )
   const nonSelectedClass = 'cursor-pointer'

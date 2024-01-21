@@ -12,6 +12,7 @@
   "dependencies": {
     "@turf/turf": "^6.5.0",
     "axios": "^1.6.0",
+    "clsx": "^2.1.0",
     "fuse.js": "^7.0.0",
     "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",

@@ -4,6 +4,7 @@ import { stringToColor } from '../mapping/styles'
 import { useEffect } from 'react'
 import React from 'react'
 import { ProvincialFeature, Seat, provincialGeoJson, seats } from './data'
+import Toggle from './components/Toggle'
 
 const Map = ({ selectedSeat }: { selectedSeat?: Seat }) => {
   const navigate = useNavigate()
@@ -67,7 +68,10 @@ const Map = ({ selectedSeat }: { selectedSeat?: Seat }) => {
   }, [selectedSeat?.seat])
 
   return (
-    <div className="flex flex-1 h-full map">
+    <div className="flex flex-1 h-full map relative">
+      <div className="absolute top-3 right-3" style={{ zIndex: 99999 }}>
+        <Toggle assembly="provincial" onChange={() => {}} isDisabled />
+      </div>
       <MapContainer
         className="w-full h-full"
         center={[30.656574684183685, 68.25139799853381]}

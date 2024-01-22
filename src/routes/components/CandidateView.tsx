@@ -9,7 +9,7 @@ const CandidateView = ({
 }) => {
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col mb-6">
+      <div className="flex flex-col mb-8">
         <div
           className="font-mono font-bold text-3xl mb-3"
           style={{ color: color }}
@@ -20,20 +20,20 @@ const CandidateView = ({
           {candidate.candidate_name}
         </div>
       </div>
-      {candidate.symbol_text && (
+      {candidate.symbol && (
         <div className="flex flex-col">
           <div
-            className="font-mono font-bold text-3xl mb-3"
+            className="font-mono font-bold text-3xl mb-4"
             style={{ color: color }}
           >
             Symbol
           </div>
-          <div className="flex ml-5 text-gray-600 font-mono mb-2 text-3xl justify-center">
-            {candidate.symbol_text}
-            <div className="ml-4 text-gray-600 font-mono">
+          <div className="flex flex-col ml-5 text-gray-600 font-mono mb-2 text-3xl justify-center">
+            <div className="mb-2">{candidate.symbol.symbol_text}</div>
+            <div className="flex text-gray-600 font-mono">
               <img
-                style={{ height: '35px', width: '35px' }}
-                src={candidate.symbol_image}
+                style={{ height: '100px', width: '100px' }}
+                src={candidate.symbol.symbol_image}
               ></img>
             </div>
           </div>

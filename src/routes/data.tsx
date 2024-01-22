@@ -6,8 +6,10 @@ import candidatesJson from '../geojson/candidates.json'
 export interface Candidate {
   constituency_name: string
   candidate_name: string
-  symbol_text?: string
-  symbol_image?: string
+  symbol?: {
+    symbol_text: string
+    symbol_image: string
+  }
 }
 
 export interface ProvincialFeature {
@@ -58,16 +60,7 @@ const produceData = () => {
   }
 
   const seats: {
-    [seat: string]: {
-      type: 'provincial' | 'national'
-      province: string
-      seat: string
-      district: string
-      candidate?: {
-        constituency_name: string
-        candidate_name: string
-      }
-    }
+    [seat: string]: Seat
   } = Object.fromEntries(
     RAW.provincialSeats.features.map((feature) => {
       const candidate = RAW.candidates[feature.properties.PA]
@@ -96,7 +89,11 @@ const produceData = () => {
       district: '',
       candidate: {
         constituency_name: seat.District,
-        candidate_name: seat.Candidate
+        candidate_name: seat.Candidate,
+        symbol: {
+          symbol_text: seat.Symbol,
+          symbol_image: '/symbols/' + seat.symbolfile + '.jpg'
+        }
       }
     }
   }

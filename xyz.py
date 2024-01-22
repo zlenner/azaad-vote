@@ -16,10 +16,9 @@ with open(file_path, 'r', encoding='utf-8') as file:
 for item in data:
     if 'Symbol' in item:
         try:
-            item['Symbol'] = convert_encoding(item['Symbol'])
+            convert_encoding(item['Symbol'])
         except Exception:
-            print('ERROR: ' + item['Symbol'])
+            print(item["Symbol"])
 
-# Write the updated JSON back to the file
 # with open(file_path, 'w', encoding='utf-8') as file:
 #     json.dump(data, file, ensure_ascii=False, indent=4)

@@ -7,7 +7,7 @@ import ConstituencyView from './components/ConstituencyView'
 import * as turf from '@turf/turf'
 import { useState } from 'react'
 import { FaLocationCrosshairs } from 'react-icons/fa6'
-import { Seat, provincialGeoJson, seats } from './data'
+import { Seat, geojson, seats } from './data'
 
 const DetailConditionals = ({
   selected,
@@ -58,7 +58,7 @@ function App() {
   }) => void = (coords) => {
     const locationPoint = turf.point([coords.longitude, coords.latitude])
 
-    const foundPolygon = provincialGeoJson.features.find((feature) =>
+    const foundPolygon = geojson.provincial.features.find((feature) =>
       turf.booleanPointInPolygon(locationPoint, feature)
     )
 

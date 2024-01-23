@@ -1,7 +1,12 @@
-import provincialSeatsGeoJson from '../geojson/provincial.json'
-import nationalSeatsGeoJson from '../geojson/national.json'
+import national from '../data/national.json'
+import balochistan from '../data/balochistan.json'
+import sindh from '../data/sindh.json'
+import punjab from '../data/punjab.json'
+import kpk from '../data/kpk.json'
 
-import candidatesJson from '../geojson/candidates.json'
+import provincialGeoJson from '../data/geojson/provincial.json'
+
+type Province = 'balochistan' | 'sindh' | 'punjab' | 'kpk'
 
 export interface Candidate {
   constituency_name: string
@@ -26,20 +31,18 @@ export interface ProvincialFeature {
   }
 }
 
-export interface NationalAssemblyObject {
+export interface AssemblyObject {
   Constituency: string
   District: string
   Candidate: string
   Symbol: string
   symbolfile: string
-  Status: string
-  duespaid: string
   'WhatsApp Link': string
 }
 
 export interface Seat {
   type: 'provincial' | 'national'
-  province: string
+  province: Province | ''
   seat: string
   district: string
   candidate?: Candidate
@@ -47,68 +50,56 @@ export interface Seat {
 
 const produceData = () => {
   const RAW = {
-    provincialSeats: provincialSeatsGeoJson as {
-      features: ProvincialFeature[]
-    },
-    nationalSeats: nationalSeatsGeoJson as NationalAssemblyObject[],
-    candidates: candidatesJson as {
-      [seat: string]: {
-        constituency: string
-        candidate: string
+    geojson: {
+      provincial: provincialGeoJson as {
+        type: 'FeatureCollection'
+        features: ProvincialFeature[]
       }
-    }
+    },
+    national: national as AssemblyObject[],
+    balochistan: balochistan as AssemblyObject[],
+    sindh: sindh as AssemblyObject[],
+    punjab: punjab as AssemblyObject[],
+    kpk: kpk as AssemblyObject[]
   }
 
-  const seats: {
-    [seat: string]: Seat
-  } = Object.fromEntries(
-    RAW.provincialSeats.features.map((feature) => {
-      const candidate = RAW.candidates[feature.properties.PA]
-      const key = feature.properties.PA
-      const value = {
-        type: 'provincial' as const,
-        province: feature.properties.PROVINCE,
-        seat: feature.properties.PA,
-        district: feature.properties.DISTRICT,
-        candidate: !candidate
-          ? undefined
-          : {
-              constituency_name: candidate.constituency,
-              candidate_name: candidate.candidate
-            }
-      }
-      return [key, value]
-    })
-  )
+  const seats: Record<string, Seat> = {}
 
-  for (const seat of RAW.nationalSeats) {
-    seats[seat.Constituency] = {
-      seat: seat.Constituency,
-      type: 'national',
-      province: '',
-      district: '',
-      candidate: {
-        constituency_name: seat.District,
-        candidate_name: seat.Candidate,
-        symbol: {
-          symbol_text: seat.Symbol,
-          symbol_image: '/symbols/' + seat.symbolfile + '.jpg'
+  const pushAssemblyObjectsToSeat = (
+    type: 'provincial' | 'national',
+    province: Province | '',
+    assemblyObjects: AssemblyObject[]
+  ) => {
+    for (const seat of assemblyObjects) {
+      seats[seat.Constituency] = {
+        seat: seat.Constituency,
+        type,
+        province,
+        district: '',
+        candidate: {
+          constituency_name: seat.District,
+          candidate_name: seat.Candidate,
+          symbol: {
+            symbol_text: seat.Symbol,
+            symbol_image: '/symbols/' + seat.symbolfile + '.jpg'
+          }
         }
       }
     }
   }
 
-  const provincialGeoJson = RAW.provincialSeats as {
-    type: 'FeatureCollection'
-    features: ProvincialFeature[]
-  }
+  pushAssemblyObjectsToSeat('national', '', RAW.national)
+  pushAssemblyObjectsToSeat('provincial', 'balochistan', RAW.balochistan)
+  pushAssemblyObjectsToSeat('provincial', 'sindh', RAW.sindh)
+  pushAssemblyObjectsToSeat('provincial', 'punjab', RAW.punjab)
+  pushAssemblyObjectsToSeat('provincial', 'kpk', RAW.kpk)
 
   return {
-    provincialGeoJson,
+    geojson: RAW.geojson,
     seats
   }
 }
 
-const { provincialGeoJson, seats } = produceData()
+const { geojson, seats } = produceData()
 
-export { provincialGeoJson, seats }
+export { geojson, seats }

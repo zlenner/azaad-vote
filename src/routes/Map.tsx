@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { stringToColor } from '../mapping/styles'
 import { useEffect } from 'react'
 import React from 'react'
-import { ProvincialFeature, Seat, provincialGeoJson, seats } from './data'
+import { ProvincialFeature, Seat, geojson, seats } from './data'
 import Toggle from './components/Toggle'
 
 const Map = ({ selectedSeat }: { selectedSeat?: Seat }) => {
@@ -82,9 +82,10 @@ const Map = ({ selectedSeat }: { selectedSeat?: Seat }) => {
       >
         <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
         <GeoJSON
-          data={provincialGeoJson}
+          data={geojson.provincial}
           style={(feature) => {
             const seat = seats[feature!.properties.PA]
+            console.log(feature, seat)
 
             const defaultStyle = {
               fillColor: stringToColor(seat.seat),
@@ -102,7 +103,7 @@ const Map = ({ selectedSeat }: { selectedSeat?: Seat }) => {
               }
             } else if (
               !seat.candidate ||
-              seat.candidate.candidate_name.toUpperCase() === 'PENDING'
+              seat.candidate.candidate_name.toUpperCase() === 'TO BE UPLOADED'
             ) {
               // In case the candidate is pending, we want to make the color lighter
               return {

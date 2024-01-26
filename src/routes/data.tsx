@@ -81,7 +81,8 @@ const produceData = () => {
           candidate_name: seat.Candidate,
           symbol: {
             symbol_text: seat.Symbol,
-            symbol_image: '/symbols/' + seat.symbolfile + '.jpg'
+            symbol_image:
+              'https://symbols.azaadvote.com/' + seat.symbolfile + '.jpg'
           }
         }
       }

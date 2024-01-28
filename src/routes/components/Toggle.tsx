@@ -17,6 +17,8 @@ export default function AssemblyToggle({
   )
   const nonSelectedClass = 'cursor-pointer'
 
+  return null
+
   const selectedClass = 'bg-emerald-100 text-emerald-700 font-bold'
   return (
     <div className="flex font-mono text-sm bg-white rounded-lg shadow border py-1.5 px-2">

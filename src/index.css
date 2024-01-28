@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap');
+
 body {
     font-family: -apple-system,
         BlinkMacSystemFont,
@@ -13,6 +15,10 @@ body {
         Helvetica Neue,
         sans-serif;
     box-sizing: border-box;
+}
+
+.font-urdu {
+    font-family: 'Noto Nastaliq Urdu', serif;
 }
 
 *, *::after, *::before {

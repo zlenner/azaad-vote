@@ -1,7 +1,9 @@
 import { FaLocationCrosshairs, FaWhatsapp } from 'react-icons/fa6'
 import CandidateView from '../CandidateView'
-import { Seat } from '../../data'
+import { Seat, form33 } from '../../data'
 import { MdHowToVote } from 'react-icons/md'
+import { useState } from 'react'
+import SampleBallot from './SampleBallot'
 
 const ConstituencyView = ({
   selectedSeat,
@@ -10,6 +12,18 @@ const ConstituencyView = ({
   selectedSeat: Seat
   isMyDistrict: boolean
 }) => {
+  const [isBallotOpen, setIsBallotOpen] = useState(false)
+
+  if (isBallotOpen) {
+    return (
+      <SampleBallot
+        isOpen={isBallotOpen}
+        closeModal={() => setIsBallotOpen(false)}
+        selectedSeat={selectedSeat}
+      />
+    )
+  }
+
   return (
     <div className="flex w-full h-full relative">
       <div className="flex flex-col absolute right-4 top-4">
@@ -40,17 +54,22 @@ const ConstituencyView = ({
           <div>
             {selectedSeat.type === 'national'
               ? 'NATIONAL'
-              : selectedSeat.province}
+              : selectedSeat.province.toUpperCase()}
           </div>
         </div>
         {selectedSeat.candidate && (
           <CandidateView candidate={selectedSeat.candidate} />
         )}
         <div className="flex mt-auto">
-          <button className="flex w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold text-purple-500 font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50">
-            <MdHowToVote className="mr-3 text-2xl" />
-            Sample Ballot
-          </button>
+          {form33[selectedSeat.seat] && (
+            <button
+              className="flex w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold text-purple-500 font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50"
+              onClick={() => setIsBallotOpen(true)}
+            >
+              <MdHowToVote className="mr-3 text-2xl" />
+              Sample Ballot
+            </button>
+          )}
           <a href={selectedSeat.candidate?.whatsapp_link} target="_blank">
             <button className="flex w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold text-green-600 font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50 ml-3">
               <FaWhatsapp className="mr-3 text-2xl" />

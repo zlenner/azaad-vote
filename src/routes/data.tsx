@@ -6,6 +6,8 @@ import kpk from '../data/kpk.json'
 
 import districtsGeoJson from '../data/geojson/districts.json'
 
+import candidatesNationalJson from '../data/candidates/national.json'
+
 type Province = 'balochistan' | 'sindh' | 'punjab' | 'kpk'
 
 export interface Candidate {
@@ -52,12 +54,35 @@ export interface Seat {
   candidate?: Candidate
 }
 
+export interface Form33Candidate {
+  SerialNo: number
+  'Name in English': string
+  'Name in Urdu': string
+  Address: string
+  Symbol: string
+  Party: string
+  symbol_url: string
+  pti_backed?: {
+    whatsapp_channel: string
+  }
+}
+
 const produceData = () => {
   const RAW = {
     geojson: {
       districts: districtsGeoJson as {
         type: 'FeatureCollection'
         features: DistrictFeature[]
+      }
+    },
+    candidatesNationalJson: candidatesNationalJson as {
+      [constituency: string]: {
+        'Constituency No': string
+        'Constituency Name': string
+        'Returning Officer': string
+        NumPages: number
+        PageFiles: string[]
+        Candidates: Form33Candidate[]
       }
     },
     national: national as AssemblyObject[],
@@ -100,15 +125,39 @@ const produceData = () => {
   pushAssemblyObjectsToSeat('provincial', 'punjab', RAW.punjab)
   pushAssemblyObjectsToSeat('provincial', 'kpk', RAW.kpk)
 
+  const form33 = Object.fromEntries(
+    Object.entries(RAW.candidatesNationalJson).map(
+      ([constituency_no, constituency]) => {
+        const candidates = constituency.Candidates.map((candidate) => {
+          return {
+            symbol_url: candidate.symbol_url,
+            candidate_name: candidate['Name in Urdu'],
+            pti_backed: !!candidate.pti_backed
+          }
+        })
+
+        return [
+          constituency_no,
+          {
+            constituency_no,
+            constituency_name: constituency['Constituency Name'],
+            candidates
+          }
+        ]
+      }
+    )
+  )
+
   return {
     geojson: RAW.geojson,
+    form33,
     seats
   }
 }
 
-const { geojson, seats } = produceData()
+const { geojson, seats, form33 } = produceData()
 
-export { geojson, seats }
+export { geojson, seats, form33 }
 
 export type Selected =
   | {

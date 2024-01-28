@@ -4,7 +4,7 @@ import sindh from '../data/sindh.json'
 import punjab from '../data/punjab.json'
 import kpk from '../data/kpk.json'
 
-import provincialGeoJson from '../data/geojson/provincial.json'
+import districtsGeoJson from '../data/geojson/districts.json'
 
 type Province = 'balochistan' | 'sindh' | 'punjab' | 'kpk'
 
@@ -24,10 +24,18 @@ export interface ProvincialFeature {
     coordinates: number[][][]
   }
   properties: {
-    OBJECTID: number
-    PROVINCE: string
-    DISTRICT: string
-    PA: string
+    ID_0: number
+    ISO: 'PAK'
+    NAME_0: 'Pakistan'
+    ID_1: number
+    NAME_1: string
+    ID_2: number
+    NAME_2: string
+    ID_3: number
+    NAME_3: string
+    TYPE_3: 'District'
+    ENGTYPE_3: 'District'
+    VARNAME_3: string | null
   }
 }
 
@@ -51,7 +59,7 @@ export interface Seat {
 const produceData = () => {
   const RAW = {
     geojson: {
-      provincial: provincialGeoJson as {
+      provincial: districtsGeoJson as {
         type: 'FeatureCollection'
         features: ProvincialFeature[]
       }

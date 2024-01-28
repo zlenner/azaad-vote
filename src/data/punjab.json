@@ -66,17 +66,17 @@
   {
     "Constituency": "PP-9",
     "District": "Rawalpindi-III",
-    "Candidate": "Adv Tariq Bhatti",
-    "Symbol": "CHARPAI\n\nچارپائی",
-    "symbolfile": "charpai",
+    "Candidate": "Munir Ahmad",
+    "Symbol": "",
+    "symbolfile": "",
     "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaK6oVI6hENqba9eJF0f"
   },
   {
     "Constituency": "PP-10",
     "District": "Rawalpindi-IV",
-    "Candidate": "Chaudhary Ameer Afzal",
-    "Symbol": "GOAT\n\nبکری",
-    "symbolfile": "goat",
+    "Candidate": "Ch Ameer Afzal",
+    "Symbol": "",
+    "symbolfile": "",
     "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaKahiHHAdNaG0Z4CF2L"
   },
   {
@@ -90,9 +90,9 @@
   {
     "Constituency": "PP-12",
     "District": "Rawalpindi-VI",
-    "Candidate": "To be uploaded",
-    "Symbol": "",
-    "symbolfile": "",
+    "Candidate": "Saad Ali Khan",
+    "Symbol": "PEACOCK\n\nمور",
+    "symbolfile": "peacock",
     "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaKahiHHAdNaG0Z4CF2L"
   },
   {
@@ -141,7 +141,7 @@
     "Candidate": "Asad Abbas",
     "Symbol": "STUDY TABLE WITH CHAIR\n\nپڑھائی والی میز اور کرسی",
     "symbolfile": "study-table-with-chair",
-    "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaG89Ex6hENnsPV7pt1c"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaLJuLDKrWQxQpNvwW2C"
   },
   {
     "Constituency": "PP-19",
@@ -157,14 +157,14 @@
     "Candidate": "Ch. Ali Nasir Bhatti",
     "Symbol": "ORANGE\n\nمالٹا",
     "symbolfile": "orange",
-    "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaLJuLDKrWQxQpNvwW2C"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaG1BsRElagzW2nCnA0G"
   },
   {
     "Constituency": "PP-21",
     "District": "Chakwal-II",
     "Candidate": "Raja Tariq Kalas",
-    "Symbol": "VIOLIN\n\nوائلن",
-    "symbolfile": "violin",
+    "Symbol": "RABAB\n\nرباب",
+    "symbolfile": "Rabab",
     "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaG1BsRElagzW2nCnA0G"
   },
   {
@@ -173,12 +173,12 @@
     "Candidate": "Hakeem Nisar Ahmad",
     "Symbol": "SUITCASE\n\nسوٹ کیس",
     "symbolfile": "Suitcase",
-    "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaG1BsRElagzW2nCnA0G"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaG6CSH2UPBCRkU0Yq1S"
   },
   {
     "Constituency": "PP-23",
     "District": "Talagang",
-    "Candidate": "Saad Taman",
+    "Candidate": "Col (Retd) Sultan Surkhro Awan",
     "Symbol": "",
     "symbolfile": "",
     "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaG6CSH2UPBCRkU0Yq1S"
@@ -189,14 +189,14 @@
     "Candidate": "Riffat Zaidi",
     "Symbol": "WATER COOLER \n\nواٹر کولر",
     "symbolfile": "water-cooler",
-    "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaG6CSH2UPBCRkU0Yq1S"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKmvDi7z4knAzjJoC3Q"
   },
   {
     "Constituency": "PP-25",
     "District": "Jehlum-II",
     "Candidate": "Yasir Qureshi",
-    "Symbol": "BADGE\n\nبیج",
-    "symbolfile": "badge",
+    "Symbol": "MEDAL\n\nتمغہ",
+    "symbolfile": "medal",
     "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaKmvDi7z4knAzjJoC3Q"
   },
   {
@@ -250,9 +250,9 @@
   {
     "Constituency": "PP-32",
     "District": "Gujrat-VI",
-    "Candidate": "Qaisara Elahi",
-    "Symbol": "PEACOCK\n\nمور",
-    "symbolfile": "peacock",
+    "Candidate": "Chaudhry Pervaiz Elahi",
+    "Symbol": "",
+    "symbolfile": "",
     "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaKc4OQ1NCraWPtLn00s"
   },
   {
@@ -282,7 +282,7 @@
   {
     "Constituency": "PP-36",
     "District": "Wazirabad-II",
-    "Candidate": "Ahmed Chattha",
+    "Candidate": "Muhammad Ahmed Chattha",
     "Symbol": "CLOCK\n\nگھڑیال",
     "symbolfile": "clock",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaKIbTl0LKZEIqB6i62O"
@@ -387,8 +387,8 @@
     "Constituency": "PP-49",
     "District": "Sialkot-VI",
     "Candidate": "Munawar Gill",
-    "Symbol": "POMEGRANATE\n\nانار",
-    "symbolfile": "pomegranate",
+    "Symbol": "",
+    "symbolfile": "",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaFvtRq5a24716K46G26"
   },
   {
@@ -429,7 +429,7 @@
     "Candidate": "Javed Mukhtar",
     "Symbol": "TANDOOR\n\nتندور",
     "symbolfile": "Tandoor",
-    "WhatsApp Link": "https://whatsapp.com/channel/0029VaL0S2qIt5s4cZCDA80n"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKOA845fM5cfsRa771h"
   },
   {
     "Constituency": "PP-55",
@@ -437,7 +437,7 @@
     "Candidate": "Arslan Hafeez",
     "Symbol": "FRIDGE\n\nفریج",
     "symbolfile": "fridge",
-    "WhatsApp Link": "https://whatsapp.com/channel/0029VaL0S2qIt5s4cZCDA80n"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKOA845fM5cfsRa771h"
   },
   {
     "Constituency": "PP-56",
@@ -477,14 +477,14 @@
     "Candidate": "Kaleem Ullah Khan",
     "Symbol": "CAKE\n\nکیک",
     "symbolfile": "cake",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaLSPuDChq6LYqIai40O"
   },
   {
     "Constituency": "PP-61",
     "District": "Gujranwala-III",
-    "Candidate": "Tahir Majeed Khan",
-    "Symbol": "DOVE\n\nفاختہ",
-    "symbolfile": "dove",
+    "Candidate": "Rizwan Aslam Butt",
+    "Symbol": "POMEGRANATE\n\nانار",
+    "symbolfile": "pomegranate",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaG8YDW9cDDbMjY6yw0h"
   },
   {
@@ -509,7 +509,7 @@
     "Candidate": "Chaudhary Muhammad Ali",
     "Symbol": "PRESSURE COOKER\n\nپریشر کوکر",
     "symbolfile": "pressure-cooker",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaGCWfTISTkTYdMqH03z"
   },
   {
     "Constituency": "PP-65",
@@ -517,7 +517,7 @@
     "Candidate": "Hassan Iqbal Buttar",
     "Symbol": "BOWL\n\nپیالہ",
     "symbolfile": "bowl",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKXzI6E50Um6l4DjV1d"
   },
   {
     "Constituency": "PP-66",
@@ -525,7 +525,7 @@
     "Candidate": "Rizwan Zafar Cheema",
     "Symbol": "NAIL CUTTER\n\nناخن تراش",
     "symbolfile": "nail-cutter",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKXzI6E50Um6l4DjV1d"
   },
   {
     "Constituency": "PP-67",
@@ -533,7 +533,7 @@
     "Candidate": "Ali Waqeel Khan",
     "Symbol": "PLUG\n\nپلگ",
     "symbolfile": "plug",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKXzI6E50Um6l4DjV1d"
   },
   {
     "Constituency": "PP-68",
@@ -541,15 +541,15 @@
     "Candidate": "Mian Arqam Khan",
     "Symbol": "RACKET\n\nریکٹ",
     "symbolfile": "racket",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaG8YDW9cDDbMjY6yw0h"
   },
   {
     "Constituency": "PP-69",
     "District": "Gujranwala-XI",
-    "Candidate": "Umair Pervaiz",
+    "Candidate": "Umar Javaid Virk",
     "Symbol": "SOFA\n\nصوفہ",
     "symbolfile": "sofa",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaG8YDW9cDDbMjY6yw0h"
   },
   {
     "Constituency": "PP-70",
@@ -557,7 +557,7 @@
     "Candidate": "Tashakal Abbas Warraich",
     "Symbol": "CRICKET STUMPS\n\nکرکٹ وکٹ",
     "symbolfile": "cricket-stumps",
-    "WhatsApp Link": "https://whatsapp.com/channel/0029VaGiBwrLCoWto2Fvkp18"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaG8YDW9cDDbMjY6yw0h"
   },
   {
     "Constituency": "PP-71",
@@ -626,7 +626,7 @@
   {
     "Constituency": "PP-79",
     "District": "Sargodha-IX",
-    "Candidate": "Ghulam Ali Asghar Lali",
+    "Candidate": "Ghulam Ali Asghar Lahri",
     "Symbol": "DOLPHIN\n\nڈولفن",
     "symbolfile": "dolphin",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaGBoQzKbYMNV60vIe2x"
@@ -658,7 +658,7 @@
   {
     "Constituency": "PP-83",
     "District": "Khushab-III",
-    "Candidate": "Ahmad Raza Gujjar",
+    "Candidate": "Amjad Raza Gujjar",
     "Symbol": "PEACOCK\n\nمور",
     "symbolfile": "peacock",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaKYjymDTkK7UUyBl13e"
@@ -877,7 +877,7 @@
     "Candidate": "Hassan Zaka Niazi",
     "Symbol": "SHUTTLE COCK\n\nشٹل کاک",
     "symbolfile": "shuttle-cock",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKmDI630LKFWq33u41r"
   },
   {
     "Constituency": "PP-111",
@@ -885,7 +885,7 @@
     "Candidate": "Basharat Ali Dogar",
     "Symbol": "HUKKAH\n\nحقہ",
     "symbolfile": "hukkah",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKmDI630LKFWq33u41r"
   },
   {
     "Constituency": "PP-112",
@@ -893,7 +893,7 @@
     "Candidate": "Asad Mehmood",
     "Symbol": "BADGE\n\nبیج",
     "symbolfile": "badge",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKmDI630LKFWq33u41r"
   },
   {
     "Constituency": "PP-113",
@@ -901,7 +901,7 @@
     "Candidate": "Nadeem Sadiq Dogar",
     "Symbol": "RACKET\n\nریکٹ",
     "symbolfile": "racket",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaGvLJBLY6d8SKx5Ob3A"
   },
   {
     "Constituency": "PP-114",
@@ -909,7 +909,7 @@
     "Candidate": "Latif Nazar",
     "Symbol": "RADIO\n\nریڈیو",
     "symbolfile": "radio",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaGvLJBLY6d8SKx5Ob3A"
   },
   {
     "Constituency": "PP-115",
@@ -917,7 +917,7 @@
     "Candidate": "Sheikh Shahid Javed",
     "Symbol": "SHUTTLE COCK\n\nشٹل کاک",
     "symbolfile": "shuttle-cock",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaGLIirBfxoCbTxBlG08"
   },
   {
     "Constituency": "PP-116",
@@ -925,7 +925,7 @@
     "Candidate": "Ismail Sela",
     "Symbol": "CLOCK\n\nگھڑیال",
     "symbolfile": "clock",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaGLIirBfxoCbTxBlG08"
   },
   {
     "Constituency": "PP-117",
@@ -933,15 +933,15 @@
     "Candidate": "Rana Abdur Razzaq",
     "Symbol": "SHUTTLE COCK\n\nشٹل کاک",
     "symbolfile": "shuttle-cock",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKn1rBLCoWz8jTBHw2j"
   },
   {
     "Constituency": "PP-118",
     "District": "Faisalabad-XXI",
-    "Candidate": "Kayal Ahmed Castro",
+    "Candidate": "Khayal Ahmad Kastro",
     "Symbol": "SHUTTLE COCK\n\nشٹل کاک",
     "symbolfile": "shuttle-cock",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKn1rBLCoWz8jTBHw2j"
   },
   {
     "Constituency": "PP-119",
@@ -949,7 +949,7 @@
     "Candidate": "Asad Cheema",
     "Symbol": "CLOCK\n\nگھڑیال",
     "symbolfile": "clock",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaLWZuN4IBhInXUTOF0Y"
   },
   {
     "Constituency": "PP-120",
@@ -957,7 +957,7 @@
     "Candidate": "Ahsan Ihsan",
     "Symbol": "CLOCK\n\nگھڑیال",
     "symbolfile": "clock",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaLWZuN4IBhInXUTOF0Y"
   },
   {
     "Constituency": "PP-121",
@@ -965,7 +965,7 @@
     "Candidate": "Saeed Ahmed Saeedi",
     "Symbol": "CHARPAI\n\nچارپائی",
     "symbolfile": "charpai",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaLGzAvLikgFeV1f5D3W"
   },
   {
     "Constituency": "PP-122",
@@ -973,7 +973,7 @@
     "Candidate": "Khawar Sher Ghadhi",
     "Symbol": "BOWL\n\nپیالہ",
     "symbolfile": "bowl",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaLGzAvLikgFeV1f5D3W"
   },
   {
     "Constituency": "PP-123",
@@ -981,7 +981,7 @@
     "Candidate": "Ashfa Riaz",
     "Symbol": "BOWL\n\nپیالہ",
     "symbolfile": "bowl",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaFap12CXC3NubgP1Q1G"
   },
   {
     "Constituency": "PP-124",
@@ -989,7 +989,7 @@
     "Candidate": "Sonia Bibi",
     "Symbol": "BOWL\n\nپیالہ",
     "symbolfile": "bowl",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaFap12CXC3NubgP1Q1G"
   },
   {
     "Constituency": "PP-125",
@@ -997,7 +997,7 @@
     "Candidate": "Sardar Ghulam Ahmad Gaddi",
     "Symbol": "CHARPAI\n\nچارپائی",
     "symbolfile": "charpai",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaLEWKqHFxP3czMkhS0x"
   },
   {
     "Constituency": "PP-126",
@@ -1005,7 +1005,7 @@
     "Candidate": "Mehar Nawaz Bharwana",
     "Symbol": "CRICKET STUMPS\n\nکرکٹ وکٹ",
     "symbolfile": "cricket-stumps",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaLEWKqHFxP3czMkhS0x"
   },
   {
     "Constituency": "PP-127",
@@ -1013,7 +1013,7 @@
     "Candidate": "Sheikh Muhammad Akram",
     "Symbol": "STUDY TABLE WITH CHAIR\n\nپڑھائی والی میز اور کرسی",
     "symbolfile": "study-table-with-chair",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKz2DOG3R3m8NxcQ60s"
   },
   {
     "Constituency": "PP-128",
@@ -1021,7 +1021,7 @@
     "Candidate": "Col. Ghazanfar Qureshi",
     "Symbol": "CHARPAI\n\nچارپائی",
     "symbolfile": "charpai",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKz2DOG3R3m8NxcQ60s"
   },
   {
     "Constituency": "PP-129",
@@ -1029,7 +1029,7 @@
     "Candidate": "Mian Muhammad Asif Khatia",
     "Symbol": "CRICKET STUMPS\n\nکرکٹ وکٹ",
     "symbolfile": "cricket-stumps",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKJxRLFHWq3v4N3Qq0C"
   },
   {
     "Constituency": "PP-130",
@@ -1037,7 +1037,7 @@
     "Candidate": "Rana Shehbaz Ahmed Khan",
     "Symbol": "CLOCK\n\nگھڑیال",
     "symbolfile": "clock",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKJxRLFHWq3v4N3Qq0C"
   },
   {
     "Constituency": "PP-131",
@@ -1045,12 +1045,12 @@
     "Candidate": "Mian Azam Chela",
     "Symbol": "BENCH\n\nبینچ",
     "symbolfile": "bench",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaLEWKqHFxP3czMkhS0x"
   },
   {
     "Constituency": "PP-132",
     "District": "Nankana Sahib-I",
-    "Candidate": "To be uploaded",
+    "Candidate": "Ahsan Wagha",
     "Symbol": "",
     "symbolfile": "",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaG5qYBC1FuAXraORq14"
@@ -1155,7 +1155,7 @@
     "Constituency": "PP-145",
     "District": "Lahore-I",
     "Candidate": "Yasir Gillani",
-    "Symbol": "DUCK\n\nبتخ",
+    "Symbol": "DUCK\n\nبطخ",
     "symbolfile": "duck",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaKgDlkFHWq6to7x8K03"
   },
@@ -1291,7 +1291,7 @@
     "Constituency": "PP-162",
     "District": "Lahore-XVIII",
     "Candidate": "Shabbir Gujjar",
-    "Symbol": "DUCK\n\nبتخ",
+    "Symbol": "DUCK\n\nبطخ",
     "symbolfile": "duck",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaGJVIK2975J06oO1y1E"
   },
@@ -1397,7 +1397,7 @@
     "Candidate": "Sardar Rashid Tufail",
     "Symbol": "CRICKET STUMPS\n\nکرکٹ وکٹ",
     "symbolfile": "cricket-stumps",
-    "WhatsApp Link": "https://whatsapp.com/channel/0029VaGMHqF5PO16Btrij91W"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKNu7IAe5VgxArLlm2g"
   },
   {
     "Constituency": "PP-176",
@@ -1421,7 +1421,7 @@
     "Candidate": "Barrister Shahid Masood",
     "Symbol": "CRICKET STUMPS\n\nکرکٹ وکٹ",
     "symbolfile": "cricket-stumps",
-    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKNu7IAe5VgxArLlm2g"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaGMHqF5PO16Btrij91W"
   },
   {
     "Constituency": "PP-179",
@@ -1434,9 +1434,9 @@
   {
     "Constituency": "PP-180",
     "District": "Kasur-VI",
-    "Candidate": "To be uploaded",
-    "Symbol": "",
-    "symbolfile": "",
+    "Candidate": "Sardar Waqas Moakal",
+    "Symbol": "HUKKAH\n\nحقہ",
+    "symbolfile": "hukkah",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaKr3NaA89MqAdllbU0Q"
   },
   {
@@ -1445,7 +1445,7 @@
     "Candidate": "Mian Hanbal Sana",
     "Symbol": "BOWL\n\nپیالہ",
     "symbolfile": "bowl",
-    "WhatsApp Link": "https://whatsapp.com/channel/0029VaLPfF6CRs1vmBgsvk1I"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKr3NaA89MqAdllbU0Q"
   },
   {
     "Constituency": "PP-182",
@@ -1461,7 +1461,7 @@
     "Candidate": "Rana Almas",
     "Symbol": "BOWL\n\nپیالہ",
     "symbolfile": "bowl",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaLPfF6CRs1vmBgsvk1I"
   },
   {
     "Constituency": "PP-184",
@@ -1469,7 +1469,7 @@
     "Candidate": "Rana Tanvir Riaz",
     "Symbol": "CLOCK\n\nگھڑیال",
     "symbolfile": "clock",
-    "WhatsApp Link": ""
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaLPfF6CRs1vmBgsvk1I"
   },
   {
     "Constituency": "PP-185",
@@ -1499,8 +1499,8 @@
     "Constituency": "PP-188",
     "District": "Okara-IV",
     "Candidate": "Ali Haider Wattoo",
-    "Symbol": "BENCH\n\nبینچ",
-    "symbolfile": "bench",
+    "Symbol": "RADIO\n\nریڈیو",
+    "symbolfile": "radio",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaG4pTp30LKUk4f32p3n"
   },
   {
@@ -1651,16 +1651,16 @@
     "Constituency": "PP-207",
     "District": "Khanewal-III",
     "Candidate": "Kanwar Tehseen Ashraf",
-    "Symbol": "WATER COOLER \n\nواٹر کولر",
-    "symbolfile": "water-cooler",
+    "Symbol": "CRICKET STUMPS\n\nکرکٹ وکٹ",
+    "symbolfile": "cricket-stumps",
     "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaGQSqdFy728gehsUX16"
   },
   {
     "Constituency": "PP-208",
     "District": "Khanewal-IV",
-    "Candidate": "To be uploaded",
-    "Symbol": "",
-    "symbolfile": "",
+    "Candidate": "Rana Muhammad Yousuf Khan",
+    "Symbol": "WATER COOLER \n\nواٹر کولر",
+    "symbolfile": "water-cooler",
     "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaGQSqdFy728gehsUX16"
   },
   {
@@ -1698,9 +1698,9 @@
   {
     "Constituency": "PP-213",
     "District": "Multan-I",
-    "Candidate": "Khalid Javed Warraich",
-    "Symbol": "CLOCK\n\nگھڑیال",
-    "symbolfile": "clock",
+    "Candidate": "To be uploaded",
+    "Symbol": "",
+    "symbolfile": "",
     "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaGTuVL6rsQqjmeZwb0W"
   },
   {
@@ -1837,7 +1837,7 @@
     "Candidate": "Salman Mehdi",
     "Symbol": "CRICKET STUMPS\n\nکرکٹ وکٹ",
     "symbolfile": "cricket-stumps",
-    "WhatsApp Link": "https://whatsapp.com/channel/0029VaL6HXVGOj9ev676Hk0Y"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKOqFdICVfijxMsm71x"
   },
   {
     "Constituency": "PP-231",
@@ -1845,7 +1845,7 @@
     "Candidate": "Khalid Nisar Dogar",
     "Symbol": "CRICKET STUMPS\n\nکرکٹ وکٹ",
     "symbolfile": "cricket-stumps",
-    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKOqFdICVfijxMsm71x"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaL6HXVGOj9ev676Hk0Y"
   },
   {
     "Constituency": "PP-232",
@@ -1866,9 +1866,9 @@
   {
     "Constituency": "PP-234",
     "District": "Vehari-VI",
-    "Candidate": "Chaudhary Zahid Iqbal",
-    "Symbol": "KETTLE\n\nکیتلی",
-    "symbolfile": "kettle",
+    "Candidate": "Zahid Iqbal",
+    "Symbol": "",
+    "symbolfile": "",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaFTiwz23n3cj4VUew1Q"
   },
   {
@@ -1955,8 +1955,8 @@
     "Constituency": "PP-245",
     "District": "Bahawalpur-I",
     "Candidate": "Ameer Hamza Abbasi",
-    "Symbol": "CHARPAI\n\nچارپائی",
-    "symbolfile": "charpai",
+    "Symbol": "GRAMOPHONE\n\nگراموفون",
+    "symbolfile": "gramophone",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaKrBLh8qJ01FCwAP92E"
   },
   {
@@ -2027,8 +2027,8 @@
     "Constituency": "PP-254",
     "District": "Bahawalpur-X",
     "Candidate": "Shafqat Shaheen",
-    "Symbol": "WATER COOLER \n\nواٹر کولر",
-    "symbolfile": "water-cooler",
+    "Symbol": "ROUND TABLE\n\nگول میز",
+    "symbolfile": "Round-Table",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaFsHwTHrDZeluBzYy3P"
   },
   {
@@ -2139,8 +2139,8 @@
     "Constituency": "PP-268",
     "District": "Muzaffargarh-I",
     "Candidate": "Jam Muhammad Younas",
-    "Symbol": "KETTLE\n\nکیتلی",
-    "symbolfile": "kettle",
+    "Symbol": "TEAPOT\n\nچائے دانی",
+    "symbolfile": "teapot",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaFeuks2UPBPxNtyAr26"
   },
   {
@@ -2171,16 +2171,16 @@
     "Constituency": "PP-272",
     "District": "Muzaffargarh-V",
     "Candidate": "Rana Manan Sajid",
-    "Symbol": "HUKKAH\n\nحقہ",
-    "symbolfile": "hukkah",
+    "Symbol": "BOTTLE\n\nبوتل",
+    "symbolfile": "bottle",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaKyOgh6WaKluVtax40V"
   },
   {
     "Constituency": "PP-273",
     "District": "Muzaffargarh-VI",
     "Candidate": "Dawood Khan Jatoi",
-    "Symbol": "HUKKAH\n\nحقہ",
-    "symbolfile": "hukkah",
+    "Symbol": "BOWL\n\nپیالہ",
+    "symbolfile": "bowl",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaKyOgh6WaKluVtax40V"
   },
   {

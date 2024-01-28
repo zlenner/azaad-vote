@@ -11,6 +11,7 @@ type Province = 'balochistan' | 'sindh' | 'punjab' | 'kpk'
 export interface Candidate {
   constituency_name: string
   candidate_name: string
+  whatsapp_link: string
   symbol?: {
     symbol_text: string
     symbol_image: string
@@ -82,6 +83,7 @@ const produceData = () => {
         candidate: {
           constituency_name: seat.District,
           candidate_name: seat.Candidate,
+          whatsapp_link: seat['WhatsApp Link'],
           symbol: {
             symbol_text: seat.Symbol,
             symbol_image:

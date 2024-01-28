@@ -60,7 +60,7 @@
     "District": "Bajaur",
     "Candidate": "Gul Zafar Khan",
     "Symbol": "SHOWER\n\nشاور",
-    "symbolfile": "shower",
+    "symbolfile": "Shower",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaKeeeF0AgWB8KsUiI3l"
   },
   {
@@ -361,7 +361,7 @@
   },
   {
     "Constituency": "NA-46",
-    "District": "ICT-l",
+    "District": "NA-46",
     "Candidate": "Aamir Masood Mughal",
     "Symbol": "BRINJAL\n\nبینگن",
     "symbolfile": "brinjal",
@@ -386,7 +386,7 @@
   {
     "Constituency": "NA-49",
     "District": "Attock-l",
-    "Candidate": "Tahir Sadiq",
+    "Candidate": "Major Tahir Sadiq",
     "Symbol": "SHEEP\n\nبھیڑ",
     "symbolfile": "sheep",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaL8e6S7z4kn1xaH5g0M"
@@ -410,9 +410,9 @@
   {
     "Constituency": "NA-52",
     "District": "Rawalpindi-l",
-    "Candidate": "Farrukh Siyal",
-    "Symbol": "STUDY TABLE WITH CHAIR\n\nپڑھائی والی میز اور کرسی",
-    "symbolfile": "study-table-with-chair",
+    "Candidate": "Adv. Tariq Bhatti",
+    "Symbol": "BOWL\n\nپیالہ",
+    "symbolfile": "bowl",
     "WhatsApp Link": "https://www.whatsapp.com/channel/0029VaK6oVI6hENqba9eJF0f"
   },
   {
@@ -597,7 +597,7 @@
     "Candidate": "Dr. Tahir Ali Javed",
     "Symbol": "CHARPAI\n\nچارپائی",
     "symbolfile": "charpai",
-    "WhatsApp Link": "https://whatsapp.com/channel/0029VaL0S2qIt5s4cZCDA80n"
+    "WhatsApp Link": "https://whatsapp.com/channel/0029VaKOA845fM5cfsRa771h"
   },
   {
     "Constituency": "NA-76",
@@ -1298,9 +1298,9 @@
   {
     "Constituency": "NA-163",
     "District": "Bahawalnagar-lV",
-    "Candidate": "Talat Mehmood Basra",
-    "Symbol": "SHOES\n\nجوتے",
-    "symbolfile": "shoes",
+    "Candidate": "Shaukat Basra",
+    "Symbol": "PEACOCK\n\nمور",
+    "symbolfile": "peacock",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaKAL11GpLHVYoycV63d"
   },
   {
@@ -1339,8 +1339,8 @@
     "Constituency": "NA-168",
     "District": "Bahawalpur-V",
     "Candidate": "Sami Ullah Chaudhary",
-    "Symbol": "WATER COOLER \n\nواٹر کولر",
-    "symbolfile": "water-cooler",
+    "Symbol": "SHOWER\n\nشاور",
+    "symbolfile": "Shower",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaFsHwTHrDZeluBzYy3P"
   },
   {
@@ -1443,7 +1443,7 @@
     "Constituency": "NA-181",
     "District": "Layyah-l",
     "Candidate": "Mrs. Amber Majeed Niazi",
-    "Symbol": "DUCK\n\nبتخ",
+    "Symbol": "DUCK\n\nبطخ",
     "symbolfile": "duck",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaG742nDOQIbfWQu672U"
   },
@@ -1491,8 +1491,8 @@
     "Constituency": "NA-187",
     "District": "Rajanpur-l",
     "Candidate": "Atif Ali Khan Dhreshak",
-    "Symbol": "MIC\n\nمائیک",
-    "symbolfile": "mic",
+    "Symbol": "SPOON\n\nچمچ",
+    "symbolfile": "spoon",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaG81qVGufIyOAPq0n2E"
   },
   {
@@ -1579,8 +1579,8 @@
     "Constituency": "NA-198",
     "District": "Ghotki-l",
     "Candidate": "Abdul Sattar Samoon",
-    "Symbol": "",
-    "symbolfile": "",
+    "Symbol": "GOAT\n\nبکری",
+    "symbolfile": "goat",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaLBp7YJUM2cwkHrLc05"
   },
   {
@@ -1635,7 +1635,7 @@
     "Constituency": "NA-205",
     "District": "NaushahroFeroze-l",
     "Candidate": "To be uploaded",
-    "Symbol": "",
+    "Symbol": "Ata Ullah Khan",
     "symbolfile": "",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaKbckWKwqSPP6FGez0B"
   },
@@ -1738,9 +1738,9 @@
   {
     "Constituency": "NA-218",
     "District": "Hyderabad-l",
-    "Candidate": "Muhram Khan",
-    "Symbol": "BOTTLE\n\nبوتل",
-    "symbolfile": "bottle",
+    "Candidate": "",
+    "Symbol": "",
+    "symbolfile": "",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaG9RVmIt5s2JaQcrp0o"
   },
   {
@@ -1858,7 +1858,7 @@
   {
     "Constituency": "NA-233",
     "District": "KarachiKorangi-ll",
-    "Candidate": "Muhammad Haris Meo",
+    "Candidate": "Adv Muhammad Haris Meo",
     "Symbol": "STILL CAMERA\n\nسٹل کیمرہ",
     "symbolfile": "still-camera",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaK6Eu3BadmYzlafID3S"
@@ -1954,7 +1954,7 @@
   {
     "Constituency": "NA-245",
     "District": "KarachiWest-ll",
-    "Candidate": "Ataullah Khan",
+    "Candidate": "Ata Ullah Khan",
     "Symbol": "RACKET\n\nریکٹ",
     "symbolfile": "racket",
     "WhatsApp Link": "https://whatsapp.com/channel/0029VaL9oBxF1YlRtZdBkf2F"

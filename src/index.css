@@ -26,12 +26,15 @@ body {
 }
 
 @media (max-width: 768px) {
-    .frame {
-        @apply flex-col;
+    .map {
+        display: none;
     }
     .details {
         width: 100% !important;
         max-width: none !important;
-        height: 70% !important;
+    }
+    .search-popover {
+        width: calc(100% - 16px - 16px) !important;
+        max-width: none !important;
     }
 }

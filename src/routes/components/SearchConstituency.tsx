@@ -23,6 +23,7 @@ const SearchConstituency = () => {
       positions={['bottom', 'left']}
       align="start"
       onClickOutside={() => setIsPopoverOpen(false)}
+      containerClassName="search-popover"
       containerStyle={{ width: 'calc(50% - 16px - 16px)' }}
       content={
         <div className="flex rounded bg-white mt-3 !shadow !shadow-gray-200">

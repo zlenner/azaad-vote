@@ -30,7 +30,6 @@ const SampleBallot = ({
   for (let i = 0; i < noRows; i += 1) {
     // Section 1
     for (let j = i; j < constituency.candidates.length; j += noRows) {
-      console.log(j)
       reordered.push(constituency.candidates[j])
     }
   }
@@ -79,7 +78,7 @@ const SampleBallot = ({
       >
         <div className="flex font-mono font-bold text-xl mb-4 tracking-tighter px-4 pt-2 pb-4">
           <div>Sample Ballot Paper</div>
-          <div className="ml-auto">سیمپل بیلٹ پیپر</div>
+          <div className="ml-auto text-right">سیمپل بیلٹ پیپر</div>
         </div>
         <div
           className="grid grid-cols-3 auto-rows-max w-full h-full gap-1 "
@@ -88,14 +87,15 @@ const SampleBallot = ({
           {reordered.map((candidate) => {
             return (
               <div
-                className="text-lg px-3 py-2 flex items-center w-full border border-black"
+                key={candidate.symbol_url}
+                className="text-sm md:text-lg px-3 py-2 flex items-center w-full border border-black"
                 style={{ borderWidth: '0.5px' }}
               >
                 <div className="ml-auto font-urdu">
                   {candidate.candidate_name}
                 </div>
                 <img
-                  style={{ width: '3em', height: '3em' }}
+                  className="w-6 h-6 md:w-12 md:h-12 mr-2"
                   src={candidate.symbol_url}
                 />
               </div>
@@ -117,7 +117,9 @@ const SampleBallot = ({
         className="flex mt-auto ml-auto mb-1 w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50 ml-3 text-red-500"
         onClick={async () => {
           if (!ballotPaperRef.current) return
-          const canvas = await html2canvas(ballotPaperRef.current)
+          const canvas = await html2canvas(ballotPaperRef.current, {
+            allowTaint: true
+          })
           const dataURL = canvas.toDataURL('image/png')
           downloadjs(dataURL, 'download.png', 'image/png')
         }}

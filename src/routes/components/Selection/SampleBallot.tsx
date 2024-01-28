@@ -6,6 +6,8 @@ import { FaImage } from 'react-icons/fa6'
 import downloadjs from 'downloadjs'
 import html2canvas from 'html2canvas'
 import { useRef } from 'react'
+import Stamp from './Stamp'
+import clsx from 'clsx'
 
 const SampleBallot = ({
   selectedSeat,
@@ -64,12 +66,12 @@ const SampleBallot = ({
           width: 560,
           padding: 8,
           borderRadius: 0,
-          height: '90vh'
+          maxHeight: '90vh'
         }
       }}
     >
       <div
-        className="flex flex-col px-3 py-3 mb-4"
+        className="flex flex-col px-3 py-3"
         style={{
           border: '5px solid #ef4444',
           borderStyle: 'dashed'
@@ -88,7 +90,10 @@ const SampleBallot = ({
             return (
               <div
                 key={candidate.symbol_url}
-                className="text-sm md:text-lg px-3 py-2 flex items-center w-full border border-black"
+                className={clsx(
+                  'relative text-sm md:text-lg px-3 py-2 flex items-center w-full border border-black',
+                  candidate.pti_backed && '!border-4 border-red-500 '
+                )}
                 style={{ borderWidth: '0.5px' }}
               >
                 <div className="ml-auto font-urdu">
@@ -98,6 +103,7 @@ const SampleBallot = ({
                   className="w-6 h-6 md:w-12 md:h-12 mr-2"
                   src={candidate.symbol_url}
                 />
+                {candidate.pti_backed && <Stamp />}
               </div>
             )
           })}
@@ -113,7 +119,7 @@ const SampleBallot = ({
           />
         </div>
       </div>
-      <button
+      {/* <button
         className="flex mt-auto ml-auto mb-1 w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50 ml-3 text-red-500"
         onClick={async () => {
           if (!ballotPaperRef.current) return
@@ -127,7 +133,7 @@ const SampleBallot = ({
       >
         <FaImage className="mr-3 text-2xl" />
         Download Image
-      </button>
+      </button> */}
     </Modal>
   )
 }

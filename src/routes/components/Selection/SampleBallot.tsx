@@ -2,12 +2,10 @@ import { Seat, form33 } from '../../data'
 import Modal from 'react-modal'
 import QRCode from 'qrcode'
 import useAsyncRefresh from '../../../hooks/useAsyncRefresh'
-import { FaImage } from 'react-icons/fa6'
-import downloadjs from 'downloadjs'
-import html2canvas from 'html2canvas'
 import { useRef } from 'react'
 import Stamp from './Stamp'
 import clsx from 'clsx'
+import { FaInfoCircle } from 'react-icons/fa'
 
 const SampleBallot = ({
   selectedSeat,
@@ -64,14 +62,32 @@ const SampleBallot = ({
           display: 'flex',
           flexDirection: 'column',
           width: 560,
-          padding: 8,
+          padding: 0,
           borderRadius: 0,
           maxHeight: '90vh'
         }
       }}
     >
+      <div className="whitespace-break-spaces bg-red-50 text-xs p-4 text-red-500 font-mono mb-2">
+        Some mistakes were pointed out by users, double-check the data for your
+        constituency with the official{' '}
+        <a
+          href="https://insafpk.github.io/pticandidates/"
+          className="text-blue-500 hover:underline"
+        >
+          PTI portal
+        </a>
+        . Will update{' '}
+        <a
+          className="text-blue-500 hover:underline"
+          href="https://twitter.com/clynergy"
+        >
+          @clynergy
+        </a>{' '}
+        as soon as they're fixed!
+      </div>
       <div
-        className="flex flex-col px-3 py-3"
+        className="flex flex-col px-3 py-3 mx-2 mb-2"
         style={{
           border: '5px solid #ef4444',
           borderStyle: 'dashed'
@@ -100,7 +116,7 @@ const SampleBallot = ({
                   {candidate.candidate_name}
                 </div>
                 <img
-                  className="w-6 h-6 md:w-12 md:h-12 mr-2"
+                  className="w-6 h-6 md:w-12 md:h-12 mr-2 bg-gray-100"
                   src={candidate.symbol_url}
                 />
                 {candidate.pti_backed && <Stamp />}

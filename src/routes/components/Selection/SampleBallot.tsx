@@ -102,7 +102,7 @@ const SampleBallot = ({
             )
           })}
         </div>
-        <div className="flex pt-3 mt-6 items-center border-t-4 border-gray-300 border-dashed">
+        <div className="flex pt-3 mt-1 items-center border-dashed">
           <div className="font-mono tracking-tight">
             https://azaadvote.com/{selectedSeat.seat}/ballot-paper
           </div>

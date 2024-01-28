@@ -3,10 +3,11 @@ import { stringToColor } from '../mapping/styles'
 import Header from './components/Header'
 import Map from './Map'
 import BackgroundImage from './components/BackgroundImage'
-import SelectionView from './components/SelectionView'
+import ConstituencyView from './components/Selection/ConstituencyView'
 import { useState } from 'react'
 import { FaLocationCrosshairs } from 'react-icons/fa6'
 import { DistrictFeature, Seat, Selected, geojson, seats } from './data'
+import DistrictView from './components/Selection/DistrictView'
 
 const findDistrictOfSeat = (seat: Seat) => {
   return geojson.districts.features.find(
@@ -21,27 +22,32 @@ const DetailConditionals = ({
   selected?: Selected
   locationFeature?: DistrictFeature | false
 }) => {
-  let isMyConstituency = false
+  let isMyDistrict = false
   if (locationFeature) {
     if (selected?.type === 'district') {
-      isMyConstituency =
+      isMyDistrict =
         selected.district.properties.DISTRICT_ID ===
         locationFeature.properties.DISTRICT_ID
     } else if (selected?.type === 'seat') {
-      isMyConstituency =
+      isMyDistrict =
         selected.seat.district === locationFeature.properties.DISTRICT
     }
   }
 
   if (selected?.type === 'seat') {
     return (
-      <SelectionView
-        isMyConstituency={isMyConstituency}
+      <ConstituencyView
+        isMyDistrict={isMyDistrict}
         selectedSeat={selected.seat}
       />
     )
   } else if (selected?.type === 'district') {
-    return <BackgroundImage />
+    return (
+      <DistrictView
+        isMyDistrict={isMyDistrict}
+        selectedDistrict={selected.district}
+      />
+    )
   } else {
     if (locationFeature === false) {
       return (

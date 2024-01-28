@@ -97,7 +97,7 @@ const Map = ({ selectedDistrict }: { selectedDistrict?: DistrictFeature }) => {
               weight: 1,
               opacity: 0.4,
               color: '#666666', // Border color
-              fillOpacity: 0.5
+              fillOpacity: 0.4
             }
 
             if (isFeatureSelected(feature as DistrictFeature)) {

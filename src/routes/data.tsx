@@ -17,25 +17,20 @@ export interface Candidate {
   }
 }
 
-export interface ProvincialFeature {
+export interface DistrictFeature {
   type: 'Feature'
   geometry: {
     type: 'Polygon'
     coordinates: number[][][]
   }
   properties: {
-    ID_0: number
-    ISO: 'PAK'
-    NAME_0: 'Pakistan'
-    ID_1: number
-    NAME_1: string
-    ID_2: number
-    NAME_2: string
-    ID_3: number
-    NAME_3: string
-    TYPE_3: 'District'
-    ENGTYPE_3: 'District'
-    VARNAME_3: string | null
+    PROVINCE_ID: 1
+    PROVINCE: 'Azad Kashmir'
+    CITY_ID: 1
+    CITY: 'Azad Kashmir'
+    DISTRICT_ID: 4
+    DISTRICT: 'Mirpur'
+    ALT_NAME: null
   }
 }
 
@@ -59,9 +54,9 @@ export interface Seat {
 const produceData = () => {
   const RAW = {
     geojson: {
-      provincial: districtsGeoJson as {
+      districts: districtsGeoJson as {
         type: 'FeatureCollection'
-        features: ProvincialFeature[]
+        features: DistrictFeature[]
       }
     },
     national: national as AssemblyObject[],
@@ -112,3 +107,14 @@ const produceData = () => {
 const { geojson, seats } = produceData()
 
 export { geojson, seats }
+
+export type Selected =
+  | {
+      type: 'district'
+      color: string
+      district: DistrictFeature
+    }
+  | {
+      type: 'seat'
+      seat: Seat
+    }

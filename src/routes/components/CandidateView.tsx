@@ -1,19 +1,10 @@
 import { Candidate } from '../data'
 
-const CandidateView = ({
-  color,
-  candidate
-}: {
-  color: string
-  candidate: Candidate
-}) => {
+const CandidateView = ({ candidate }: { candidate: Candidate }) => {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col mb-8">
-        <div
-          className="font-mono font-bold text-3xl mb-3"
-          style={{ color: color }}
-        >
+        <div className="font-mono font-bold text-3xl mb-3 text-emerald-500">
           Candidate
         </div>
         <div className="flex ml-5 text-gray-600 font-mono text-3xl">
@@ -22,10 +13,7 @@ const CandidateView = ({
       </div>
       {candidate.symbol && (
         <div className="flex flex-col">
-          <div
-            className="font-mono font-bold text-3xl mb-4"
-            style={{ color: color }}
-          >
+          <div className="font-mono font-bold text-3xl mb-4 text-emerald-500">
             Symbol
           </div>
           <div className="flex flex-col ml-5 text-gray-600 font-mono mb-2 text-3xl justify-center">

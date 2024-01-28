@@ -3,18 +3,21 @@ import { useNavigate } from 'react-router-dom'
 import { stringToColor } from '../mapping/styles'
 import { useEffect } from 'react'
 import React from 'react'
-import { ProvincialFeature, Seat, geojson, seats } from './data'
+import { DistrictFeature, geojson, seats } from './data'
 import Toggle from './components/Toggle'
 
-const Map = ({ selectedSeat }: { selectedSeat?: Seat }) => {
+const Map = ({ selectedDistrict }: { selectedDistrict?: DistrictFeature }) => {
   const navigate = useNavigate()
 
-  const isFeatureSelected = (feature: ProvincialFeature) => {
-    return feature.properties.PA === selectedSeat?.seat
+  const isFeatureSelected = (feature: DistrictFeature) => {
+    return (
+      feature.properties.DISTRICT_ID ===
+      selectedDistrict?.properties.DISTRICT_ID
+    )
   }
 
   // Attach event handlers to each feature
-  const onEachFeature = (feature: ProvincialFeature, layer: any) => {
+  const onEachFeature = (feature: DistrictFeature, layer: any) => {
     layer.on({
       mouseover: (event: any) => {
         if (isFeatureSelected(feature)) return
@@ -34,7 +37,8 @@ const Map = ({ selectedSeat }: { selectedSeat?: Seat }) => {
       },
       click: (event: any) => {
         const layer = event.target
-        navigate('/' + layer.feature.properties.PA)
+        const district = layer.feature as DistrictFeature
+        navigate('/DISTRICT-' + district.properties.DISTRICT_ID)
       }
     })
   }
@@ -49,7 +53,7 @@ const Map = ({ selectedSeat }: { selectedSeat?: Seat }) => {
         )
       }
       // Zoom to the initial selected polygon, if provided
-      if (selectedSeat && mapRef.current) {
+      if (selectedDistrict && mapRef.current) {
         const selectedLayer = Object.values(mapRef.current._layers).find(
           (layer: any) => {
             if (layer.feature === undefined) {
@@ -65,7 +69,7 @@ const Map = ({ selectedSeat }: { selectedSeat?: Seat }) => {
         }
       }
     }, 0)
-  }, [selectedSeat?.seat])
+  }, [selectedDistrict?.properties.DISTRICT_ID])
 
   return (
     <div className="flex flex-1 h-full map relative">
@@ -82,34 +86,25 @@ const Map = ({ selectedSeat }: { selectedSeat?: Seat }) => {
       >
         <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
         <GeoJSON
-          data={geojson.provincial}
+          data={geojson.districts}
           style={(feature) => {
-            const seat = seats[feature!.properties.PA]
-            console.log(feature, seat)
+            const district = feature as DistrictFeature
 
             const defaultStyle = {
-              fillColor: stringToColor(seat.seat),
+              fillColor: stringToColor(
+                district.properties.DISTRICT_ID.toString()
+              ),
               weight: 1,
-              opacity: 1,
+              opacity: 0.4,
               color: '#666666', // Border color
               fillOpacity: 0.5
             }
 
-            if (isFeatureSelected(feature as ProvincialFeature)) {
+            if (isFeatureSelected(feature as DistrictFeature)) {
               return {
                 ...defaultStyle,
                 fillColor: 'transparent',
                 weight: 5
-              }
-            } else if (
-              !seat.candidate ||
-              seat.candidate.candidate_name.toUpperCase() === 'TO BE UPLOADED'
-            ) {
-              // In case the candidate is pending, we want to make the color lighter
-              return {
-                ...defaultStyle,
-                fillColor: '#e5e7eb',
-                opacity: 0.2
               }
             } else {
               return defaultStyle

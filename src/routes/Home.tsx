@@ -1,37 +1,49 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { stringToColor } from '../mapping/styles'
 import Header from './components/Header'
 import Map from './Map'
 import BackgroundImage from './components/BackgroundImage'
-import ConstituencyView from './components/ConstituencyView'
-import * as turf from '@turf/turf'
+import SelectionView from './components/SelectionView'
 import { useState } from 'react'
 import { FaLocationCrosshairs } from 'react-icons/fa6'
-import { Seat, geojson, seats } from './data'
+import { DistrictFeature, Seat, Selected, geojson, seats } from './data'
+
+const findDistrictOfSeat = (seat: Seat) => {
+  return geojson.districts.features.find(
+    (feature) => feature.properties.DISTRICT === seat.district
+  )
+}
 
 const DetailConditionals = ({
   selected,
-  locationConstituency
+  locationFeature
 }: {
-  selected?: {
-    seat: Seat
-    color: string
-  }
-  locationConstituency?: Seat | false
+  selected?: Selected
+  locationFeature?: DistrictFeature | false
 }) => {
-  if (selected) {
+  let isMyConstituency = false
+  if (locationFeature) {
+    if (selected?.type === 'district') {
+      isMyConstituency =
+        selected.district.properties.DISTRICT_ID ===
+        locationFeature.properties.DISTRICT_ID
+    } else if (selected?.type === 'seat') {
+      isMyConstituency =
+        selected.seat.district === locationFeature.properties.DISTRICT
+    }
+  }
+
+  if (selected?.type === 'seat') {
     return (
-      <ConstituencyView
-        isMyConstituency={
-          locationConstituency
-            ? locationConstituency.seat === selected.seat.seat
-            : false
-        }
-        selected={selected}
+      <SelectionView
+        isMyConstituency={isMyConstituency}
+        selectedSeat={selected.seat}
       />
     )
+  } else if (selected?.type === 'district') {
+    return <BackgroundImage />
   } else {
-    if (locationConstituency === false) {
+    if (locationFeature === false) {
       return (
         <div className="flex text-gray-400 font-mono w-full h-full items-center justify-center p-3 tracking-tighter">
           <FaLocationCrosshairs className="mr-3 text-lg" />
@@ -45,41 +57,35 @@ const DetailConditionals = ({
 }
 
 function App() {
-  const { seat: seatCode = null } = useParams()
-  const navigate = useNavigate()
+  const { code = null } = useParams()
 
-  const [locationConstituency, setLocationConstituency] = useState<
-    Seat | false | undefined
+  const [locationFeature, setLocationFeature] = useState<
+    DistrictFeature | false | undefined
   >(undefined)
 
-  const goToMyConstituency: (coords: {
-    latitude: number
-    longitude: number
-  }) => void = (coords) => {
-    const locationPoint = turf.point([coords.longitude, coords.latitude])
+  let selected: Selected | undefined = undefined
+  let selectedDistrict: DistrictFeature | undefined = undefined
 
-    const foundPolygon = geojson.provincial.features.find((feature) =>
-      turf.booleanPointInPolygon(locationPoint, feature)
+  if (code) {
+    const found = geojson.districts.features.find(
+      (feature) =>
+        parseInt(code.substring(9)) === feature.properties.DISTRICT_ID
     )
-
-    if (!foundPolygon) {
-      setLocationConstituency(false)
-      navigate('/')
-    } else {
-      const seat = seats[foundPolygon.properties.PA]
-      setLocationConstituency(seat)
-      navigate('/' + seat.seat)
+    if (found) {
+      selected = {
+        type: 'district',
+        color: stringToColor(found.properties.DISTRICT_ID.toString()),
+        district: found
+      }
+      selectedDistrict = found
+    } else if (seats[code ?? '']) {
+      selected = {
+        type: 'seat',
+        seat: seats[code ?? '']
+      }
+      selectedDistrict = findDistrictOfSeat(seats[code ?? ''])
     }
   }
-
-  const selectedSeat = seatCode ? seats[seatCode] : undefined
-
-  const SELECTED = !selectedSeat
-    ? undefined
-    : ({
-        color: stringToColor(selectedSeat.seat),
-        seat: selectedSeat
-      } as const)
 
   return (
     <div className="flex flex w-full h-full frame">
@@ -87,15 +93,23 @@ function App() {
         className="flex flex-col w-full h-full details"
         style={{ width: '50%', maxWidth: 850 }}
       >
-        <Header goToMyConstituency={goToMyConstituency} />
+        <Header setLocationFeature={setLocationFeature} />
         <div className="flex flex-1 w-full">
           <DetailConditionals
-            selected={SELECTED}
-            locationConstituency={locationConstituency}
+            selected={selected}
+            locationFeature={locationFeature}
           />
         </div>
       </div>
-      <Map selectedSeat={SELECTED?.seat} />
+      <Map
+        selectedDistrict={
+          selected
+            ? selected.type === 'district'
+              ? selected.district
+              : findDistrictOfSeat(selected.seat)
+            : undefined
+        }
+      />
     </div>
   )
 }

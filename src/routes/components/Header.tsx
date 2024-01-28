@@ -1,12 +1,36 @@
+import { useNavigate } from 'react-router-dom'
 import PTIElectionSymbol from '../../assets/nobg.png'
+import { DistrictFeature, geojson } from '../data'
 import FindLocation from './FindLocation'
 import SearchConstituency from './SearchConstituency'
+import * as turf from '@turf/turf'
 
 const Header = ({
-  goToMyConstituency
+  setLocationFeature
 }: {
-  goToMyConstituency: (coords: { latitude: number; longitude: number }) => void
+  setLocationFeature: (district: DistrictFeature | false) => void
 }) => {
+  const navigate = useNavigate()
+  const goToMyConstituency: (coords: {
+    latitude: number
+    longitude: number
+  }) => void = (coords) => {
+    const locationPoint = turf.point([coords.longitude, coords.latitude])
+
+    const foundPolygon = geojson.districts.features.find((feature) =>
+      turf.booleanPointInPolygon(locationPoint, feature)
+    )
+
+    if (!foundPolygon) {
+      setLocationFeature(false)
+      navigate('/')
+    } else {
+      const feature: DistrictFeature = foundPolygon
+      setLocationFeature(feature)
+      navigate('/' + foundPolygon)
+    }
+  }
+
   return (
     <div className="flex flex-col px-4 py-4 bg-green-50 items-center justify-center relative">
       <img className="w-20 h-20 rounded-md mb-5" src={PTIElectionSymbol} />

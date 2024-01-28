@@ -31,10 +31,7 @@ const SearchConstituency = () => {
               <div
                 key={result.item.seat}
                 className="flex font-mono py-1 hover:bg-red-50 px-2 cursor-pointer text-gray-700"
-                style={{
-                  borderLeftWidth: 12,
-                  borderColor: stringToColor(result.item.seat)
-                }}
+                style={{}}
                 onClick={() => {
                   navigate('/' + result.item.seat)
                 }}

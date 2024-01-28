@@ -118,7 +118,8 @@ const SampleBallot = ({
         onClick={async () => {
           if (!ballotPaperRef.current) return
           const canvas = await html2canvas(ballotPaperRef.current, {
-            allowTaint: true
+            allowTaint: true,
+            foreignObjectRendering: true
           })
           const dataURL = canvas.toDataURL('image/png')
           downloadjs(dataURL, 'download.png', 'image/png')

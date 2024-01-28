@@ -49,6 +49,7 @@ const SearchConstituency = () => {
     >
       <input
         onInput={(e) => setSearchValue(e.currentTarget.value)}
+        onFocus={() => setIsPopoverOpen(true)}
         placeholder="Search Constituency"
         value={searchValue}
         className="flex flex-1 bg-white !ring-0	!shadow !shadow-gray-200 rounded-md px-3 py-1 font-bold text-red-600 font-mono tracking-tighter !border !border-transparent active:shadow-none active:border-gray-100 transition mr-3"

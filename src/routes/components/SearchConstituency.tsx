@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Popover } from 'react-tiny-popover'
 import fuse from './fuseSearch'
-import { stringToColor } from '../../mapping/styles'
 import { useNavigate } from 'react-router'
 
 const SearchConstituency = () => {

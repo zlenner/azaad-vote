@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { FaLocationCrosshairs } from 'react-icons/fa6'
 import { DistrictFeature, Seat, Selected, geojson, seats } from './data'
 import DistrictView from './components/Selection/DistrictView'
+import { Form33Provider, useLoadCandidateData } from '../hooks/useForm33'
 
 const findDistrictOfSeat = (seat: Seat) => {
   return geojson.districts.features.find(
@@ -62,7 +63,7 @@ const DetailConditionals = ({
   }
 }
 
-function App() {
+function Inner() {
   const { code = null } = useParams()
 
   const [locationFeature, setLocationFeature] = useState<
@@ -118,6 +119,23 @@ function App() {
       />
     </div>
   )
+}
+
+function App() {
+  const value = useLoadCandidateData()
+  if (value === undefined) {
+    return (
+      <div className="flex w-full h-full items-center justify-center">
+        Loading...
+      </div>
+    )
+  } else {
+    return (
+      <Form33Provider initialValue={value}>
+        <Inner />
+      </Form33Provider>
+    )
+  }
 }
 
 export default App

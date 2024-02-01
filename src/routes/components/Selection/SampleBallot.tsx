@@ -1,11 +1,11 @@
-import { Seat, form33 } from '../../data'
+import { Seat } from '../../data'
 import Modal from 'react-modal'
 import QRCode from 'qrcode'
 import useAsyncRefresh from '../../../hooks/useAsyncRefresh'
 import { useRef } from 'react'
 import Stamp from './Stamp'
 import clsx from 'clsx'
-import { FaInfoCircle } from 'react-icons/fa'
+import { useForm33 } from '../../../hooks/useForm33'
 
 const SampleBallot = ({
   selectedSeat,
@@ -17,6 +17,7 @@ const SampleBallot = ({
   closeModal: () => void
 }) => {
   const ballotPaperRef = useRef<HTMLDivElement>(null)
+  const [form33] = useForm33()
 
   const constituency = form33[selectedSeat.seat]
   const reordered: {
@@ -90,7 +91,8 @@ const SampleBallot = ({
         className="flex flex-col px-3 py-3 mx-2 mb-2"
         style={{
           border: '5px solid #ef4444',
-          borderStyle: 'dashed'
+          borderStyle: 'dashed',
+          backgroundColor: '#c9e5d6'
         }}
         ref={ballotPaperRef}
       >
@@ -116,7 +118,7 @@ const SampleBallot = ({
                   {candidate.candidate_name}
                 </div>
                 <img
-                  className="w-6 h-6 md:w-12 md:h-12 mr-2 bg-gray-100"
+                  className="w-6 h-6 md:w-12 md:h-12 mr-2"
                   src={candidate.symbol_url}
                 />
                 {candidate.pti_backed && <Stamp />}

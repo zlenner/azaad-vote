@@ -1,10 +1,10 @@
 import { FaLocationCrosshairs, FaWhatsapp } from 'react-icons/fa6'
 import CandidateView from '../CandidateView'
-import { Seat, form33 } from '../../data'
+import { Seat } from '../../data'
 import { MdHowToVote } from 'react-icons/md'
-import { useState } from 'react'
 import SampleBallot from './SampleBallot'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useForm33 } from '../../../hooks/useForm33'
 
 const ConstituencyView = ({
   selectedSeat,
@@ -19,6 +19,8 @@ const ConstituencyView = ({
     'ballot-paper'
 
   const navigate = useNavigate()
+
+  const [form33] = useForm33()
 
   if (isBallotOpen) {
     return (

@@ -163,4 +163,4 @@ export const problematicSeats = [
   'NA-181'
 ]
 
-export const knownIssues = ['NA-127']
+export const knownIssues = ['NA-127', 'NA-96', 'NA-97']

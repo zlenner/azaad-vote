@@ -7,6 +7,9 @@ import Stamp from './Stamp'
 import clsx from 'clsx'
 import { useForm33 } from '../../../hooks/useForm33'
 import { IoIosWarning, IoMdWarning } from 'react-icons/io'
+import html2canvas from 'html2canvas'
+import downloadjs from 'downloadjs'
+import { FaImage } from 'react-icons/fa6'
 
 const SampleBallot = ({
   selectedSeat,

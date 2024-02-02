@@ -62,7 +62,7 @@ const CandidateView = ({
                       pticandidates.com
                     </a>{' '}
                     does have a symbol for this constituency, this symbol is
-                    from sample ballot paper and is accurate.)
+                    from the sample ballot paper and is accurate.)
                   </div>
                 </div>
               ) : (

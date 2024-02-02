@@ -98,6 +98,10 @@ const SampleBallot = ({
         }}
         ref={ballotPaperRef}
       >
+        <div className="flex items-center justify-center font-mono font-bold mb-2 text-2xl">
+          {selectedSeat.seat + ' '}
+          {selectedSeat.candidate?.constituency_name}
+        </div>
         <div className="flex font-mono font-bold text-xl mb-4 tracking-tighter px-4 pt-2 pb-4">
           <div>Sample Ballot Paper</div>
           <div className="ml-auto text-right">سیمپل بیلٹ پیپر</div>

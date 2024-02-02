@@ -53,7 +53,6 @@ const CandidateView = ({
                     src={pti_backed!.symbol_url}
                   ></img>
                   <div className="text-xs mt-4">
-                    (
                     <a
                       href={'https://pticandidates.com/'}
                       target="_blank"
@@ -61,8 +60,8 @@ const CandidateView = ({
                     >
                       pticandidates.com
                     </a>{' '}
-                    does have a symbol for this constituency, this symbol is
-                    from the sample ballot paper and is accurate.)
+                    does not list a symbol for this constituency, this symbol is
+                    from the sample ballot paper and is accurate.
                   </div>
                 </div>
               ) : (

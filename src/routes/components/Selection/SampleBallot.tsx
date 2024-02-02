@@ -1,4 +1,4 @@
-import { Seat, problematicSeats } from '../../data'
+import { Seat, knownIssues, problematicSeats } from '../../data'
 import Modal from 'react-modal'
 import QRCode from 'qrcode'
 import useAsyncRefresh from '../../../hooks/useAsyncRefresh'
@@ -70,20 +70,22 @@ const SampleBallot = ({
         }
       }}
     >
-      <div className="flex bg-yellow-50 px-3 py-4 font-bold items-center text-yellow-600">
-        <IoMdWarning className="mr-4 text-4xl" />
-        <span className="text-sm">
-          Known issues in ballot paper of this constituency because of bad data
-          quality from ECP.{' '}
-          <a
-            href={'https://fix.azaadvote.com/' + selectedSeat.seat}
-            className="text-blue-500 hover:underline"
-            target="_blank"
-          >
-            See ECP Form-33.
-          </a>
-        </span>
-      </div>
+      {knownIssues.includes(selectedSeat.seat) ? (
+        <div className="flex bg-yellow-50 px-3 py-4 font-bold items-center text-yellow-600">
+          <IoMdWarning className="mr-4 text-4xl" />
+          <span className="text-sm">
+            Known issues in ballot paper of this constituency because of bad
+            data quality from ECP.{' '}
+            <a
+              href={'https://fix.azaadvote.com/' + selectedSeat.seat}
+              className="text-blue-500 hover:underline"
+              target="_blank"
+            >
+              See ECP Form-33.
+            </a>
+          </span>
+        </div>
+      ) : null}
       <div
         className="flex flex-col px-3 py-3"
         style={{

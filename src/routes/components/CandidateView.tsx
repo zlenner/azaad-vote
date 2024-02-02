@@ -15,7 +15,7 @@ const CandidateView = ({
     candidate.symbol.symbol_image.length - 4
   )
 
-  const pti_backed = form33[constituency_code].candidates.find(
+  const pti_backed = form33[constituency_code]?.candidates.find(
     (candidate) => !!candidate.pti_backed
   )
   const pti_backed_symbol = pti_backed?.symbol_url.substring(

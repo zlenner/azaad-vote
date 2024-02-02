@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Popover } from 'react-tiny-popover'
 import fuse from './fuseSearch'
 import { useNavigate } from 'react-router'
+import { Seat, seats } from '../data'
 
 const SearchConstituency = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
@@ -10,7 +11,32 @@ const SearchConstituency = () => {
   const searchResults = useMemo(() => {
     if (searchValue.length > 0) {
       setIsPopoverOpen(true)
-      return fuse.search(searchValue).slice(0, 10)
+      const exact = Object.values(seats).find((seat) => {
+        const isMatchingCode =
+          seat.seat.toLowerCase().replaceAll('-', '') ===
+          searchValue.toLowerCase().replaceAll('-', '')
+        const isMatchingNumber = parseInt(seat.seat) === parseInt(searchValue)
+
+        return isMatchingCode || isMatchingNumber
+      })
+
+      const results: {
+        item: Seat
+      }[] = []
+      if (exact) {
+        results.push({
+          item: exact
+        })
+      }
+
+      results.push(
+        ...fuse
+          .search(searchValue)
+          .filter((result) => result.item.seat !== exact?.seat)
+          .slice(0, 10)
+      )
+
+      return results
     }
   }, [searchValue])
 

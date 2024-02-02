@@ -68,7 +68,10 @@ const ConstituencyView = ({
           </div>
         </div>
         {selectedSeat.candidate && (
-          <CandidateView candidate={selectedSeat.candidate} />
+          <CandidateView
+            candidate={selectedSeat.candidate}
+            constituency_code={selectedSeat.seat}
+          />
         )}
         <div className="flex mt-auto">
           {form33[selectedSeat.seat] && (

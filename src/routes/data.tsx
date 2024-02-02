@@ -101,7 +101,7 @@ const produceData = () => {
           symbol: {
             symbol_text: seat.Symbol,
             symbol_image:
-              'https://symbols.azaadvote.com/' + seat.symbolfile + '.jpg'
+              'https://symbols.azaadvote.com/' + seat.symbolfile + '.png'
           }
         }
       }

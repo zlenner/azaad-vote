@@ -1,10 +1,12 @@
 import { FaLocationCrosshairs, FaWhatsapp } from 'react-icons/fa6'
 import CandidateView from '../CandidateView'
-import { Seat } from '../../data'
+import { Seat, problematicSeats } from '../../data'
 import { MdHowToVote } from 'react-icons/md'
 import SampleBallot from './SampleBallot'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useForm33 } from '../../../hooks/useForm33'
+import { IoIosWarning } from 'react-icons/io'
+import clsx from 'clsx'
 
 const ConstituencyView = ({
   selectedSeat,
@@ -71,10 +73,19 @@ const ConstituencyView = ({
         <div className="flex mt-auto">
           {form33[selectedSeat.seat] && (
             <button
-              className="flex w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold text-purple-500 font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50"
+              className={clsx(
+                'flex w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50',
+                problematicSeats.includes(selectedSeat.seat)
+                  ? 'text-red-600'
+                  : 'text-purple-500'
+              )}
               onClick={() => navigate(`/${selectedSeat.seat}/ballot-paper`)}
             >
-              <MdHowToVote className="mr-3 text-2xl" />
+              {problematicSeats.includes(selectedSeat.seat) ? (
+                <IoIosWarning className="mr-2 text-xl" />
+              ) : (
+                <MdHowToVote className="mr-3 text-2xl" />
+              )}
               Sample Ballot
             </button>
           )}

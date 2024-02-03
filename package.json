@@ -13,7 +13,7 @@
     "@turf/turf": "^6.5.0",
     "axios": "^1.6.0",
     "clsx": "^2.1.0",
-    "downloadjs": "^1.4.7",
+    "download": "^8.0.0",
     "fuse.js": "^7.0.0",
     "html2canvas": "^1.4.1",
     "jwt-decode": "^4.0.0",

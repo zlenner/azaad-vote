@@ -131,9 +131,6 @@ const SampleBallot = ({
               backgroundColor: '#c9e5d6'
             }}
           >
-            <div className="flex items-center justify-center font-mono font-bold mb-2 text-2xl">
-              {selectedSeat.seat + ' '}
-            </div>
             <div className="flex font-mono font-bold text-xl mb-4 px-4 pt-2 pb-4">
               <div className="tracking-tighter">Sample Ballot Paper</div>
               <div className="ml-auto text-right">سیمپل بیلٹ پیپر</div>

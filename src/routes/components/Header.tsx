@@ -29,7 +29,7 @@ const Header = ({
     } else {
       const feature: DistrictFeature = foundPolygon
       setLocationFeature(feature)
-      navigate('/' + foundPolygon)
+      navigate('/DISTRICT-' + foundPolygon.properties.DISTRICT_ID)
     }
   }
 

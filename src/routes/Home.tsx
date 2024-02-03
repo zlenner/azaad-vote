@@ -134,8 +134,6 @@ function Inner() {
 function App() {
   const data = useLoadData()
 
-  console.log(data)
-
   if (!data) {
     return (
       <div className="flex w-full h-full items-center justify-center">

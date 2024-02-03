@@ -118,63 +118,69 @@ const SampleBallot = ({
           </div>
         ) : null}
         <div
-          className="flex flex-col px-3 py-3"
+          className="flex flex-col"
           style={{
             border: '5px solid #ef4444',
-            borderStyle: 'dashed',
-            backgroundColor: '#c9e5d6'
+            borderStyle: 'dashed'
           }}
-          ref={ballotPaperRef}
         >
-          <div className="flex items-center justify-center font-mono font-bold mb-2 text-2xl">
-            {selectedSeat.seat + ' '}
-          </div>
-          <div className="flex font-mono font-bold text-xl mb-4 px-4 pt-2 pb-4">
-            <div className="tracking-tighter">Sample Ballot Paper</div>
-            <div className="ml-auto text-right">سیمپل بیلٹ پیپر</div>
-          </div>
-          {!issues.problematicSeats.includes(selectedSeat.seat) ? (
-            <div
-              className="grid grid-cols-3 auto-rows-max w-full h-full gap-1 "
-              dir="rtl"
-            >
-              {reordered.map((candidate) => {
-                return (
-                  <div
-                    key={candidate.symbol_url}
-                    className={clsx(
-                      'relative text-sm md:text-lg px-2 py-2 flex items-center w-full border border-black',
-                      candidate.pti_backed && '!border-4 border-red-500 '
-                    )}
-                    style={{ borderWidth: '0.5px' }}
-                  >
-                    <div className="ml-auto font-urdu pb-2">
-                      {candidate.candidate_name}
+          <div
+            className="flex flex-col px-3 py-3"
+            ref={ballotPaperRef}
+            style={{
+              backgroundColor: '#c9e5d6'
+            }}
+          >
+            <div className="flex items-center justify-center font-mono font-bold mb-2 text-2xl">
+              {selectedSeat.seat + ' '}
+            </div>
+            <div className="flex font-mono font-bold text-xl mb-4 px-4 pt-2 pb-4">
+              <div className="tracking-tighter">Sample Ballot Paper</div>
+              <div className="ml-auto text-right">سیمپل بیلٹ پیپر</div>
+            </div>
+            {!issues.problematicSeats.includes(selectedSeat.seat) ? (
+              <div
+                className="grid grid-cols-3 auto-rows-max w-full h-full gap-1 "
+                dir="rtl"
+              >
+                {reordered.map((candidate) => {
+                  return (
+                    <div
+                      key={candidate.symbol_url}
+                      className={clsx(
+                        'relative text-sm md:text-lg px-2 py-2 flex items-center w-full border border-black',
+                        candidate.pti_backed && '!border-4 border-red-500 '
+                      )}
+                      style={{ borderWidth: '0.5px' }}
+                    >
+                      <div className="ml-auto font-urdu pb-2">
+                        {candidate.candidate_name}
+                      </div>
+                      <img
+                        className="w-6 h-6 md:w-12 md:h-12 mr-2"
+                        src={candidate.symbol_url}
+                      />
+                      {candidate.pti_backed && <Stamp />}
                     </div>
-                    <img
-                      className="w-6 h-6 md:w-12 md:h-12 mr-2"
-                      src={candidate.symbol_url}
-                    />
-                    {candidate.pti_backed && <Stamp />}
-                  </div>
-                )
-              })}
-            </div>
-          ) : (
-            <div className="flex flex-col px-4 font-mono text-red-600">
-              <div className="flex items-center font-bold mb-3">
-                <IoMdWarning className="mr-3 text-xl" /> Sample ballot paper not
-                available for this constituency.
+                  )
+                })}
               </div>
-              <div>
-                Sample ballot paper not available for 25 constituencies, waiting
-                for data from PTI team.
+            ) : (
+              <div className="flex flex-col px-4 font-mono text-red-600">
+                <div className="flex items-center font-bold mb-3">
+                  <IoMdWarning className="mr-3 text-xl" /> Sample ballot paper
+                  not available for this constituency.
+                </div>
+                <div>
+                  Sample ballot paper not available for 25 constituencies,
+                  waiting for data from PTI team.
+                </div>
               </div>
-            </div>
-          )}
-          <div className="flex pt-3 mt-1 items-center border-dashed">
-            <div className="font-mono tracking-tight">
-              https://azaadvote.com/{selectedSeat.seat}/ballot-paper
+            )}
+            <div className="flex pt-3 mt-1 items-center border-dashed">
+              <div className="font-mono tracking-tight">
+                https://azaadvote.com/{selectedSeat.seat}/ballot-paper
+              </div>
             </div>
           </div>
         </div>

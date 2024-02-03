@@ -128,7 +128,6 @@ const SampleBallot = ({
         >
           <div className="flex items-center justify-center font-mono font-bold mb-2 text-2xl">
             {selectedSeat.seat + ' '}
-            {selectedSeat.candidate?.constituency_name}
           </div>
           <div className="flex font-mono font-bold text-xl mb-4 px-4 pt-2 pb-4">
             <div className="tracking-tighter">Sample Ballot Paper</div>
@@ -177,11 +176,6 @@ const SampleBallot = ({
             <div className="font-mono tracking-tight">
               https://azaadvote.com/{selectedSeat.seat}/ballot-paper
             </div>
-            <img
-              className="ml-auto"
-              src={QRCodeURL}
-              style={{ width: '3em', height: '3em' }}
-            />
           </div>
         </div>
       </div>

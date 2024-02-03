@@ -1,5 +1,5 @@
 import { useData } from '../../hooks/useData'
-import { Candidate } from '../data'
+import { Candidate } from '../../hooks/useData/loadPTIData'
 
 const CandidateView = ({
   candidate,

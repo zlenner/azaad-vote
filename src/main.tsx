@@ -10,7 +10,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <Route path="/" element={<Home />} />
       <Route path="/:code" element={<Home />} />
       <Route path="/:code/ballot-paper" element={<Home />} />
-      <Route path="/:code/ballot-paper/download" element={<Home />} />
       <Route
         path="*"
         element={

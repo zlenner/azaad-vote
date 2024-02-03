@@ -1,34 +1,9 @@
 import createStateContext from 'react-use/lib/factory/createStateContext'
 import useAsyncRefresh from '../useAsyncRefresh'
 import geojson, { GeoJsonData } from './geojson'
-import loadForm33 from './loadForm33'
+import loadForm33, { ProcessedForm33 } from './loadForm33'
 import loadPTIData, { Seat } from './loadPTIData'
 import { knownIssues, problematicSeats } from './issues'
-
-export interface ProcessedForm33 {
-  [key: string]: {
-    constituency_no: string
-    constituency_name: string
-    candidates: {
-      symbol_url: string
-      candidate_name: string
-      pti_backed: boolean
-    }[]
-  }
-}
-
-export interface Form33Candidate {
-  SerialNo: number
-  'Name in English': string
-  'Name in Urdu': string
-  Address: string
-  Symbol: string
-  Party: string
-  symbol_url: string
-  pti_backed?: {
-    whatsapp_channel: string
-  }
-}
 
 interface Data {
   form33: ProcessedForm33
@@ -45,12 +20,54 @@ const [useSharedState, SharedStateProvider] = createStateContext<Data>(
 )
 
 export const useLoadData = () => {
-  const { value: form33 } = useAsyncRefresh(loadForm33, [])
+  const { value: form33WithoutPTIData } = useAsyncRefresh(loadForm33, [])
   const { value: pti_data } = useAsyncRefresh(loadPTIData, [])
 
-  if (!form33 || !pti_data) {
+  if (!form33WithoutPTIData || !pti_data) {
     return undefined
   }
+
+  const form33 = Object.fromEntries(
+    Object.entries(form33WithoutPTIData).map(
+      ([constituency_code, constituency]) => {
+        const ptiDataCandidate = pti_data[constituency_code].candidate
+        let pti_backed_any = false
+        const updated_constituency_entries = [
+          constituency_code,
+          {
+            ...constituency,
+            candidates: constituency.candidates.map((form33Candidate) => {
+              const isGohar =
+                constituency_code === 'NA-10' &&
+                form33Candidate.symbol_url ===
+                  'https://symbols.azaadvote.com/teapot.png'
+
+              const isPTIBacked =
+                ptiDataCandidate?.symbol?.symbol_image ===
+                  form33Candidate.symbol_url || isGohar
+
+              if (isPTIBacked) {
+                pti_backed_any = true
+              }
+
+              return {
+                ...form33Candidate,
+                pti_backed: isPTIBacked
+              }
+            })
+          }
+        ]
+        if (pti_backed_any && problematicSeats.includes(constituency_code)) {
+          console.log('Why is this problematic?', constituency_code)
+        }
+
+        if (!pti_backed_any && !problematicSeats.includes(constituency_code)) {
+          console.log('PTI did not back any candidate in', constituency_code)
+        }
+        return updated_constituency_entries
+      }
+    )
+  )
 
   const data: Data = {
     form33,

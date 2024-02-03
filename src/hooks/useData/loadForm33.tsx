@@ -1,5 +1,25 @@
 export type Province = 'balochistan' | 'sindh' | 'punjab' | 'kpk'
 
+export interface Form33Constituency {
+  constituency_no: string
+  constituency_name: string
+  candidates: {
+    symbol_url: string
+    candidate_name: string
+  }[]
+}
+
+export interface ProcessedForm33WithoutPTIData {
+  [key: string]: {
+    constituency_no: string
+    constituency_name: string
+    candidates: {
+      symbol_url: string
+      candidate_name: string
+    }[]
+  }
+}
+
 export interface ProcessedForm33 {
   [key: string]: {
     constituency_no: string
@@ -20,9 +40,6 @@ export interface Form33Candidate {
   Symbol: string
   Party: string
   symbol_url: string
-  pti_backed?: {
-    whatsapp_channel: string
-  }
 }
 
 export interface Constituency {
@@ -74,14 +91,13 @@ const form33 = async function () {
     [key: string]: Constituency
   }
 
-  const form33: ProcessedForm33 = Object.fromEntries(
+  const form33: ProcessedForm33WithoutPTIData = Object.fromEntries(
     Object.entries(combinedForm33Data).map(
       ([constituency_no, constituency]) => {
         const candidates = constituency.Candidates.map((candidate) => {
           return {
             symbol_url: candidate.symbol_url,
-            candidate_name: candidate['Name in Urdu'],
-            pti_backed: !!candidate.pti_backed
+            candidate_name: candidate['Name in Urdu']
           }
         })
 

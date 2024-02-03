@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { stringToColor } from '../mapping/styles'
 import { useEffect } from 'react'
 import React from 'react'
-import { DistrictFeature, geojson, seats } from './data'
 import Toggle from './components/Toggle'
+import { DistrictFeature } from '../hooks/useData/geojson'
+import { useData } from '../hooks/useData'
 
 const Map = ({ selectedDistrict }: { selectedDistrict?: DistrictFeature }) => {
   const navigate = useNavigate()
+  const [data] = useData()
 
   const isFeatureSelected = (feature: DistrictFeature) => {
     return (
@@ -86,7 +88,7 @@ const Map = ({ selectedDistrict }: { selectedDistrict?: DistrictFeature }) => {
       >
         <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
         <GeoJSON
-          data={geojson.districts}
+          data={data.geojson.districts}
           style={(feature) => {
             const district = feature as DistrictFeature
 

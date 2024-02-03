@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js'
-import { seats } from '../data'
+import { Seat } from '../../hooks/useData/loadPTIData'
 
 const fuseOptions = {
   // isCaseSensitive: false,
@@ -18,6 +18,8 @@ const fuseOptions = {
   keys: ['seat', 'candidate.constituency_name', 'candidate.candidate_name']
 }
 
-const fuse = new Fuse(Object.values(seats), fuseOptions)
+const fuseSearch = (seats: { [key: string]: Seat }) => {
+  return new Fuse(Object.values(seats), fuseOptions)
+}
 
-export default fuse
+export default fuseSearch

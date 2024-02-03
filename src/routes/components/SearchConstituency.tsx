@@ -1,17 +1,20 @@
 import { useMemo, useState } from 'react'
 import { Popover } from 'react-tiny-popover'
-import fuse from './fuseSearch'
 import { useNavigate } from 'react-router'
-import { Seat, seats } from '../data'
+import { useData } from '../../hooks/useData'
+import fuseSearch from './fuseSearch'
+import { Seat } from '../../hooks/useData/loadPTIData'
 
 const SearchConstituency = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const [searchValue, setSearchValue] = useState<string>('')
 
+  const [data] = useData()
+
   const searchResults = useMemo(() => {
     if (searchValue.length > 0) {
       setIsPopoverOpen(true)
-      const exact = Object.values(seats).find((seat) => {
+      const exact = Object.values(data.seats).find((seat) => {
         const isMatchingCode =
           seat.seat.toLowerCase().replaceAll('-', '') ===
           searchValue.toLowerCase().replaceAll('-', '')
@@ -30,7 +33,7 @@ const SearchConstituency = () => {
       }
 
       results.push(
-        ...fuse
+        ...fuseSearch(data.seats)
           .search(searchValue)
           .filter((result) => result.item.seat !== exact?.seat)
           .slice(0, 10)

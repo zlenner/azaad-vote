@@ -1,4 +1,4 @@
-import { useForm33 } from '../../hooks/useForm33'
+import { useData } from '../../hooks/useData'
 import { Candidate } from '../data'
 
 const CandidateView = ({
@@ -8,7 +8,7 @@ const CandidateView = ({
   candidate: Candidate
   constituency_code: string
 }) => {
-  const [form33] = useForm33()
+  const [{ form33 }] = useData()
 
   const pticandidates_com_symbol = candidate.symbol?.symbol_image.substring(
     30,

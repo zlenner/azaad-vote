@@ -1,5 +1,5 @@
+import { DistrictFeature } from '../../../hooks/useData/geojson'
 import { stringToColor } from '../../../mapping/styles'
-import { DistrictFeature } from '../../data'
 
 const DistrictView = ({
   isMyDistrict,

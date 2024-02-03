@@ -1,15 +1,15 @@
-import { Seat, knownIssues, problematicSeats } from '../../data'
 import Modal from 'react-modal'
 import QRCode from 'qrcode'
 import useAsyncRefresh from '../../../hooks/useAsyncRefresh'
 import { useRef } from 'react'
 import Stamp from './Stamp'
 import clsx from 'clsx'
-import { useForm33 } from '../../../hooks/useForm33'
+import { useData } from '../../../hooks/useData'
 import { IoIosWarning, IoMdWarning } from 'react-icons/io'
 import html2canvas from 'html2canvas'
 import downloadjs from 'downloadjs'
 import { FaImage } from 'react-icons/fa6'
+import { Seat } from '../../../hooks/useData/loadPTIData'
 
 const SampleBallot = ({
   selectedSeat,
@@ -21,7 +21,7 @@ const SampleBallot = ({
   closeModal: () => void
 }) => {
   const ballotPaperRef = useRef<HTMLDivElement>(null)
-  const [form33] = useForm33()
+  const [{ form33, seats, issues }] = useData()
 
   const constituency = form33[selectedSeat.seat]
   const reordered: {
@@ -73,7 +73,7 @@ const SampleBallot = ({
         }
       }}
     >
-      {knownIssues.includes(selectedSeat.seat) ? (
+      {issues.knownIssues.includes(selectedSeat.seat) ? (
         <div className="flex bg-yellow-50 px-3 py-4 font-bold items-center text-yellow-600">
           <IoMdWarning className="mr-4 text-4xl" />
           <span className="text-sm">
@@ -106,7 +106,7 @@ const SampleBallot = ({
           <div>Sample Ballot Paper</div>
           <div className="ml-auto text-right">سیمپل بیلٹ پیپر</div>
         </div>
-        {!problematicSeats.includes(selectedSeat.seat) ? (
+        {!issues.problematicSeats.includes(selectedSeat.seat) ? (
           <div
             className="grid grid-cols-3 auto-rows-max w-full h-full gap-1 "
             dir="rtl"

@@ -6,11 +6,16 @@ import BackgroundImage from './components/BackgroundImage'
 import ConstituencyView from './components/Selection/ConstituencyView'
 import { useState } from 'react'
 import { FaLocationCrosshairs } from 'react-icons/fa6'
-import { DistrictFeature, Seat, Selected, geojson, seats } from './data'
 import DistrictView from './components/Selection/DistrictView'
-import { Form33Provider, useLoadCandidateData } from '../hooks/useForm33'
+import { DataProvider, useData, useLoadData } from '../hooks/useData'
+import {
+  DistrictFeature,
+  GeoJsonData,
+  Selected
+} from '../hooks/useData/geojson'
+import { Seat } from '../hooks/useData/loadPTIData'
 
-const findDistrictOfSeat = (seat: Seat) => {
+const findDistrictOfSeat = (seat: Seat, geojson: GeoJsonData) => {
   return geojson.districts.features.find(
     (feature) => feature.properties.DISTRICT === seat.district
   )
@@ -66,6 +71,8 @@ const DetailConditionals = ({
 function Inner() {
   const { code = null } = useParams()
 
+  const [data] = useData()
+
   const [locationFeature, setLocationFeature] = useState<
     DistrictFeature | false | undefined
   >(undefined)
@@ -74,7 +81,7 @@ function Inner() {
   let selectedDistrict: DistrictFeature | undefined = undefined
 
   if (code) {
-    const found = geojson.districts.features.find(
+    const found = data.geojson.districts.features.find(
       (feature) =>
         parseInt(code.substring(9)) === feature.properties.DISTRICT_ID
     )
@@ -85,12 +92,15 @@ function Inner() {
         district: found
       }
       selectedDistrict = found
-    } else if (seats[code ?? '']) {
+    } else if (data.seats[code ?? '']) {
       selected = {
         type: 'seat',
-        seat: seats[code ?? '']
+        seat: data.seats[code ?? '']
       }
-      selectedDistrict = findDistrictOfSeat(seats[code ?? ''])
+      selectedDistrict = findDistrictOfSeat(
+        data.seats[code ?? ''],
+        data.geojson
+      )
     }
   }
 
@@ -113,7 +123,7 @@ function Inner() {
           selected
             ? selected.type === 'district'
               ? selected.district
-              : findDistrictOfSeat(selected.seat)
+              : findDistrictOfSeat(selected.seat, data.geojson)
             : undefined
         }
       />
@@ -122,8 +132,11 @@ function Inner() {
 }
 
 function App() {
-  const value = useLoadCandidateData()
-  if (value === undefined) {
+  const data = useLoadData()
+
+  console.log(data)
+
+  if (!data) {
     return (
       <div className="flex w-full h-full items-center justify-center">
         Loading...
@@ -131,9 +144,9 @@ function App() {
     )
   } else {
     return (
-      <Form33Provider initialValue={value}>
+      <DataProvider initialValue={data}>
         <Inner />
-      </Form33Provider>
+      </DataProvider>
     )
   }
 }

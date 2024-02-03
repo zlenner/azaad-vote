@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import PTIElectionSymbol from '../../assets/nobg.png'
-import { DistrictFeature, geojson } from '../data'
 import FindLocation from './FindLocation'
 import SearchConstituency from './SearchConstituency'
 import * as turf from '@turf/turf'
+import { DistrictFeature } from '../../hooks/useData/geojson'
+import { useData } from '../../hooks/useData'
 
 const Header = ({
   setLocationFeature
@@ -11,13 +12,14 @@ const Header = ({
   setLocationFeature: (district: DistrictFeature | false) => void
 }) => {
   const navigate = useNavigate()
+  const [data] = useData()
   const goToMyConstituency: (coords: {
     latitude: number
     longitude: number
   }) => void = (coords) => {
     const locationPoint = turf.point([coords.longitude, coords.latitude])
 
-    const foundPolygon = geojson.districts.features.find((feature) =>
+    const foundPolygon = data.geojson.districts.features.find((feature) =>
       turf.booleanPointInPolygon(locationPoint, feature)
     )
 

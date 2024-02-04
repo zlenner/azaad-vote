@@ -1,52 +1,41 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { stringToColor } from '../mapping/styles'
 import Header from './components/Header'
 import Map from './Map'
 import BackgroundImage from './components/BackgroundImage'
 import ConstituencyView from './components/Selection/ConstituencyView'
 import { useMemo, useState } from 'react'
 import { FaLocationCrosshairs } from 'react-icons/fa6'
-import DistrictView from './components/Selection/DistrictView'
-import { DataProvider, useData } from '../hooks/useData'
-import { GeoJsonData, SeatFeature } from '../hooks/useData/geojson'
+import { DataProvider, Selected, useData } from '../hooks/useData'
+import { SeatFeature } from '../hooks/useData/geojson'
 import { Seat, useLoadData } from '../hooks/useData/useLoadData'
 import * as turf from '@turf/turf'
 
 const DetailConditionals = ({
   selected,
-  locationFeature
+  locationFeatures
 }: {
   selected?: Selected
-  locationFeature?: DistrictFeature | false
+  locationFeatures?:
+    | {
+        national: SeatFeature
+        provincial: SeatFeature
+      }
+    | false
+    | undefined
 }) => {
-  let isMyDistrict = false
-  if (locationFeature) {
-    if (selected?.type === 'district') {
-      isMyDistrict =
-        selected.district.properties.DISTRICT_ID ===
-        locationFeature.properties.DISTRICT_ID
-    } else if (selected?.type === 'seat') {
-      isMyDistrict =
-        selected.seat.district === locationFeature.properties.DISTRICT
-    }
-  }
+  if (selected?.national || selected?.provincial) {
+    const seatToView =
+      !selected.primary || selected.primary === 'provincial'
+        ? selected.provincial
+        : selected.national
 
-  if (selected?.type === 'seat') {
-    return (
-      <ConstituencyView
-        isMyDistrict={isMyDistrict}
-        selectedSeat={selected.seat}
-      />
-    )
-  } else if (selected?.type === 'district') {
-    return (
-      <DistrictView
-        isMyDistrict={isMyDistrict}
-        selectedDistrict={selected.district}
-      />
-    )
+    if (!seatToView) {
+      throw new Error('UNKNOWN ERROR WITH CONDITIONALS')
+    }
+
+    return <ConstituencyView isMyDistrict={false} selectedSeat={seatToView} />
   } else {
-    if (locationFeature === false) {
+    if (locationFeatures === false) {
       return (
         <div className="flex text-gray-400 font-mono w-full h-full items-center justify-center p-3 tracking-tighter">
           <FaLocationCrosshairs className="mr-3 text-lg" />
@@ -73,11 +62,7 @@ function Inner() {
     | undefined
   >(undefined)
 
-  const selected = useMemo((): {
-    national?: Seat
-    provincial?: Seat
-    primary: 'national' | 'provincial' | false
-  } => {
+  const selected = useMemo((): Selected => {
     if (!code) {
       return {
         primary: false
@@ -179,12 +164,12 @@ function Inner() {
           setLocationFeatures={setLocationFeatures}
           setSelection={setSelection}
         />
-        {/* <div className="flex flex-1 w-full">
+        <div className="flex flex-1 w-full">
           <DetailConditionals
             selected={selected}
-            locationFeature={locationFeature}
+            locationFeatures={locationFeatures}
           />
-        </div> */}
+        </div>
       </div>
       <Map selected={selected} />
     </div>

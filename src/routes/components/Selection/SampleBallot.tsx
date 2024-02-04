@@ -7,8 +7,10 @@ import clsx from 'clsx'
 import { useData } from '../../../hooks/useData'
 import { IoMdWarning } from 'react-icons/io'
 import { FaImage } from 'react-icons/fa6'
-import { Seat } from '../../../hooks/useData/loadPTIData'
 import download from 'downloadjs'
+import { Candidate, Seat } from '../../../hooks/useData/useLoadData'
+import { useLocation, useNavigate } from 'react-router-dom'
+import html2canvas from 'html2canvas'
 
 const SampleBallot = ({
   selectedSeat,
@@ -20,45 +22,40 @@ const SampleBallot = ({
   closeModal: () => void
 }) => {
   const ballotPaperRef = useRef<HTMLDivElement>(null)
-  const [{ form33, seats, issues }] = useData()
+  const [{ issues }] = useData()
 
-  const constituency = form33[selectedSeat.seat]
-  const reordered: {
-    symbol_url: string
-    candidate_name: string
-    pti_backed: boolean
-  }[] = []
+  const reordered: Candidate[] = []
 
-  // const currentURL = useLocation()
+  const currentURL = useLocation()
   // const navigate = useNavigate()
 
   // const toDownload =
   //   currentURL.pathname.split('/').filter((el) => el !== '')[2] === 'download'
 
-  // const downloadBallotPaperFromElement = async () => {
-  //   console.log('Downloading ballot paper', ballotPaperRef.current)
-  //   if (!ballotPaperRef.current) return
+  const downloadBallotPaperFromElement = async () => {
+    console.log('Downloading ballot paper', ballotPaperRef.current)
+    if (!ballotPaperRef.current) return
 
-  //   try {
-  //     const canvas = await html2canvas(ballotPaperRef.current, {
-  //       useCORS: true,
-  //       allowTaint: true
-  //     })
-  //     download(
-  //       canvas.toDataURL('image/png'),
-  //       selectedSeat.seat + '_Ballot_Paper.png'
-  //     )
-  //   } catch (e) {
-  //     console.error(e)
-  //   }
-  // }
+    try {
+      const canvas = await html2canvas(ballotPaperRef.current, {
+        useCORS: true,
+        allowTaint: true
+      })
+      download(
+        canvas.toDataURL('image/png'),
+        selectedSeat.seat + '_Ballot_Paper.png'
+      )
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
-  const noRows = Math.ceil(constituency.candidates.length / 3)
+  const noRows = Math.ceil(selectedSeat.candidates.length / 3)
 
   for (let i = 0; i < noRows; i += 1) {
     // Section 1
-    for (let j = i; j < constituency.candidates.length; j += noRows) {
-      reordered.push(constituency.candidates[j])
+    for (let j = i; j < selectedSeat.candidates.length; j += noRows) {
+      reordered.push(selectedSeat.candidates[j])
     }
   }
 
@@ -131,7 +128,7 @@ const SampleBallot = ({
           >
             <div className="flex items-center justify-center font-mono font-bold mb-2 text-2xl">
               {selectedSeat.seat + ' '}
-              {selectedSeat.candidate?.constituency_name}
+              {selectedSeat.pti_data.constituency_name}
             </div>
             <div className="flex font-mono font-bold text-xl mb-4 px-4 pt-2 pb-4">
               <div className="tracking-tighter">Sample Ballot Paper</div>
@@ -153,7 +150,7 @@ const SampleBallot = ({
                       style={{ borderWidth: '0.5px' }}
                     >
                       <div className="ml-auto font-urdu pb-2">
-                        {candidate.candidate_name}
+                        {candidate.candidate_urdu_name}
                       </div>
                       <img
                         className="w-6 h-6 md:w-12 md:h-12 mr-2"
@@ -189,17 +186,13 @@ const SampleBallot = ({
           </div>
         </div>
       </div>
-      <button
+      {/* <button
         className="flex mt-4 mb-3 ml-auto w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50 ml-3 text-red-500"
-        onClick={() => {
-          download(
-            `https://files.azaadvote.com/${selectedSeat.seat}_Ballot_Paper.png`
-          )
-        }}
+        onClick={downloadBallotPaperFromElement}
       >
         <FaImage className="mr-3 text-2xl" />
         Download Image
-      </button>
+      </button> */}
     </Modal>
   )
 }

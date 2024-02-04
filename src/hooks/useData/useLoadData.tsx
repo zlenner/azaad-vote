@@ -20,11 +20,17 @@ export interface Seat {
   form33_data: {
     constituency_name: string
     returning_officer: string
+    candidate_symbol_url?: string
   }
   pti_data: {
     constituency_name: string
     whatsapp_link: string
     candidate_name: string
+    candidate_symbol: {
+      text: string
+      url: string
+      symbolfile: string
+    }
   }
   candidates: Candidate[]
 }
@@ -43,18 +49,33 @@ export const useLoadData = () => {
 
   for (const row of pti_data) {
     const form33Constituency = form33[row.Constituency]
+    const pti_candidate_from_form_33 =
+      form33Constituency &&
+      form33Constituency.Candidates.find(
+        (candidate) =>
+          candidate['symbol_url'] ===
+          'https://symbols.azaadvote.com/' + row.symbolfile + '.png'
+      )
+
     seats[row.Constituency] = {
       type: row.type,
       province: row.Province,
       seat: row.Constituency,
       form33_data: form33Constituency && {
         constituency_name: form33Constituency['Constituency Name'],
-        returning_officer: form33Constituency['Returning Officer']
+        returning_officer: form33Constituency['Returning Officer'],
+        candidate_symbol_url:
+          pti_candidate_from_form_33 && pti_candidate_from_form_33.symbol_url
       },
       pti_data: {
         constituency_name: row.District,
         whatsapp_link: row['WhatsApp Link'],
-        candidate_name: row.Candidate
+        candidate_name: row.Candidate,
+        candidate_symbol: {
+          text: row['Symbol'],
+          url: 'https://symbols.azaadvote.com/' + row['symbolfile'] + '.png',
+          symbolfile: row['symbolfile']
+        }
       },
       candidates: form33Constituency?.Candidates.map((candidate) => {
         let pti_backed =

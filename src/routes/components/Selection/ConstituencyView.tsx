@@ -1,12 +1,12 @@
 import { FaLocationCrosshairs, FaWhatsapp } from 'react-icons/fa6'
-import CandidateView from '../CandidateView'
 import { MdHowToVote } from 'react-icons/md'
 import SampleBallot from './SampleBallot'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useData } from '../../../hooks/useData'
 import { IoIosWarning } from 'react-icons/io'
 import clsx from 'clsx'
-import { Seat } from '../../../hooks/useData/loadPTIData'
+import { Seat } from '../../../hooks/useData/useLoadData'
+import SeatCandidateView from '../SeatCandidateView'
 
 const ConstituencyView = ({
   selectedSeat,
@@ -22,7 +22,7 @@ const ConstituencyView = ({
 
   const navigate = useNavigate()
 
-  const [{ form33, issues }] = useData()
+  const [{ issues }] = useData()
 
   if (isBallotOpen) {
     return (
@@ -57,7 +57,7 @@ const ConstituencyView = ({
             {selectedSeat.seat}
           </div>
           <div className="font-mono font-bold text-3xl text-emerald-500">
-            {selectedSeat.candidate?.constituency_name}
+            {selectedSeat.pti_data.constituency_name}
           </div>
         </div>
         <div className="flex flex-col absolute right-3 bottom-3 text-gray-700 font-semibold font-mono hidden md:flex">
@@ -67,14 +67,11 @@ const ConstituencyView = ({
               : selectedSeat.province.toUpperCase()}
           </div>
         </div>
-        {selectedSeat.candidate && (
-          <CandidateView
-            candidate={selectedSeat.candidate}
-            constituency_code={selectedSeat.seat}
-          />
+        {selectedSeat.pti_data.candidate_name && (
+          <SeatCandidateView seat={selectedSeat} />
         )}
         <div className="flex mt-auto">
-          {form33[selectedSeat.seat] && (
+          {selectedSeat.form33_data && (
             <button
               className={clsx(
                 'flex w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50',
@@ -92,7 +89,7 @@ const ConstituencyView = ({
               Sample Ballot
             </button>
           )}
-          <a href={selectedSeat.candidate?.whatsapp_link} target="_blank">
+          <a href={selectedSeat.pti_data.whatsapp_link} target="_blank">
             <button className="flex w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold text-green-600 font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50 ml-3">
               <FaWhatsapp className="mr-3 text-2xl" />
               WhatsApp Channel

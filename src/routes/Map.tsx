@@ -1,22 +1,13 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { stringToColor } from '../mapping/styles'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import React from 'react'
 import Toggle from './components/Toggle'
-import { useData } from '../hooks/useData'
+import { Selected, useData } from '../hooks/useData'
 import { SeatFeature } from '../hooks/useData/geojson'
-import { Seat } from '../hooks/useData/useLoadData'
 
-const Map = ({
-  selected
-}: {
-  selected: {
-    national?: Seat
-    provincial?: Seat
-    primary: 'national' | 'provincial' | false
-  }
-}) => {
+const Map = ({ selected }: { selected: Selected }) => {
   const navigate = useNavigate()
   const [data] = useData()
 

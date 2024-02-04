@@ -2,6 +2,12 @@ import createStateContext from 'react-use/lib/factory/createStateContext'
 import { GeoJsonData } from './geojson'
 import { Seat } from './useLoadData'
 
+export interface Selected {
+  national?: Seat
+  provincial?: Seat
+  primary: 'national' | 'provincial' | false
+}
+
 export interface Data {
   seats: Record<string, Seat>
   geojson: GeoJsonData

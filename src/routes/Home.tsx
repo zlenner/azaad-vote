@@ -8,11 +8,7 @@ import { useState } from 'react'
 import { FaLocationCrosshairs } from 'react-icons/fa6'
 import DistrictView from './components/Selection/DistrictView'
 import { DataProvider, useData, useLoadData } from '../hooks/useData'
-import {
-  DistrictFeature,
-  GeoJsonData,
-  Selected
-} from '../hooks/useData/geojson'
+import { GeoJsonData, SeatFeature, Selected } from '../hooks/useData/geojson'
 import { Seat } from '../hooks/useData/loadPTIData'
 
 const findDistrictOfSeat = (seat: Seat, geojson: GeoJsonData) => {
@@ -74,33 +70,33 @@ function Inner() {
   const [data] = useData()
 
   const [locationFeature, setLocationFeature] = useState<
-    DistrictFeature | false | undefined
+    | {
+        national: SeatFeature
+        provincial?: SeatFeature
+      }
+    | false
+    | undefined
   >(undefined)
 
-  let selected: Selected | undefined = undefined
-  let selectedDistrict: DistrictFeature | undefined = undefined
+  let selected: {
+    national?: Seat
+    provincial?: Seat
+  } = {}
 
   if (code) {
-    const found = data.geojson.districts.features.find(
-      (feature) =>
-        parseInt(code.substring(9)) === feature.properties.DISTRICT_ID
-    )
-    if (found) {
-      selected = {
-        type: 'district',
-        color: stringToColor(found.properties.DISTRICT_ID.toString()),
-        district: found
+    const parts = code.split('-')
+    if (parts.length === 2) {
+      const [assembly_code, number] = parts
+      if (assembly_code === 'NA') {
+        selected = {
+          national: data.seats['NA-' + number.toString()]
+        }
+      } else if (['PB', 'PP', 'PS', 'PK'].includes(assembly_code)) {
+        selected = {
+          national: {},
+          provincial: data.seats[code]
+        }
       }
-      selectedDistrict = found
-    } else if (data.seats[code ?? '']) {
-      selected = {
-        type: 'seat',
-        seat: data.seats[code ?? '']
-      }
-      selectedDistrict = findDistrictOfSeat(
-        data.seats[code ?? ''],
-        data.geojson
-      )
     }
   }
 

@@ -28,24 +28,63 @@ export interface AssemblyObject {
   'WhatsApp Link': string
 }
 
+const parseMappingCSV = (csvText: string) => {
+  // Parse the CSV with PapaParse
+  const parsedData = Papa.parse(csvText, {
+    header: false, // Adjust this if your CSV has a header row
+    skipEmptyLines: true // Skips empty lines to avoid unnecessary processing
+  })
+
+  const mappingJSON: {
+    [key: string]: string[]
+  } = {}
+  let currentKey = ''
+
+  // Iterate over each row in the parsed data
+  ;(parsedData.data as string[]).forEach((row) => {
+    const key = row[0]?.trim() // Assuming keys are in the second column
+    const value = row[1]?.trim() // Assuming values are in the third column
+
+    // If a new key is found
+    if (key && key !== '') {
+      // Start a new array for this key
+      currentKey = key
+      mappingJSON[currentKey] = []
+    }
+
+    // Add the value to the current key's array, if applicable
+    if (value && value !== '' && currentKey) {
+      mappingJSON[currentKey].push(value)
+    }
+  })
+
+  return mappingJSON
+}
+
 const loadPTIData = async () => {
-  const [national, kpk, punjab, sindh, balochistan] = await Promise.all([
-    fetch(
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=285854974&single=true&output=csv&time=1706928750431'
-    ).then((r) => r.text()),
-    fetch(
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=300989700&single=true&output=csv&time=1706928752894'
-    ).then((r) => r.text()),
-    fetch(
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=472420017&single=true&output=csv&time=1706928754997'
-    ).then((r) => r.text()),
-    fetch(
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=924832023&single=true&output=csv&time=1706928755984'
-    ).then((r) => r.text()),
-    fetch(
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=924832023&single=true&output=csv&time=1706928755984'
-    ).then((r) => r.text())
-  ])
+  const [national, kpk, punjab, sindh, balochistan, mappingCSV] =
+    await Promise.all([
+      fetch(
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=285854974&single=true&output=csv'
+      ).then((r) => r.text()),
+      fetch(
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=300989700&single=true&output=csv'
+      ).then((r) => r.text()),
+      fetch(
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=472420017&single=true&output=csv'
+      ).then((r) => r.text()),
+      fetch(
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=924832023&single=true&output=csv'
+      ).then((r) => r.text()),
+      fetch(
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=924832023&single=true&output=csv'
+      ).then((r) => r.text()),
+      fetch(
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=276582531&single=true&output=csv'
+      ).then((r) => r.text())
+    ])
+
+  parseMappingCSV(mappingCSV)
 
   const seats: Record<string, Seat> = {}
 

@@ -1,43 +1,38 @@
-import districtsGeoJson from '../../data/geojson/districts.json'
+import nationalGeoJson from '../../data/geojson/national.json'
+import provincialGeoJson from '../../data/geojson/provincial.json'
 import { Seat } from './loadPTIData'
 
-export type Selected =
-  | {
-      type: 'district'
-      color: string
-      district: DistrictFeature
-    }
-  | {
-      type: 'seat'
-      seat: Seat
-    }
-
-export interface DistrictFeature {
+export interface SeatFeature {
   type: 'Feature'
   geometry: {
     type: 'Polygon'
     coordinates: number[][][]
   }
   properties: {
-    PROVINCE_ID: 1
-    PROVINCE: 'Azad Kashmir'
-    CITY_ID: 1
-    CITY: 'Azad Kashmir'
-    DISTRICT_ID: 4
-    DISTRICT: 'Mirpur'
-    ALT_NAME: null
+    COUNTRY: 'Pakistan'
+    PROVINCE: string
+    latitude: string
+    longitude: string
+    CONSTITUENCY: string
+    DISTRICT: string
+    DISTRICT_ALT_NAME: string
   }
 }
 
 export type GeoJsonData = {
-  districts: {
+  national: {
     type: 'FeatureCollection'
-    features: DistrictFeature[]
+    features: SeatFeature[]
+  }
+  provincial: {
+    type: 'FeatureCollection'
+    features: SeatFeature[]
   }
 }
 
 const geojson = {
-  districts: districtsGeoJson
+  national: nationalGeoJson,
+  provincial: provincialGeoJson
 } as GeoJsonData
 
 export default geojson

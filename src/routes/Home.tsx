@@ -87,11 +87,21 @@ function Inner() {
     }
 
     if (code.includes('&')) {
-      const [national_code, provincial_code] = code.split('&', 2)
+      const [primary_code, secondary_code] = code.split('&', 2)
+      const [national, provincial] = primary_code.startsWith('NA-')
+        ? [
+            parseSeatCode(primary_code, 'national'),
+            parseSeatCode(secondary_code, 'provincial')
+          ]
+        : [
+            parseSeatCode(secondary_code, 'national'),
+            parseSeatCode(primary_code, 'provincial')
+          ]
+
       return {
-        national: parseSeatCode(national_code, 'national'),
-        provincial: parseSeatCode(provincial_code, 'provincial'),
-        primary: false
+        national,
+        provincial,
+        primary: primary_code === national?.seat ? 'national' : 'provincial'
       }
     } else {
       if (code.startsWith('NA-')) {

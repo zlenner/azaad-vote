@@ -28,6 +28,8 @@ const Header = ({
     latitude: number
     longitude: number
   }) => void = (coords) => {
+    // const customPoint = [31.590285443855617, 74.29916482386706]
+    // const locationPoint = turf.point([customPoint[1], customPoint[0]])
     const locationPoint = turf.point([coords.longitude, coords.latitude])
 
     const foundNationalPolygon = data.geojson.national.features.find(

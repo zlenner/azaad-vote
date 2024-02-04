@@ -103,9 +103,21 @@ const Map = ({ selected }: { selected: Selected }) => {
         <Toggle
           type={selectedType}
           onChange={() => {
-            setSelectedType(
+            const changeTo =
               selectedType === 'national' ? 'provincial' : 'national'
-            )
+            if (selected.national && selected.provincial) {
+              if (changeTo === 'national') {
+                navigate(
+                  '/' + selected.national.seat + '&' + selected.provincial.seat
+                )
+              } else {
+                navigate(
+                  '/' + selected.provincial.seat + '&' + selected.national.seat
+                )
+              }
+            } else {
+              setSelectedType(changeTo)
+            }
           }}
         />
       </div>

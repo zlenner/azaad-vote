@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js'
-import { Seat } from '../../hooks/useData/loadPTIData'
+import { Seat } from '../../hooks/useData/useLoadData'
 
 const fuseOptions = {
   // isCaseSensitive: false,
@@ -15,7 +15,12 @@ const fuseOptions = {
   // ignoreLocation: false,
   // ignoreFieldNorm: false,
   // fieldNormWeight: 1,
-  keys: ['seat', 'candidate.constituency_name', 'candidate.candidate_name']
+  keys: [
+    'seat',
+    'pti_data.constituency_name',
+    'pti_data.candidate_name',
+    'form33_data.constituency_name'
+  ]
 }
 
 const fuseSearch = (seats: { [key: string]: Seat }) => {

@@ -1,25 +1,56 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { stringToColor } from '../mapping/styles'
-import { useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import React from 'react'
 import Toggle from './components/Toggle'
-import { DistrictFeature } from '../hooks/useData/geojson'
 import { useData } from '../hooks/useData'
+import { SeatFeature } from '../hooks/useData/geojson'
+import { Seat } from '../hooks/useData/useLoadData'
 
-const Map = ({ selectedDistrict }: { selectedDistrict?: DistrictFeature }) => {
+const Map = ({
+  selected
+}: {
+  selected: {
+    national?: Seat
+    provincial?: Seat
+    primary: 'national' | 'provincial' | false
+  }
+}) => {
   const navigate = useNavigate()
   const [data] = useData()
 
-  const isFeatureSelected = (feature: DistrictFeature) => {
+  const [selectedType, setSelectedType] = useState<'national' | 'provincial'>(
+    'provincial'
+  )
+
+  const mapRef = React.useRef<any>(null)
+
+  const isFeatureSelected = (feature: SeatFeature) => {
     return (
-      feature.properties.DISTRICT_ID ===
-      selectedDistrict?.properties.DISTRICT_ID
+      feature.properties.CONSTITUENCY_CODE === selected?.national?.seat ||
+      feature.properties.CONSTITUENCY_CODE === selected?.provincial?.seat
     )
   }
 
+  const selectCurrentLayer = () => {
+    const selectedLayer = Object.values(mapRef.current._layers).find(
+      (layer: any) => {
+        if (layer.feature === undefined) {
+          return false
+        }
+        return isFeatureSelected(layer.feature)
+      }
+    ) as any
+
+    if (selectedLayer) {
+      const bounds = selectedLayer.getBounds()
+      mapRef.current.fitBounds(bounds)
+    }
+  }
+
   // Attach event handlers to each feature
-  const onEachFeature = (feature: DistrictFeature, layer: any) => {
+  const onEachFeature = (feature: SeatFeature, layer: any) => {
     layer.on({
       mouseover: (event: any) => {
         if (isFeatureSelected(feature)) return
@@ -38,45 +69,54 @@ const Map = ({ selectedDistrict }: { selectedDistrict?: DistrictFeature }) => {
         })
       },
       click: (event: any) => {
-        const layer = event.target
-        const district = layer.feature as DistrictFeature
-        navigate('/DISTRICT-' + district.properties.DISTRICT_ID)
+        navigate('/' + feature.properties.CONSTITUENCY_CODE)
       }
     })
   }
 
-  const mapRef = React.useRef<any>(null)
+  useEffect(() => {
+    setTimeout(() => {
+      if (selected.primary === false) {
+        selectCurrentLayer()
+      } else if (
+        selected.primary === 'national' &&
+        selectedType === 'national'
+      ) {
+        selectCurrentLayer()
+      } else if (
+        selected.primary === 'provincial' &&
+        selectedType === 'provincial'
+      ) {
+        selectCurrentLayer()
+      } else {
+        console.log('Switching type')
+        setSelectedType((prevType) => {
+          return prevType === 'national' ? 'provincial' : 'national'
+        })
+        setTimeout(() => {
+          selectCurrentLayer()
+        }, 0)
+      }
+    }, 0)
+  }, [JSON.stringify(selected)])
 
   useEffect(() => {
     setTimeout(() => {
-      if (!mapRef.current) {
-        console.warn(
-          "Couldn't zoom on selected constituency because map wasn't loaded as expected."
-        )
-      }
-      // Zoom to the initial selected polygon, if provided
-      if (selectedDistrict && mapRef.current) {
-        const selectedLayer = Object.values(mapRef.current._layers).find(
-          (layer: any) => {
-            if (layer.feature === undefined) {
-              return false
-            }
-            return isFeatureSelected(layer.feature)
-          }
-        ) as any
-
-        if (selectedLayer) {
-          const bounds = selectedLayer.getBounds()
-          mapRef.current.fitBounds(bounds)
-        }
-      }
+      selectCurrentLayer()
     }, 0)
-  }, [selectedDistrict?.properties.DISTRICT_ID])
+  }, [selectedType])
 
   return (
     <div className="flex flex-1 h-full map relative">
       <div className="absolute top-3 right-3" style={{ zIndex: 99999 }}>
-        <Toggle assembly="provincial" onChange={() => {}} isDisabled />
+        <Toggle
+          type={selectedType}
+          onChange={() => {
+            setSelectedType(
+              selectedType === 'national' ? 'provincial' : 'national'
+            )
+          }}
+        />
       </div>
       <MapContainer
         className="w-full h-full"
@@ -88,13 +128,18 @@ const Map = ({ selectedDistrict }: { selectedDistrict?: DistrictFeature }) => {
       >
         <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
         <GeoJSON
-          data={data.geojson.districts}
+          key={selectedType}
+          data={
+            selectedType === 'national'
+              ? data.geojson.national
+              : data.geojson.provincial
+          }
           style={(feature) => {
-            const district = feature as DistrictFeature
+            const seatFeature = feature as SeatFeature
 
             const defaultStyle = {
               fillColor: stringToColor(
-                district.properties.DISTRICT_ID.toString()
+                seatFeature.properties.CONSTITUENCY_CODE
               ),
               weight: 1,
               opacity: 0.4,
@@ -102,7 +147,7 @@ const Map = ({ selectedDistrict }: { selectedDistrict?: DistrictFeature }) => {
               fillOpacity: 0.4
             }
 
-            if (isFeatureSelected(feature as DistrictFeature)) {
+            if (isFeatureSelected(seatFeature)) {
               return {
                 ...defaultStyle,
                 fillColor: 'transparent',

@@ -1,21 +1,16 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { stringToColor } from '../mapping/styles'
 import Header from './components/Header'
 import Map from './Map'
 import BackgroundImage from './components/BackgroundImage'
 import ConstituencyView from './components/Selection/ConstituencyView'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { FaLocationCrosshairs } from 'react-icons/fa6'
 import DistrictView from './components/Selection/DistrictView'
-import { DataProvider, useData, useLoadData } from '../hooks/useData'
-import { GeoJsonData, SeatFeature, Selected } from '../hooks/useData/geojson'
-import { Seat } from '../hooks/useData/loadPTIData'
-
-const findDistrictOfSeat = (seat: Seat, geojson: GeoJsonData) => {
-  return geojson.districts.features.find(
-    (feature) => feature.properties.DISTRICT === seat.district
-  )
-}
+import { DataProvider, useData } from '../hooks/useData'
+import { GeoJsonData, SeatFeature } from '../hooks/useData/geojson'
+import { Seat, useLoadData } from '../hooks/useData/useLoadData'
+import * as turf from '@turf/turf'
 
 const DetailConditionals = ({
   selected,
@@ -69,35 +64,109 @@ function Inner() {
 
   const [data] = useData()
 
-  const [locationFeature, setLocationFeature] = useState<
+  const [locationFeatures, setLocationFeatures] = useState<
     | {
         national: SeatFeature
-        provincial?: SeatFeature
+        provincial: SeatFeature
       }
     | false
     | undefined
   >(undefined)
 
-  let selected: {
+  const selected = useMemo((): {
     national?: Seat
     provincial?: Seat
-  } = {}
+    primary: 'national' | 'provincial' | false
+  } => {
+    if (!code) {
+      return {
+        primary: false
+      }
+    }
 
-  if (code) {
-    const parts = code.split('-')
-    if (parts.length === 2) {
+    const parseSeatCode = (code: string, type: 'national' | 'provincial') => {
+      const parts = code.split('-')
+      if (parts.length !== 2) {
+        return
+      }
+
       const [assembly_code, number] = parts
-      if (assembly_code === 'NA') {
-        selected = {
-          national: data.seats['NA-' + number.toString()]
+      if (assembly_code === 'NA' && type === 'national') {
+        return data.seats[code]
+      } else if (
+        ['PB', 'PP', 'PS', 'PK'].includes(assembly_code) &&
+        type === 'provincial'
+      ) {
+        return data.seats[code]
+      }
+    }
+
+    if (code.includes('&')) {
+      const [national_code, provincial_code] = code.split('&', 2)
+      return {
+        national: parseSeatCode(national_code, 'national'),
+        provincial: parseSeatCode(provincial_code, 'provincial'),
+        primary: false
+      }
+    } else {
+      if (code.startsWith('NA-')) {
+        return {
+          national: parseSeatCode(code, 'national'),
+          primary: 'national'
         }
-      } else if (['PB', 'PP', 'PS', 'PK'].includes(assembly_code)) {
-        selected = {
-          national: {},
-          provincial: data.seats[code]
+      } else {
+        const PROVINCIAL_SEAT = parseSeatCode(code, 'provincial')
+
+        // Try to find national seat using NA-PA mapping
+        const found = Object.entries(data.na_pa_mapping).find(([key, list]) =>
+          list.includes(code)
+        )
+        if (found) {
+          const [national_seat_code] = found
+          return {
+            national: parseSeatCode(national_seat_code, 'national'),
+            provincial: PROVINCIAL_SEAT,
+            primary: 'provincial'
+          }
+        }
+
+        // Try to find national seat using provincial co-ordinates
+        const provincial_feature = data.geojson.provincial.features.find(
+          (feature) => feature.properties.CONSTITUENCY_CODE === code
+        )
+        if (provincial_feature) {
+          const provincial_center = turf.point([
+            parseFloat(provincial_feature.properties.longitude),
+            parseFloat(provincial_feature.properties.latitude)
+          ])
+
+          const foundNationalFeature = data.geojson.national.features.find(
+            (feature) => turf.booleanPointInPolygon(provincial_center, feature)
+          )
+
+          if (foundNationalFeature) {
+            const national_code =
+              foundNationalFeature.properties.CONSTITUENCY_CODE
+            return {
+              national: parseSeatCode(national_code, 'national'),
+              provincial: PROVINCIAL_SEAT,
+              primary: 'provincial'
+            }
+          }
+        }
+
+        // Couldn't find national seat, we're ignoring the provincial we found
+        return {
+          primary: false
         }
       }
     }
+  }, [code])
+
+  const navigate = useNavigate()
+
+  const setSelection = (selection: { national: Seat; provincial: Seat }) => {
+    navigate(`/${selection.national.seat}&${selection.provincial.seat}`)
   }
 
   return (
@@ -106,23 +175,18 @@ function Inner() {
         className="flex flex-col w-full h-full details"
         style={{ width: '50%', maxWidth: 850 }}
       >
-        <Header setLocationFeature={setLocationFeature} />
-        <div className="flex flex-1 w-full">
+        <Header
+          setLocationFeatures={setLocationFeatures}
+          setSelection={setSelection}
+        />
+        {/* <div className="flex flex-1 w-full">
           <DetailConditionals
             selected={selected}
             locationFeature={locationFeature}
           />
-        </div>
+        </div> */}
       </div>
-      <Map
-        selectedDistrict={
-          selected
-            ? selected.type === 'district'
-              ? selected.district
-              : findDistrictOfSeat(selected.seat, data.geojson)
-            : undefined
-        }
-      />
+      <Map selected={selected} />
     </div>
   )
 }

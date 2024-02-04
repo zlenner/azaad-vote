@@ -3,34 +3,59 @@ import PTIElectionSymbol from '../../assets/nobg.png'
 import FindLocation from './FindLocation'
 import SearchConstituency from './SearchConstituency'
 import * as turf from '@turf/turf'
-import { DistrictFeature } from '../../hooks/useData/geojson'
 import { useData } from '../../hooks/useData'
+import { SeatFeature } from '../../hooks/useData/geojson'
+import { Seat } from '../../hooks/useData/useLoadData'
 
 const Header = ({
-  setLocationFeature
+  setLocationFeatures,
+  setSelection
 }: {
-  setLocationFeature: (district: DistrictFeature | false) => void
+  setLocationFeatures: (
+    location:
+      | {
+          national: SeatFeature
+          provincial: SeatFeature
+        }
+      | false
+  ) => void
+  setSelection: (selection: { national: Seat; provincial: Seat }) => void
 }) => {
   const navigate = useNavigate()
   const [data] = useData()
+
   const goToMyConstituency: (coords: {
     latitude: number
     longitude: number
   }) => void = (coords) => {
-    const locationPoint = turf.point([coords.longitude, coords.latitude])
+    const customPoint = [24.932555627051396, 67.05652078289751]
+    const locationPoint = turf.point([customPoint[1], customPoint[0]])
+    // const locationPoint = turf.point([coords.longitude, coords.latitude])
 
-    const foundPolygon = data.geojson.districts.features.find((feature) =>
-      turf.booleanPointInPolygon(locationPoint, feature)
+    const foundNationalPolygon = data.geojson.national.features.find(
+      (feature) => turf.booleanPointInPolygon(locationPoint, feature)
     )
 
-    if (!foundPolygon) {
-      setLocationFeature(false)
+    const foundProvincialPolygon = data.geojson.provincial.features.find(
+      (feature) => turf.booleanPointInPolygon(locationPoint, feature)
+    )
+
+    if (!foundNationalPolygon || !foundProvincialPolygon) {
+      setLocationFeatures(false)
       navigate('/')
-    } else {
-      const feature: DistrictFeature = foundPolygon
-      setLocationFeature(feature)
-      navigate('/DISTRICT-' + foundPolygon.properties.DISTRICT_ID)
+      return
     }
+
+    setLocationFeatures({
+      national: foundNationalPolygon,
+      provincial: foundProvincialPolygon
+    })
+
+    setSelection({
+      national: data.seats[foundNationalPolygon.properties.CONSTITUENCY_CODE],
+      provincial:
+        data.seats[foundProvincialPolygon.properties.CONSTITUENCY_CODE]
+    })
   }
 
   return (

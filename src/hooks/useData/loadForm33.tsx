@@ -1,38 +1,6 @@
 export type Province = 'balochistan' | 'sindh' | 'punjab' | 'kpk'
 
-export interface Form33Constituency {
-  constituency_no: string
-  constituency_name: string
-  candidates: {
-    symbol_url: string
-    candidate_name: string
-  }[]
-}
-
-export interface ProcessedForm33WithoutPTIData {
-  [key: string]: {
-    constituency_no: string
-    constituency_name: string
-    candidates: {
-      symbol_url: string
-      candidate_name: string
-    }[]
-  }
-}
-
-export interface ProcessedForm33 {
-  [key: string]: {
-    constituency_no: string
-    constituency_name: string
-    candidates: {
-      symbol_url: string
-      candidate_name: string
-      pti_backed: boolean
-    }[]
-  }
-}
-
-export interface Form33Candidate {
+interface Form33Candidate {
   SerialNo: number
   'Name in English': string
   'Name in Urdu': string
@@ -42,7 +10,7 @@ export interface Form33Candidate {
   symbol_url: string
 }
 
-export interface Constituency {
+interface Form33Constituency {
   'Constituency No': string
   'Constituency Name': string
   'Returning Officer': string
@@ -52,7 +20,7 @@ export interface Constituency {
   province: Province
 }
 
-function AddProvinceName(province: string) {
+function AddProvinceName(province: string, type: 'national' | 'provincial') {
   return (data: any) => {
     return Object.fromEntries(
       Object.entries(data).map(([key, value]) => [
@@ -70,16 +38,16 @@ const form33 = async function () {
   const [balochistan, kpk, punjab, sindh] = await Promise.all([
     fetch('https://elections-data.vercel.app/NA/balochistan.json')
       .then((r) => r.json())
-      .then(AddProvinceName('Balochistan')),
+      .then(AddProvinceName('Balochistan', 'national')),
     fetch('https://elections-data.vercel.app/NA/kpk.json')
       .then((r) => r.json())
-      .then(AddProvinceName('KPK')),
+      .then(AddProvinceName('KPK', 'national')),
     fetch('https://elections-data.vercel.app/NA/punjab.json')
       .then((r) => r.json())
-      .then(AddProvinceName('Punjab')),
+      .then(AddProvinceName('Punjab', 'national')),
     fetch('https://elections-data.vercel.app/NA/sindh.json')
       .then((r) => r.json())
-      .then(AddProvinceName('Sindh'))
+      .then(AddProvinceName('Sindh', 'national'))
   ])
 
   const combinedForm33Data = {
@@ -88,32 +56,10 @@ const form33 = async function () {
     ...punjab,
     ...sindh
   } as {
-    [key: string]: Constituency
+    [key: string]: Form33Constituency
   }
 
-  const form33: ProcessedForm33WithoutPTIData = Object.fromEntries(
-    Object.entries(combinedForm33Data).map(
-      ([constituency_no, constituency]) => {
-        const candidates = constituency.Candidates.map((candidate) => {
-          return {
-            symbol_url: candidate.symbol_url,
-            candidate_name: candidate['Name in Urdu']
-          }
-        })
-
-        return [
-          constituency_no,
-          {
-            constituency_no,
-            constituency_name: constituency['Constituency Name'],
-            candidates
-          }
-        ]
-      }
-    )
-  )
-
-  return form33
+  return combinedForm33Data
 }
 
 export default form33

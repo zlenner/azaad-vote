@@ -3,7 +3,7 @@ import { Popover } from 'react-tiny-popover'
 import { useNavigate } from 'react-router'
 import { useData } from '../../hooks/useData'
 import fuseSearch from './fuseSearch'
-import { Seat } from '../../hooks/useData/loadPTIData'
+import { Seat } from '../../hooks/useData/useLoadData'
 
 const SearchConstituency = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
@@ -70,7 +70,7 @@ const SearchConstituency = () => {
               >
                 <div className="font-bold">{result.item.seat}</div>
                 <div className="ml-auto">
-                  {result.item.candidate?.constituency_name}
+                  {result.item.pti_data.constituency_name}
                 </div>
               </div>
             ))}

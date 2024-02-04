@@ -1,23 +1,17 @@
 import clsx from 'clsx'
 
 interface Props {
-  assembly: 'national' | 'provincial'
-  onChange: (assembly: string) => void
+  type: 'national' | 'provincial'
+  onChange: (type: 'national' | 'provincial') => void
   isDisabled?: boolean
 }
 
-export default function AssemblyToggle({
-  assembly,
-  isDisabled,
-  onChange
-}: Props) {
+export default function AssemblyToggle({ type, isDisabled, onChange }: Props) {
   const defaultClass = clsx(
     isDisabled && 'opacity-50 !cursor-not-allowed',
     'transition px-2 py-1 rounded text-gray-600'
   )
   const nonSelectedClass = 'cursor-pointer'
-
-  return null
 
   const selectedClass = 'bg-emerald-100 text-emerald-700 font-bold'
   return (
@@ -25,7 +19,7 @@ export default function AssemblyToggle({
       <div
         className={clsx(
           defaultClass,
-          assembly === 'national' ? selectedClass : nonSelectedClass
+          type === 'national' ? selectedClass : nonSelectedClass
         )}
         onClick={() => onChange('national')}
       >
@@ -35,7 +29,7 @@ export default function AssemblyToggle({
         onClick={() => onChange('provincial')}
         className={clsx(
           defaultClass,
-          assembly === 'provincial' ? selectedClass : nonSelectedClass
+          type === 'provincial' ? selectedClass : nonSelectedClass
         )}
       >
         PROVINCIAL

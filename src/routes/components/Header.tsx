@@ -9,7 +9,8 @@ import { Seat } from '../../hooks/useData/useLoadData'
 
 const Header = ({
   setLocationFeatures,
-  setSelection
+  setSelection,
+  setCurrentLocation
 }: {
   setLocationFeatures: (
     location:
@@ -18,6 +19,9 @@ const Header = ({
           provincial: SeatFeature
         }
       | false
+  ) => void
+  setCurrentLocation: (
+    coords: { latitude: number; longitude: number } | undefined
   ) => void
   setSelection: (selection: { national: Seat; provincial: Seat }) => void
 }) => {
@@ -42,9 +46,15 @@ const Header = ({
 
     if (!foundNationalPolygon || !foundProvincialPolygon) {
       setLocationFeatures(false)
+      setCurrentLocation(undefined)
       navigate('/')
       return
     }
+
+    setCurrentLocation({
+      latitude: locationPoint.geometry.coordinates[1],
+      longitude: locationPoint.geometry.coordinates[0]
+    })
 
     setLocationFeatures({
       national: foundNationalPolygon,

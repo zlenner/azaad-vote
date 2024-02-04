@@ -12,8 +12,7 @@ import * as turf from '@turf/turf'
 
 const DetailConditionals = ({
   selected,
-  locationFeatures,
-  currentLocation
+  locationFeatures
 }: {
   selected?: Selected
   locationFeatures?:
@@ -23,7 +22,6 @@ const DetailConditionals = ({
       }
     | false
     | undefined
-  currentLocation?: { latitude: number; longitude: number }
 }) => {
   if (selected?.national || selected?.provincial) {
     const seatToView =
@@ -55,6 +53,13 @@ function Inner() {
 
   const [data] = useData()
 
+  const [currentLocation, setCurrentLocation] = useState<
+    | {
+        latitude: number
+        longitude: number
+      }
+    | undefined
+  >()
   const [locationFeatures, setLocationFeatures] = useState<
     | {
         national: SeatFeature
@@ -113,7 +118,6 @@ function Inner() {
         }
       } else {
         const PROVINCIAL_SEAT = parseSeatCode(code, 'provincial')
-        console.log(code, code.length, PROVINCIAL_SEAT, data.seats)
         if (!PROVINCIAL_SEAT) {
           return {
             primary: false
@@ -183,6 +187,7 @@ function Inner() {
       >
         <Header
           setLocationFeatures={setLocationFeatures}
+          setCurrentLocation={setCurrentLocation}
           setSelection={setSelection}
         />
         <div className="flex flex-1 w-full">
@@ -192,7 +197,7 @@ function Inner() {
           />
         </div>
       </div>
-      <Map selected={selected} />
+      <Map selected={selected} currentLocation={currentLocation} />
     </div>
   )
 }

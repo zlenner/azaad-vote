@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
+import { MapContainer, TileLayer, GeoJSON, Marker } from 'react-leaflet'
 import { useNavigate } from 'react-router-dom'
 import { stringToColor } from '../mapping/styles'
 import { useEffect, useState } from 'react'
@@ -6,8 +6,25 @@ import React from 'react'
 import Toggle from './components/Toggle'
 import { Selected, useData } from '../hooks/useData'
 import { SeatFeature } from '../hooks/useData/geojson'
+import { divIcon } from 'leaflet'
+import ReactDOMServer from 'react-dom/server'
+import { MdMyLocation } from 'react-icons/md'
 
-const Map = ({ selected }: { selected: Selected }) => {
+const locationIcon = divIcon({
+  html: ReactDOMServer.renderToString(
+    <div className="w-full h-full bg-blue-600 rounded-full border-white border-4 animate-pulse shadow-md shadow-blue-500"></div>
+  ),
+  className: 'location-icon',
+  iconSize: [25, 25] // size of the icon
+})
+
+const Map = ({
+  selected,
+  currentLocation
+}: {
+  selected: Selected
+  currentLocation?: { latitude: number; longitude: number }
+}) => {
   const navigate = useNavigate()
   const [data] = useData()
 
@@ -161,6 +178,15 @@ const Map = ({ selected }: { selected: Selected }) => {
           }}
           onEachFeature={onEachFeature}
         />
+        {currentLocation && (
+          <Marker
+            icon={locationIcon}
+            position={{
+              lat: currentLocation?.latitude,
+              lng: currentLocation?.longitude
+            }}
+          ></Marker>
+        )}
       </MapContainer>
     </div>
   )

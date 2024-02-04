@@ -186,13 +186,17 @@ const SampleBallot = ({
           </div>
         </div>
       </div>
-      {/* <button
+      <button
         className="flex mt-4 mb-3 ml-auto w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50 ml-3 text-red-500"
-        onClick={downloadBallotPaperFromElement}
+        onClick={() =>
+          download(
+            `https://files.azaadvote.com/${selectedSeat.seat}_Ballot_Paper.png`
+          )
+        }
       >
         <FaImage className="mr-3 text-2xl" />
         Download Image
-      </button> */}
+      </button>
     </Modal>
   )
 }

@@ -32,7 +32,6 @@ const DetailConditionals = ({
         : selected.national
 
     if (!seatToView) {
-      console.log(selected)
       throw new Error('UNKNOWN ERROR WITH CONDITIONALS')
     }
 
@@ -114,12 +113,20 @@ function Inner() {
         }
       } else {
         const PROVINCIAL_SEAT = parseSeatCode(code, 'provincial')
+        console.log(code, code.length, PROVINCIAL_SEAT, data.seats)
+        if (!PROVINCIAL_SEAT) {
+          return {
+            primary: false
+          }
+        }
 
         // Try to find national seat using NA-PA mapping
         const found = Object.entries(data.na_pa_mapping).find(([key, list]) =>
           list.includes(code)
         )
         if (found) {
+          console.log('FOUND NATIONAL SEAT USING NA-PA MAPPING')
+
           const [national_seat_code] = found
           return {
             national: parseSeatCode(national_seat_code, 'national'),
@@ -145,6 +152,7 @@ function Inner() {
           if (foundNationalFeature) {
             const national_code =
               foundNationalFeature.properties.CONSTITUENCY_CODE
+            console.log('FOUND NATIONAL SEAT USING PROVINCIAL CO-ORDINATES')
             return {
               national: parseSeatCode(national_code, 'national'),
               provincial: PROVINCIAL_SEAT,

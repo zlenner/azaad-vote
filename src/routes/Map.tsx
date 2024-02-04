@@ -80,7 +80,6 @@ const Map = ({ selected }: { selected: Selected }) => {
       ) {
         selectCurrentLayer()
       } else {
-        console.log('Switching type')
         setSelectedType((prevType) => {
           return prevType === 'national' ? 'provincial' : 'national'
         })

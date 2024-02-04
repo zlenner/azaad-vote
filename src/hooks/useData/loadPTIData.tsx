@@ -27,7 +27,7 @@ const loadPTIData = async () => {
       'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=924832023&single=true&output=csv'
     ).then((r) => r.text()),
     fetch(
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=924832023&single=true&output=csv'
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=1032451550&single=true&output=csv'
     ).then((r) => r.text())
   ])
 

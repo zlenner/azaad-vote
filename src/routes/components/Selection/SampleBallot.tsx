@@ -89,7 +89,7 @@ const SampleBallot = ({
           width: 620,
           padding: 0,
           borderRadius: 0,
-          maxHeight: '90vh',
+          maxHeight: '80vh',
           backgroundColor: 'transparent',
           border: 'none'
         }

@@ -115,7 +115,7 @@ const Map = ({
 
   return (
     <div className="flex flex-1 h-full map relative">
-      <div className="absolute top-3 right-3" style={{ zIndex: 99999 }}>
+      <div className="absolute top-3 right-3" style={{ zIndex: 1000 }}>
         <Toggle
           type={selectedType}
           onChange={() => {

@@ -66,6 +66,7 @@ const SearchConstituency = () => {
                 style={{}}
                 onClick={() => {
                   navigate('/' + result.item.seat)
+                  setIsPopoverOpen(false)
                 }}
               >
                 <div className="font-bold">{result.item.seat}</div>

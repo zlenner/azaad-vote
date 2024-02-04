@@ -28,9 +28,7 @@ const Header = ({
     latitude: number
     longitude: number
   }) => void = (coords) => {
-    const customPoint = [24.932555627051396, 67.05652078289751]
-    const locationPoint = turf.point([customPoint[1], customPoint[0]])
-    // const locationPoint = turf.point([coords.longitude, coords.latitude])
+    const locationPoint = turf.point([coords.longitude, coords.latitude])
 
     const foundNationalPolygon = data.geojson.national.features.find(
       (feature) => turf.booleanPointInPolygon(locationPoint, feature)

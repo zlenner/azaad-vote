@@ -12,7 +12,8 @@ import * as turf from '@turf/turf'
 
 const DetailConditionals = ({
   selected,
-  locationFeatures
+  locationFeatures,
+  currentLocation
 }: {
   selected?: Selected
   locationFeatures?:
@@ -22,6 +23,7 @@ const DetailConditionals = ({
       }
     | false
     | undefined
+  currentLocation?: { latitude: number; longitude: number }
 }) => {
   if (selected?.national || selected?.provincial) {
     const seatToView =
@@ -30,6 +32,7 @@ const DetailConditionals = ({
         : selected.national
 
     if (!seatToView) {
+      console.log(selected)
       throw new Error('UNKNOWN ERROR WITH CONDITIONALS')
     }
 

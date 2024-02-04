@@ -33,7 +33,6 @@ const SampleBallot = ({
   //   currentURL.pathname.split('/').filter((el) => el !== '')[2] === 'download'
 
   const downloadBallotPaperFromElement = async () => {
-    console.log('Downloading ballot paper', ballotPaperRef.current)
     if (!ballotPaperRef.current) return
 
     try {
@@ -149,14 +148,25 @@ const SampleBallot = ({
                       )}
                       style={{ borderWidth: '0.5px' }}
                     >
+                      {candidate.pti_backed && (
+                        <div
+                          className="absolute"
+                          style={{
+                            left: 8,
+                            top: 8
+                          }}
+                        >
+                          <Stamp />
+                        </div>
+                      )}
                       <div className="ml-auto font-urdu pb-2">
                         {candidate.candidate_urdu_name}
                       </div>
                       <img
+                        crossOrigin="anonymous"
                         className="w-6 h-6 md:w-12 md:h-12 mr-2"
                         src={candidate.symbol_url}
                       />
-                      {candidate.pti_backed && <Stamp />}
                     </div>
                   )
                 })}
@@ -188,10 +198,11 @@ const SampleBallot = ({
       </div>
       <button
         className="flex mt-4 mb-3 ml-auto w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50 ml-3 text-red-500"
-        onClick={() =>
-          download(
-            `https://files.azaadvote.com/${selectedSeat.seat}_Ballot_Paper.png`
-          )
+        onClick={
+          () => downloadBallotPaperFromElement()
+          // download(
+          //   `https://files.azaadvote.com/${selectedSeat.seat}_Ballot_Paper.png`
+          // )
         }
       >
         <FaImage className="mr-3 text-2xl" />

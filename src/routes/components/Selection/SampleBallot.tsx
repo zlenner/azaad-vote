@@ -24,13 +24,15 @@ const SampleBallot = ({
   const ballotPaperRef = useRef<HTMLDivElement>(null)
   const [{ issues }] = useData()
 
-  const reordered: Candidate[] = []
-
   const currentURL = useLocation()
   // const navigate = useNavigate()
 
   // const toDownload =
   //   currentURL.pathname.split('/').filter((el) => el !== '')[2] === 'download'
+
+  if (!selectedSeat.candidates) {
+    return null
+  }
 
   const downloadBallotPaperFromElement = async () => {
     if (!ballotPaperRef.current) return
@@ -49,14 +51,26 @@ const SampleBallot = ({
     }
   }
 
-  const noRows = Math.ceil(selectedSeat.candidates.length / 3)
+  const [reordering, highest_index] = (() => {
+    const reordering: {
+      [key: number]: number
+    } = {}
 
-  for (let i = 0; i < noRows; i += 1) {
-    // Section 1
-    for (let j = i; j < selectedSeat.candidates.length; j += noRows) {
-      reordered.push(selectedSeat.candidates[j])
+    const NO_COLS = 3
+    const noRows = Math.ceil(selectedSeat.candidates.length / NO_COLS)
+
+    let highest_index = 0
+
+    for (let i = 0; i < selectedSeat.candidates.length; i++) {
+      const colIndex = Math.floor(i / noRows)
+      const moveTo = (i - colIndex * noRows) * NO_COLS + colIndex
+      reordering[moveTo] = i
+
+      highest_index = Math.max(highest_index, moveTo)
     }
-  }
+
+    return [reordering, highest_index]
+  })()
 
   const { value: QRCodeURL } = useAsyncRefresh(() => {
     return new Promise((resolve, reject) => {
@@ -138,7 +152,14 @@ const SampleBallot = ({
                 className="grid grid-cols-3 auto-rows-max w-full h-full gap-1 "
                 dir="rtl"
               >
-                {reordered.map((candidate) => {
+                {new Array(highest_index + 1).fill(true).map((_, i) => {
+                  const index = reordering[i]
+                  if (index === undefined) {
+                    return <div key={i} className="w-full h-full"></div>
+                  }
+                  const candidate = selectedSeat.candidates?.[
+                    index
+                  ] as Candidate
                   return (
                     <div
                       key={candidate.symbol_url}

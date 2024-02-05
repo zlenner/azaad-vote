@@ -32,7 +32,7 @@ export interface Seat {
       symbolfile: string
     }
   }
-  candidates: Candidate[]
+  candidates?: Candidate[]
 }
 
 export const useLoadData = () => {

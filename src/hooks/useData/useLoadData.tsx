@@ -1,7 +1,7 @@
 import useAsyncRefresh from '../useAsyncRefresh'
 import loadForm33, { Province } from './loadForm33'
 import loadPTIData from './loadPTIData'
-import { knownIssues, problematicSeats } from './issues'
+import { knownIssues, hardCodedProblematicSeats } from './issues'
 import { Data } from '.'
 import na_pa_mapping from './na_pa_mapping'
 import geojson from './geojson'
@@ -53,6 +53,8 @@ export const useLoadData = () => {
     [key: string]: Seat
   } = {}
 
+  const seatsWithNoMatchingPTISymbol: string[] = []
+
   for (const row of pti_data) {
     const form33Constituency = form33[row.Constituency]
     const pti_candidate_from_form_33 =
@@ -62,6 +64,10 @@ export const useLoadData = () => {
           candidate['symbol_url'] ===
           'https://symbols.azaadvote.com/' + row.symbolfile + '.png'
       )
+
+    if (form33Constituency && !pti_candidate_from_form_33) {
+      seatsWithNoMatchingPTISymbol.push(row.Constituency)
+    }
 
     seats[row.Constituency] = {
       type: row.type,
@@ -116,11 +122,21 @@ export const useLoadData = () => {
     }
   }
 
+  console.log(
+    seatsWithNoMatchingPTISymbol.filter(
+      (seat_code) =>
+        seats[seat_code].pti_data.candidate_name.toUpperCase() !==
+        'TO BE UPLOADED'
+    )
+  )
+
   const data: Data = {
     seats,
     geojson,
     issues: {
-      problematicSeats,
+      problematicSeats: hardCodedProblematicSeats.concat(
+        ...seatsWithNoMatchingPTISymbol
+      ),
       knownIssues
     },
     na_pa_mapping

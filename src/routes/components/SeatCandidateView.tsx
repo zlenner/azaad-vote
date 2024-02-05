@@ -24,7 +24,7 @@ const SeatCandidateView = ({ seat }: { seat: Seat }) => {
                   style={{ height: '100px', width: '100px' }}
                   src={seat.pti_data.candidate_symbol.url}
                 ></img>
-              ) : seat.form33_data.candidate_symbol_url ? (
+              ) : seat.form33_data?.candidate_symbol_url ? (
                 <div>
                   <img
                     style={{ height: '100px', width: '100px' }}

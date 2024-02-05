@@ -9,7 +9,7 @@ import { IoMdWarning } from 'react-icons/io'
 import { FaImage } from 'react-icons/fa6'
 import download from 'downloadjs'
 import { Candidate, Seat } from '../../../hooks/useData/useLoadData'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import html2canvas from 'html2canvas'
 
 const SampleBallot = ({
@@ -147,8 +147,7 @@ const SampleBallot = ({
               <div className="tracking-tighter">Sample Ballot Paper</div>
               <div className="ml-auto text-right">سیمپل بیلٹ پیپر</div>
             </div>
-            {!issues.problematicSeats.includes(selectedSeat.seat) &&
-            selectedSeat.form33_data?.candidate_symbol_url ? (
+            {!issues.problematicSeats.includes(selectedSeat.seat) ? (
               <div
                 className="grid grid-cols-3 auto-rows-max w-full h-full gap-1 "
                 dir="rtl"
@@ -200,8 +199,9 @@ const SampleBallot = ({
                   not available for this constituency.
                 </div>
                 <div>
-                  Sample ballot paper not available for 25 constituencies,
-                  waiting for data from PTI team.
+                  Sample ballot paper not available for{' '}
+                  {issues.problematicSeats.length} constituencies, waiting for
+                  data from PTI team.
                 </div>
               </div>
             )}

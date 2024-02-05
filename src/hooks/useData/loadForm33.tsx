@@ -8,6 +8,7 @@ interface Form33Candidate {
   Symbol: string
   Party: string
   symbol_url: string
+  SymbolNo: number
 }
 
 interface Form33Constituency {

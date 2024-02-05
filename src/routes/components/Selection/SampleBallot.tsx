@@ -147,7 +147,8 @@ const SampleBallot = ({
               <div className="tracking-tighter">Sample Ballot Paper</div>
               <div className="ml-auto text-right">سیمپل بیلٹ پیپر</div>
             </div>
-            {!issues.problematicSeats.includes(selectedSeat.seat) ? (
+            {!issues.problematicSeats.includes(selectedSeat.seat) &&
+            selectedSeat.form33_data?.candidate_symbol_url ? (
               <div
                 className="grid grid-cols-3 auto-rows-max w-full h-full gap-1 "
                 dir="rtl"

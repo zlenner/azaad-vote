@@ -75,7 +75,8 @@ const ConstituencyView = ({
             <button
               className={clsx(
                 'flex w-fit items-center bg-white shadow rounded-md px-3 py-2 select-none cursor-pointer font-bold font-mono tracking-tighter border border-transparent active:shadow-none active:border-gray-100 transition cursor-pointer z-50',
-                issues.problematicSeats.includes(selectedSeat.seat)
+                issues.problematicSeats.includes(selectedSeat.seat) ||
+                  !selectedSeat.form33_data.candidate_symbol_url
                   ? 'text-red-600'
                   : 'text-purple-500'
               )}

@@ -102,42 +102,43 @@ const Poster = () => {
           Download
         </button>
       </div>
-      <div
-        className={clsx(`w-full grid auto flex-1`, 'grid-cols-' + numRows)}
-        ref={ref}
-      >
-        {filtered.map((seat) => (
-          <div
-            key={seat.seat}
-            className={clsx(
-              'flex flex-col items-center px-2 py-2 border-2 border-gray-300 overflow-hidden',
-              seat.type === 'national' ? 'bg-[#dce6e0]' : ''
-            )}
-          >
-            <div className="text-center text-red-700 font-bold mb-1">
-              {seat.seat} ({seat.pti_data.constituency_name})
-            </div>
-            <div className="text-center text-green-800 font-bold mb-1">
-              {seat.pti_data.candidate_name}
-            </div>
-            <div className="flex py-2 items-center">
-              <div className="text-center font-urdu h-fit">
-                {seat.pti_data.candidate_symbol.text}
+      <div className="flex flex-col " ref={ref}>
+        <div
+          className={clsx(`w-full grid auto flex-1`, 'grid-cols-' + numRows)}
+        >
+          {filtered.map((seat) => (
+            <div
+              key={seat.seat}
+              className={clsx(
+                'flex flex-col items-center px-2 py-2 border-2 border-gray-300 overflow-hidden',
+                seat.type === 'national' ? 'bg-[#dce6e0]' : ''
+              )}
+            >
+              <div className="text-center text-red-700 font-bold mb-1">
+                {seat.seat} ({seat.pti_data.constituency_name})
               </div>
-              <img
-                crossOrigin="anonymous"
-                className="text-center ml-1"
-                width="90px"
-                height="90px"
-                src={seat.pti_data.candidate_symbol.url}
-                alt={seat.pti_data.candidate_symbol.text}
-              />
+              <div className="text-center text-green-800 font-bold mb-1">
+                {seat.pti_data.candidate_name}
+              </div>
+              <div className="flex py-2 items-center">
+                <div className="text-center font-urdu h-fit">
+                  {seat.pti_data.candidate_symbol.text}
+                </div>
+                <img
+                  crossOrigin="anonymous"
+                  className="text-center ml-1"
+                  width="90px"
+                  height="90px"
+                  src={seat.pti_data.candidate_symbol.url}
+                  alt={seat.pti_data.candidate_symbol.text}
+                />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className="font-mono px-auto w-full flex justify-center py-2">
-        azaadvote.com/poster
+          ))}
+        </div>
+        <div className="font-mono px-auto w-full flex justify-center pb-4">
+          azaadvote.com/poster
+        </div>
       </div>
     </div>
   )

@@ -48,7 +48,7 @@ const DetailConditionals = ({
   }
 }
 
-function Inner() {
+function Home() {
   const { code = null } = useParams()
 
   const [data] = useData()
@@ -202,22 +202,4 @@ function Inner() {
   )
 }
 
-function App() {
-  const data = useLoadData()
-
-  if (!data) {
-    return (
-      <div className="flex w-full h-full items-center justify-center">
-        Loading...
-      </div>
-    )
-  } else {
-    return (
-      <DataProvider initialValue={data}>
-        <Inner />
-      </DataProvider>
-    )
-  }
-}
-
-export default App
+export default Home

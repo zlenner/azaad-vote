@@ -39,16 +39,16 @@ const form33 = async function () {
   const [balochistan, kpk, punjab, sindh] = await Promise.all([
     fetch('https://elections-data.vercel.app/NA/balochistan.json')
       .then((r) => r.json())
-      .then(AddProvinceName('Balochistan', 'national')),
+      .then(AddProvinceName('balochistan', 'national')),
     fetch('https://elections-data.vercel.app/NA/kpk.json')
       .then((r) => r.json())
-      .then(AddProvinceName('KPK', 'national')),
+      .then(AddProvinceName('kpk', 'national')),
     fetch('https://elections-data.vercel.app/NA/punjab.json')
       .then((r) => r.json())
-      .then(AddProvinceName('Punjab', 'national')),
+      .then(AddProvinceName('punjab', 'national')),
     fetch('https://elections-data.vercel.app/NA/sindh.json')
       .then((r) => r.json())
-      .then(AddProvinceName('Sindh', 'national'))
+      .then(AddProvinceName('sindh', 'national'))
   ])
 
   const combinedForm33Data = {

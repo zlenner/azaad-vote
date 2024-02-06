@@ -43,6 +43,10 @@ function Routing() {
           element={<Navigate to="6" relative="route" />}
         />
         <Route
+          path="/poster/:province"
+          element={<Navigate to="6" relative="route" />}
+        />
+        <Route
           path="/poster/:province/:rows"
           element={
             <App>

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import PTIElectionSymbol from '../../assets/nobg.png'
 import FindLocation from './FindLocation'
 import SearchConstituency from './SearchConstituency'
@@ -69,12 +69,20 @@ const Header = ({
   }
 
   return (
-    <div className="flex flex-col px-4 py-4 bg-green-50 items-center justify-center relative">
-      <img className="w-20 h-20 rounded-md mb-5" src={PTIElectionSymbol} />
-      <div className="font-mono font-bold text-emerald-600 mb-6">
+    <div className="flex flex-col bg-green-50 items-center justify-center relative">
+      <Link
+        to="/poster/kpk"
+        className="w-full cursor-pointer bg-red-500 hover:bg-red-600 h-fit mb-4"
+      >
+        <div className="flex text-white px-4 w-full py-2 font-mono font-bold justify-center">
+          CLICK FOR SYMBOL POSTERS
+        </div>
+      </Link>
+      <img className="w-20 h-20 rounded-md mb-5 mx-4" src={PTIElectionSymbol} />
+      <div className="font-mono font-bold text-emerald-600 mb-6 px-4">
         One-step tool to find the PTI Candidate in your constituency.
       </div>
-      <div className="flex w-full">
+      <div className="flex w-full px-4 mb-4">
         <SearchConstituency />
         <FindLocation goToMyConstituency={goToMyConstituency} />
       </div>

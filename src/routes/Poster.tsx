@@ -11,7 +11,7 @@ const Poster = () => {
   const ref = useRef<HTMLDivElement>(null)
 
   const provinces = ['sindh', 'punjab', 'kpk', 'balochistan']
-  const rows_list = [5, 6, 7, 8, 10, 12]
+  const rows_list = [3, 5, 6, 8, 10, 12]
 
   if (!provinces.includes(province)) {
     return <div>Invalid province</div>
@@ -26,7 +26,7 @@ const Poster = () => {
   }, [rows])
 
   if (numRows === null) {
-    return <div>Invalid no. of rows</div>
+    return <div>Invalid no. of cols</div>
   }
 
   const downloadPoster = async () => {
@@ -79,7 +79,9 @@ const Poster = () => {
               </Link>
             ))}
         </div>
+
         <div className="flex items-center ml-auto mr-4">
+          <div className="mr-3">COLUMNS</div>
           <div className="bg-black text-white px-2 py-1 mx-1">{numRows}</div>
           {rows_list
             .filter((n) => n !== numRows)
@@ -101,17 +103,14 @@ const Poster = () => {
         </button>
       </div>
       <div
-        className={clsx(
-          `w-full grid overflow-auto flex-1`,
-          'grid-cols-' + numRows
-        )}
+        className={clsx(`w-full grid auto flex-1`, 'grid-cols-' + numRows)}
         ref={ref}
       >
         {filtered.map((seat) => (
           <div
             key={seat.seat}
             className={clsx(
-              'flex flex-col items-center px-2 py-2 border-2 border-gray-300',
+              'flex flex-col items-center px-2 py-2 border-2 border-gray-300 overflow-hidden',
               seat.type === 'national' ? 'bg-[#dce6e0]' : ''
             )}
           >

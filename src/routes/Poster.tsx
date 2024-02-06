@@ -118,7 +118,11 @@ const Poster = () => {
                 {seat.seat} ({seat.pti_data.constituency_name})
               </div>
               <div className="text-center text-green-800 font-bold mb-1">
-                {seat.pti_data.candidate_name}
+                {seat.pti_data.candidate_name
+                  .toUpperCase()
+                  .includes('TO BE UPLOADED')
+                  ? 'NO CANDIDATE'
+                  : seat.pti_data.candidate_name}
               </div>
               <div className="flex py-2 items-center">
                 <div className="text-center font-urdu h-fit">

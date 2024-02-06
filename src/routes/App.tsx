@@ -39,8 +39,8 @@ function Routing() {
           }
         />
         <Route
-          path="/poster/:province"
-          element={<Navigate to="6" relative="route" />}
+          path="/poster"
+          element={<Navigate to="kpk" relative="route" />}
         />
         <Route
           path="/poster/:province"

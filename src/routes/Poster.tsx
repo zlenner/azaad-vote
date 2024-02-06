@@ -136,6 +136,9 @@ const Poster = () => {
           </div>
         ))}
       </div>
+      <div className="font-mono px-auto w-full flex justify-center py-2">
+        azaadvote.com/poster
+      </div>
     </div>
   )
 }

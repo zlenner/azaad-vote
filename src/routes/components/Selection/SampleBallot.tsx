@@ -75,7 +75,7 @@ const SampleBallot = ({
   const { value: QRCodeURL } = useAsyncRefresh(() => {
     return new Promise((resolve, reject) => {
       QRCode.toDataURL(
-        `https://azaadvote.com/${selectedSeat.seat}/ballot-paper`,
+        `https://zlenner.github.io/azaad-vote/${selectedSeat.seat}/ballot-paper`,
         function (err, url) {
           resolve(url)
         }
@@ -114,7 +114,7 @@ const SampleBallot = ({
             <IoMdWarning className="mr-4 text-4xl" />
             <span className="text-sm">
               Known issues in ballot paper of this constituency because of bad
-              data quality from ECP.{' '}
+              data quality from ECP. This website is blocked so use a VPN.
               <a
                 href={'https://fix.azaadvote.com/' + selectedSeat.seat}
                 className="text-blue-500 hover:underline"
@@ -207,7 +207,8 @@ const SampleBallot = ({
             )}
             <div className="flex pt-3 mt-1 items-center border-dashed">
               <div className="font-mono tracking-tight">
-                https://azaadvote.com/{selectedSeat.seat}/ballot-paper
+                https://zlenner.github.io/azaad-vote/{selectedSeat.seat}
+                /ballot-paper
               </div>
               <img
                 className="ml-auto"

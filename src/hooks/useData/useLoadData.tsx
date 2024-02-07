@@ -57,13 +57,22 @@ export const useLoadData = () => {
 
   for (const row of pti_data) {
     const form33Constituency = form33[row.Constituency]
+    if (form33Constituency?.Candidates) {
+      form33Constituency.Candidates = form33Constituency.Candidates.map(
+        (candidate) => ({
+          ...candidate,
+          symbol_url: candidate.symbol_url.replace('azaadvote.com', 'capry.dev')
+        })
+      )
+    }
     const pti_candidate_from_form_33 =
       form33Constituency &&
-      form33Constituency.Candidates.find(
-        (candidate) =>
+      form33Constituency.Candidates.find((candidate) => {
+        return (
           candidate['symbol_url'] ===
-          'https://symbols.azaadvote.com/' + row.symbolfile + '.png'
-      )
+          'https://symbols.capry.dev/' + row.symbolfile + '.png'
+        )
+      })
 
     if (form33Constituency && !pti_candidate_from_form_33) {
       seatsWithNoMatchingPTISymbol.push(row.Constituency)
@@ -89,20 +98,20 @@ export const useLoadData = () => {
         candidate_name: row.Candidate,
         candidate_symbol: {
           text: row['Symbol'],
-          url: 'https://symbols.azaadvote.com/' + row['symbolfile'] + '.png',
+          url: 'https://symbols.capry.dev/' + row['symbolfile'] + '.png',
           symbolfile: row['symbolfile']
         }
       },
       candidates: form33Constituency?.Candidates.map((candidate) => {
         let pti_backed =
           candidate.symbol_url ===
-          'https://symbols.azaadvote.com/' + row.symbolfile + '.png'
+          'https://symbols.capry.dev/' + row.symbolfile + '.png'
         // SPECIAL CASES
 
         // Gohar Ali Khan NA-10 Buner
         if (
           row.Constituency === 'NA-10' &&
-          candidate.symbol_url === 'https://symbols.azaadvote.com/teapot.png'
+          candidate.symbol_url === 'https://symbols.capry.dev/teapot.png'
         ) {
           pti_backed = true
         }

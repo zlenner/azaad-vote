@@ -6,8 +6,8 @@ This project has been created to facilitate voters in Pakistan to find their loc
 
 ## Website
 
-[Azaad Vote](https://www.azaadvote.com)
+[Azaad Vote](https://www.azaadvote.com "This is the link for the project website")
 
 Note: The following link has been created to bypass the ban on the website in Pakistan:
-[Azaad Vote (hosted on Github)](https://zlenner.com/azaad-vote/)
+[Azaad Vote (hosted on Github)](https://zlenner.com/azaad-vote/ "This is the link for the project website hosted on Github")
 

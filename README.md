@@ -1,6 +1,6 @@
-## Azaad Vote
+# Azaad Vote
 
-# About
+## About
 
-This project was created to facilitate voters in Pakistan to find their local voting information for Pakistan Tehreek-i-Insaaf candidates. This is especially important because there is a nationwide crackdown and disinformation campaign against the party to put it on unequal footing for the elections. The purpose of the project is thus to help counter the undemocratic elements within the country.
+This project has been created to facilitate voters in Pakistan to find their local voting information for Pakistan Tehreek-i-Insaaf candidates. This is especially important because there is a nationwide crackdown and disinformation campaign against the party to put it on unequal footing for the elections. The crackdown included banning Pakistan Tehreek-i-Insaaf's party symbol, which has forced candidates to run with other symbols causing mass confusion. The purpose of the project is thus to help make the elections more democratic by helping voters to vote for who they want to.
 

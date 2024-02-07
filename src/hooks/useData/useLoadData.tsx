@@ -62,7 +62,7 @@ export const useLoadData = () => {
       form33Constituency.Candidates.find(
         (candidate) =>
           candidate['symbol_url'] ===
-          'https://symbols.azaadvotes.com/' + row.symbolfile + '.png'
+          'https://symbols.azaadvote.com/' + row.symbolfile + '.png'
       )
 
     if (form33Constituency && !pti_candidate_from_form_33) {
@@ -89,20 +89,20 @@ export const useLoadData = () => {
         candidate_name: row.Candidate,
         candidate_symbol: {
           text: row['Symbol'],
-          url: 'https://symbols.azaadvotes.com/' + row['symbolfile'] + '.png',
+          url: 'https://symbols.azaadvote.com/' + row['symbolfile'] + '.png',
           symbolfile: row['symbolfile']
         }
       },
       candidates: form33Constituency?.Candidates.map((candidate) => {
         let pti_backed =
           candidate.symbol_url ===
-          'https://symbols.azaadvotes.com/' + row.symbolfile + '.png'
+          'https://symbols.azaadvote.com/' + row.symbolfile + '.png'
         // SPECIAL CASES
 
         // Gohar Ali Khan NA-10 Buner
         if (
           row.Constituency === 'NA-10' &&
-          candidate.symbol_url === 'https://symbols.azaadvotes.com/teapot.png'
+          candidate.symbol_url === 'https://symbols.azaadvote.com/teapot.png'
         ) {
           pti_backed = true
         }

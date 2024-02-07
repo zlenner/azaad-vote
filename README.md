@@ -8,6 +8,6 @@ This project has been created to facilitate voters in Pakistan to find their loc
 
 [Azaad Vote](https://www.azaadvote.com)
 
-Note: Due to the original website being banned in Pakistan, the following link has been created to bypass the ban:
+Note: The following link has been created to bypass the ban on the website in Pakistan:
 [Azaad Vote (hosted on Github)](https://zlenner.com/azaad-vote/)
 

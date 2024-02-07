@@ -141,7 +141,7 @@ const Poster = () => {
           ))}
         </div>
         <div className="font-mono px-auto w-full flex justify-center pb-4 mt-2">
-          azaadvote.com/poster
+          zlenner.com/azaad-vote/poster
         </div>
       </div>
     </div>

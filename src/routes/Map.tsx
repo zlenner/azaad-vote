@@ -8,7 +8,6 @@ import { Selected, useData } from '../hooks/useData'
 import { SeatFeature } from '../hooks/useData/geojson'
 import { divIcon } from 'leaflet'
 import ReactDOMServer from 'react-dom/server'
-import { MdMyLocation } from 'react-icons/md'
 
 const locationIcon = divIcon({
   html: ReactDOMServer.renderToString(
@@ -62,6 +61,7 @@ const Map = ({
     layer.on({
       mouseover: (event: any) => {
         if (isFeatureSelected(feature)) return
+        if (!data.seats[feature.properties.CONSTITUENCY_CODE]) return
 
         const layer = event.target
         layer.setStyle({
@@ -70,6 +70,7 @@ const Map = ({
       },
       mouseout: (event: any) => {
         if (isFeatureSelected(feature)) return
+        if (!data.seats[feature.properties.CONSTITUENCY_CODE]) return
 
         const layer = event.target
         layer.setStyle({
@@ -77,6 +78,8 @@ const Map = ({
         })
       },
       click: (event: any) => {
+        if (!data.seats[feature.properties.CONSTITUENCY_CODE]) return
+
         navigate('/' + feature.properties.CONSTITUENCY_CODE)
       }
     })
@@ -114,7 +117,7 @@ const Map = ({
   }, [selectedType])
 
   return (
-    <div className="flex flex-1 h-full map relative">
+    <div className="flex map w-1/2 h-full relative">
       <div className="absolute top-3 right-3" style={{ zIndex: 1000 }}>
         <Toggle
           type={selectedType}
@@ -166,7 +169,14 @@ const Map = ({
               fillOpacity: 0.4
             }
 
-            if (isFeatureSelected(seatFeature)) {
+            if (!data.seats[seatFeature.properties.CONSTITUENCY_CODE]) {
+              return {
+                ...defaultStyle,
+                fillOpacity: 0.15,
+                opacity: 0.1,
+                fillColor: '#d1d5db'
+              }
+            } else if (isFeatureSelected(seatFeature)) {
               return {
                 ...defaultStyle,
                 fillColor: 'transparent',

@@ -71,15 +71,18 @@ const Header = ({
   return (
     <div className="flex flex-col bg-green-50 items-center justify-center relative">
       <Link
-        to="/poster/kpk"
+        to="/poster"
         className="w-full cursor-pointer bg-red-500 hover:bg-red-600 h-fit mb-4"
       >
         <div className="flex text-white px-4 w-full py-2 font-mono font-bold justify-center">
           CLICK FOR SYMBOL POSTERS
         </div>
       </Link>
+      <div className="mb-4 text-red-600 font-mono font-bold uppercase">
+        NOW RELEASED FOR Bye-Elections 2024!
+      </div>
       <img className="w-20 h-20 rounded-md mb-5 mx-4" src={PTIElectionSymbol} />
-      <div className="font-mono font-bold text-emerald-600 mb-6 px-4">
+      <div className="text-center font-mono font-bold text-emerald-600 mb-6 px-4">
         One-step tool to find the PTI Candidate in your constituency.
       </div>
       <div className="flex w-full px-4 mb-4">

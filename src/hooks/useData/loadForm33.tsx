@@ -36,6 +36,8 @@ function AddProvinceName(province: string, type: 'national' | 'provincial') {
 }
 
 const form33 = async function () {
+  return {}
+
   const [balochistan, kpk, punjab, sindh] = await Promise.all([
     fetch('https://elections-data.vercel.app/NA/balochistan.json')
       .then((r) => r.json())

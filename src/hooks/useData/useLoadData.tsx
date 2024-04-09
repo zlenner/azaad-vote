@@ -56,7 +56,7 @@ export const useLoadData = () => {
   const seatsWithNoMatchingPTISymbol: string[] = []
 
   for (const row of pti_data) {
-    const form33Constituency = form33[row.Constituency]
+    const form33Constituency = form33[row['Constituency No']]
     if (form33Constituency?.Candidates) {
       form33Constituency.Candidates = form33Constituency.Candidates.map(
         (candidate) => ({
@@ -75,13 +75,17 @@ export const useLoadData = () => {
       })
 
     if (form33Constituency && !pti_candidate_from_form_33) {
-      seatsWithNoMatchingPTISymbol.push(row.Constituency)
+      seatsWithNoMatchingPTISymbol.push(row['Constituency No'])
     }
 
-    seats[row.Constituency] = {
-      type: row.type,
-      province: row.Province || form33Constituency.province,
-      seat: row.Constituency,
+    seats[row['Constituency No']] = {
+      type:
+        row['Constituency No'].slice(0, 2) === 'NA' ? 'national' : 'provincial',
+      province:
+        row.Location === 'NA'
+          ? form33Constituency?.province
+          : (row.Location.toLowerCase() as Province),
+      seat: row['Constituency No'],
       form33_data: !form33Constituency
         ? undefined
         : {
@@ -94,8 +98,8 @@ export const useLoadData = () => {
           },
       pti_data: {
         constituency_name: row.District,
-        whatsapp_link: row['WhatsApp Link'],
-        candidate_name: row.Candidate,
+        whatsapp_link: row['WhatsApp Channel Link'],
+        candidate_name: row['Candidate Name'],
         candidate_symbol: {
           text: row['Symbol'],
           url: 'https://symbols.capry.dev/' + row['symbolfile'] + '.png',
@@ -107,14 +111,6 @@ export const useLoadData = () => {
           candidate.symbol_url ===
           'https://symbols.capry.dev/' + row.symbolfile + '.png'
         // SPECIAL CASES
-
-        // Gohar Ali Khan NA-10 Buner
-        if (
-          row.Constituency === 'NA-10' &&
-          candidate.symbol_url === 'https://symbols.capry.dev/teapot.png'
-        ) {
-          pti_backed = true
-        }
 
         return {
           serial_no: candidate['SerialNo'],

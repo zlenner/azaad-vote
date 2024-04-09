@@ -36,10 +36,13 @@ const SearchConstituency = () => {
         ...fuseSearch(data.seats)
           .search(searchValue)
           .filter((result) => result.item.seat !== exact?.seat)
-          .slice(0, 10)
       )
 
       return results
+    } else {
+      return Object.values(data.seats).map((seat) => ({
+        item: seat
+      }))
     }
   }, [searchValue])
 
@@ -57,7 +60,10 @@ const SearchConstituency = () => {
         maxWidth: 'calc(850px - 16px - 16px)'
       }}
       content={
-        <div className="flex rounded bg-white mt-3 !shadow !shadow-gray-200">
+        <div
+          className="flex rounded bg-white mt-3 !shadow !shadow-gray-200"
+          style={{ maxHeight: 400, overflowY: 'auto' }}
+        >
           <div className="flex flex-col w-full">
             {searchResults?.map((result) => (
               <div

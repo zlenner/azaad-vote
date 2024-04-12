@@ -6,16 +6,11 @@ import html2canvas from 'html2canvas'
 import download from 'downloadjs'
 
 const Poster = () => {
-  const { province = '', rows = '7' } = useParams()
+  const { rows = '6' } = useParams()
   const [data] = useData()
   const ref = useRef<HTMLDivElement>(null)
 
-  const provinces = ['sindh', 'punjab', 'kpk', 'balochistan']
-  const rows_list = [3, 5, 6, 8, 10, 12]
-
-  if (!provinces.includes(province)) {
-    return <div>Invalid province</div>
-  }
+  const rows_list = [3, 4, 5, 6, 8]
 
   const numRows = useMemo(() => {
     try {
@@ -37,7 +32,10 @@ const Poster = () => {
         useCORS: true,
         allowTaint: true
       })
-      download(canvas.toDataURL('image/png'), province + '_poster.png')
+      download(
+        canvas.toDataURL('image/png'),
+        'bye_elections_april_2024_poster.png'
+      )
     } catch (e) {
       console.error(e)
     }
@@ -45,9 +43,9 @@ const Poster = () => {
 
   const filtered = useMemo(() => {
     return Object.values(data.seats).filter(
-      (seat) => seat.province === province
+      (seat) => seat.pti_data.candidate_symbol.symbolfile
     )
-  }, [province])
+  }, [])
 
   const x = [
     'grid-cols-3',
@@ -65,21 +63,9 @@ const Poster = () => {
   return (
     <div className="flex flex-col w-full h-full">
       <div className="flex uppercase py-2 font-bold font-mono px-4 items-center">
-        <div className="flex items-center">
-          <div className="bg-black text-white px-2 py-1 mx-1">{province}</div>
-          {provinces
-            .filter((p) => p !== province)
-            .map((p) => (
-              <Link
-                key={p}
-                to={`/poster/${p}/${rows}`}
-                className="hover:bg-gray-100 active:bg-gray-200 px-2 py-1 mx-1"
-              >
-                {p}
-              </Link>
-            ))}
-        </div>
-
+        <Link className="lowercase" to="/">
+          azaadvote
+        </Link>
         <div className="flex items-center ml-auto mr-4">
           <div className="mr-3">COLUMNS</div>
           <div className="bg-black text-white px-2 py-1 mx-1">{numRows}</div>
@@ -88,7 +74,7 @@ const Poster = () => {
             .map((n) => (
               <Link
                 key={n}
-                to={`/poster/${province}/${n}`}
+                to={`/poster/${n}`}
                 className="hover:bg-gray-100 active:bg-gray-200 px-2 py-1 mx-1"
               >
                 {n}
@@ -141,7 +127,7 @@ const Poster = () => {
           ))}
         </div>
         <div className="font-mono px-auto w-full flex justify-center pb-4 mt-2">
-          zlenner.com/azaad-vote/poster
+          azaadvote.com/poster
         </div>
       </div>
     </div>

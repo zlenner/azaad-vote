@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Header from './components/Header'
 import Map from './Map'
 import BackgroundImage from './components/BackgroundImage'
@@ -190,7 +190,7 @@ function Home() {
           setCurrentLocation={setCurrentLocation}
           setSelection={setSelection}
         />
-        <div className="flex flex-1 w-full">
+        <div className="flex flex-1 h-0 overflow-auto w-full">
           <DetailConditionals
             selected={selected}
             locationFeatures={locationFeatures}

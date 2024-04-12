@@ -36,10 +36,13 @@ const SearchConstituency = () => {
         ...fuseSearch(data.seats)
           .search(searchValue)
           .filter((result) => result.item.seat !== exact?.seat)
-          .slice(0, 10)
       )
 
       return results
+    } else {
+      return Object.values(data.seats).map((seat) => ({
+        item: seat
+      }))
     }
   }, [searchValue])
 
@@ -57,7 +60,10 @@ const SearchConstituency = () => {
         maxWidth: 'calc(850px - 16px - 16px)'
       }}
       content={
-        <div className="flex rounded bg-white mt-3 !shadow !shadow-gray-200">
+        <div
+          className="flex rounded bg-white mt-3 !shadow !shadow-gray-200"
+          style={{ maxHeight: 400, overflowY: 'auto' }}
+        >
           <div className="flex flex-col w-full">
             {searchResults?.map((result) => (
               <div
@@ -79,13 +85,15 @@ const SearchConstituency = () => {
         </div>
       }
     >
-      <input
-        onInput={(e) => setSearchValue(e.currentTarget.value)}
-        onFocus={() => setIsPopoverOpen(true)}
-        placeholder="Search Constituency"
-        value={searchValue}
-        className="flex flex-1 bg-white !ring-0	!shadow !shadow-gray-200 rounded-md px-3 py-1 font-bold text-red-600 font-mono tracking-tighter !border !border-transparent active:shadow-none active:border-gray-100 transition mr-3"
-      ></input>
+      <div className="flex flex-1 pr-3 w-0">
+        <input
+          onInput={(e) => setSearchValue(e.currentTarget.value)}
+          onFocus={() => setIsPopoverOpen(true)}
+          placeholder="Search Constituency"
+          value={searchValue}
+          className="flex w-full bg-white !ring-0	!shadow !shadow-gray-200 rounded-md px-3 py-1 font-bold text-red-600 font-mono tracking-tighter !border !border-transparent active:shadow-none active:border-gray-100 transition"
+        ></input>
+      </div>
     </Popover>
   )
 }

@@ -38,16 +38,9 @@ function Routing() {
             </App>
           }
         />
+        <Route path="/poster" element={<Navigate to="6" relative="route" />} />
         <Route
-          path="/poster"
-          element={<Navigate to="kpk" relative="route" />}
-        />
-        <Route
-          path="/poster/:province"
-          element={<Navigate to="6" relative="route" />}
-        />
-        <Route
-          path="/poster/:province/:rows"
+          path="/poster/:rows"
           element={
             <App>
               <Poster />

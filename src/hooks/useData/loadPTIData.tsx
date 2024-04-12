@@ -2,68 +2,50 @@ import Papa from 'papaparse'
 import { Province } from './loadForm33'
 
 export interface RawPTIDataRow {
-  Constituency: string
+  'Constituency No': string
+  Location: string
   District: string
-  Candidate: string
+  'Candidate Name': string
   Symbol: string
   symbolfile: string
-  'WhatsApp Link': string
-  Province: Province | ''
-  type: 'national' | 'provincial'
+  'WhatsApp Channel Link': string
 }
 
 const loadPTIData = async () => {
-  const [national, kpk, punjab, sindh, balochistan] = await Promise.all([
+  const [all] = await Promise.all([
     fetch(
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=285854974&single=true&output=csv'
-    ).then((r) => r.text()),
-    fetch(
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=300989700&single=true&output=csv'
-    ).then((r) => r.text()),
-    fetch(
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=472420017&single=true&output=csv'
-    ).then((r) => r.text()),
-    fetch(
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=924832023&single=true&output=csv'
-    ).then((r) => r.text()),
-    fetch(
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3KERJcSeR44Le50BBC8lu9O-C2mU0PACCl9leUqba_NVKNhk5NNYKalpVNWkoWQ/pub?gid=1032451550&single=true&output=csv'
+      'https://docs.google.com/spreadsheets/d/121W0GqI_ZUtTjpbVpgrlACtkFupA3If9/export?format=csv'
     ).then((r) => r.text())
   ])
 
-  const formatCSV = (
-    csvText: string,
-    province: Province | '',
-    type: 'national' | 'provincial'
-  ) => {
+  const formatCSV = (csvText: string, province: Province | '') => {
     const parsedData = Papa.parse(csvText, {
       header: true,
       skipEmptyLines: true
     })
 
-    const formatted: RawPTIDataRow[] = parsedData.data.map((row: any) => {
-      return {
-        Constituency: row.Constituency.trim(),
-        District: row.District.trim(),
-        Candidate: row.Candidate.trim(),
-        Symbol: row.Symbol.trim(),
-        symbolfile: row.symbolfile.trim(),
-        'WhatsApp Link': row['WhatsApp Link'].trim(),
-        Province: province,
-        type: type
-      }
-    })
+    const formatted: RawPTIDataRow[] = parsedData.data
+      .map((row: any) => {
+        return {
+          'Constituency No': row['Constituency No']
+            .trim()
+            .replace(/([a-zA-Z]+)(\d+)/, '$1-$2'),
+          Location: row.Location.trim(),
+          District: row.District.trim(),
+          'Candidate Name': row['Candidate Name'].trim(),
+          Symbol: row.Symbol.trim(),
+          symbolfile: row.symbolfile.trim(),
+          'WhatsApp Channel Link': row['WhatsApp Channel Link'].trim()
+        }
+      })
+      .filter((row: RawPTIDataRow) => {
+        return row['Constituency No'] !== ''
+      })
 
     return formatted
   }
 
-  const formatted = [
-    ...formatCSV(national, '', 'national'),
-    ...formatCSV(kpk, 'kpk', 'provincial'),
-    ...formatCSV(punjab, 'punjab', 'provincial'),
-    ...formatCSV(sindh, 'sindh', 'provincial'),
-    ...formatCSV(balochistan, 'balochistan', 'provincial')
-  ]
+  const formatted = [...formatCSV(all, '')]
 
   return formatted
 }

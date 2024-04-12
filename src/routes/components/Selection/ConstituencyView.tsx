@@ -51,7 +51,7 @@ const ConstituencyView = ({
           width: '25px'
         }}
       ></div>
-      <div className="flex flex-col w-full px-5 py-4 relative">
+      <div className="flex flex-col w-full px-5 py-4 relative overflow-auto">
         <div className="flex flex-col w-full mb-8">
           <div className="font-bold font-mono text-7xl text-emerald-500">
             {selectedSeat.seat}

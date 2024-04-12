@@ -5,6 +5,7 @@ import SearchConstituency from './SearchConstituency'
 import * as turf from '@turf/turf'
 import { useData } from '../../hooks/useData'
 import { SeatFeature } from '../../hooks/useData/geojson'
+import { PiWallFill } from 'react-icons/pi'
 import { Seat } from '../../hooks/useData/useLoadData'
 
 const Header = ({
@@ -70,19 +71,21 @@ const Header = ({
 
   return (
     <div className="flex flex-col bg-green-50 items-center justify-center relative">
+      <div className="bg-red-500 w-full text-center px-2 py-2 text-white font-mono font-bold text-xs sm:text-sm">
+        NOW RELEASED FOR 21 APRIL BYE-ELECTIONS
+      </div>
       <Link
         to="/poster"
-        className="w-full cursor-pointer bg-red-500 hover:bg-red-600 h-fit mb-4"
+        className="flex mb-5 w-full items-center justify-center h-fit text-purple-700 hover:border-purple-700 hover:bg-purple-50 px-3 py-2 bg-white"
       >
-        <div className="flex text-white px-4 w-full py-2 font-mono font-bold justify-center">
-          CLICK FOR SYMBOL POSTERS
+        <PiWallFill className="mr-3 text-base sm:text-lg" />
+        <div className="font-mono font-bold text-xs sm:text-sm">
+          POSTERS NOW AVAILABLE
         </div>
       </Link>
-      <div className="mb-4 text-red-600 font-mono font-bold uppercase">
-        NOW RELEASED FOR Bye-Elections 2024!
-      </div>
-      <img className="w-20 h-20 rounded-md mb-5 mx-4" src={PTIElectionSymbol} />
-      <div className="text-center font-mono font-bold text-emerald-600 mb-6 px-4">
+
+      <img className="w-20 h-20 rounded-md mb-4 mx-4" src={PTIElectionSymbol} />
+      <div className="text-center font-mono font-bold text-emerald-600 mb-4 px-4">
         One-step tool to find the PTI Candidate in your constituency.
       </div>
       <div className="flex w-full px-4 mb-4">

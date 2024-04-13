@@ -14,7 +14,7 @@ export interface RawPTIDataRow {
 const loadPTIData = async () => {
   const [all] = await Promise.all([
     fetch(
-      'https://docs.google.com/spreadsheets/d/121W0GqI_ZUtTjpbVpgrlACtkFupA3If9/export?format=csv'
+      'https://docs.google.com/spreadsheets/d/1C1zVBpEtGRJHu5D_o_FAw781rcyqLw2C/export?format=csv'
     ).then((r) => r.text())
   ])
 

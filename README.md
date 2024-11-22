@@ -12,3 +12,6 @@ Note: The following link has been created to bypass the ban on the website in Pa
 [AzaadVote.com (hosted on Github)](https://zlenner.com/azaad-vote/ "This is the link for the project website hosted on Github")
 
 ![Preview of AzaadVote.com](https://pbs.twimg.com/media/GFAbN6maEAApD-D?format=jpg&name=large)
+
+
+The website got 2 million+ views in the 7 days leading up to the elections.

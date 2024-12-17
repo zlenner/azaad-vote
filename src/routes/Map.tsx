@@ -8,7 +8,6 @@ import { Selected, useData } from '../hooks/useData'
 import { SeatFeature } from '../hooks/useData/geojson'
 import { divIcon } from 'leaflet'
 import ReactDOMServer from 'react-dom/server'
-import { MdMyLocation } from 'react-icons/md'
 
 const locationIcon = divIcon({
   html: ReactDOMServer.renderToString(
